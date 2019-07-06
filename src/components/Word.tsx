@@ -1,9 +1,9 @@
 import * as React from 'react'
-import {css} from 'styled-components'
+import styled from 'styled-components'
 
 import Character from '@/components/Character'
 
-const word = css`
+const WordC = styled.span`
   font-size: 26;
   margin-bottom: 4px;
   padding: 4px 5px;
@@ -30,7 +30,7 @@ const Word = ({expected, actual, variant}: WordProps) => {
   else if (variant === 'current') styleObject.background = '#3bd376'
 
   return (
-    <span>
+    <WordC style={{...styleObject}}>
       {variant !== 'current'
         ? expected
         : expected.split('').map((c, i) => (
@@ -38,7 +38,7 @@ const Word = ({expected, actual, variant}: WordProps) => {
               {c}
             </Character>
           ))}
-    </span>
+    </WordC>
   )
 }
 

@@ -1,25 +1,10 @@
 import * as React from 'react'
+import randomwords from 'random-words'
 
 import Word from '@/components/Word'
 // import ResultDialog from './ResultDialog'
 
-const randomBetween = (start: number, end: number) =>
-  Math.floor(Math.random() * end) + start
-
-const generateWords = () => {
-  let words: string[] = []
-  const vocab = 'about all also and because but by can come could day even find first for from get give go have he her here him his how if in into it its just know like look make man many me more my new no not now of on one only or other our out people say see she so some take tell than that the their them then there these they thing think this those time to two up use very want way we well what when which who will with would year you your'.split(
-    ' ',
-  )
-
-  while (words.length < 250) {
-    words.push(vocab[randomBetween(0, vocab.length - 1)])
-  }
-
-  return words
-}
-
-const words = generateWords()
+const words = randomwords(250)
 
 enum TypingState {
   NotStarted,
@@ -125,7 +110,7 @@ class App extends React.Component<{}, AppState> {
 
     return (
       <div>
-        <div>
+        <div style={{maxWidth: '750px', width: '90%', margin: '10px auto'}}>
           <div>
             <div>
               <div>
@@ -146,7 +131,10 @@ class App extends React.Component<{}, AppState> {
               </div>
             </div>
             <div style={{padding: '35px 15px'}}>
-              <div ref={this.wordsRef}>
+              <div
+                ref={this.wordsRef}
+                style={{height: '100px', overflow: 'hidden'}}
+              >
                 {words.map((word, i) => (
                   <Word
                     key={i}
