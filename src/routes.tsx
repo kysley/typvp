@@ -6,7 +6,7 @@ import {AppContainer, AppWrapper} from '@/styled/AppContainer'
 // import Header from '@/components/Header'
 
 const Signup = React.lazy(() => import('@/pages/Signup'))
-const Home = React.lazy(() => import('@/pages/Home'))
+const Home = React.lazy(() => import('@/components/Singleplayer'))
 const NoMatch = React.lazy(() => import('@/pages/NoMatch'))
 
 const Routes = () => (

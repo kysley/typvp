@@ -6,9 +6,9 @@ interface CharacterProps {
 }
 
 const Character = ({children, variant}: CharacterProps) => {
-  let color = '#111'
+  let color = '#162020'
   if (variant === 'red') color = '#ff0033'
-  else if (variant === 'white') color = '#c2a'
+  else if (variant === 'white') color = '#fff'
 
   return <span style={{color: color}}>{children}</span>
 }

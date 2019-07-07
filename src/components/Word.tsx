@@ -25,7 +25,9 @@ const getVariant = (expected: string, actual: string, i: number) => {
 const Word = ({expected, actual, variant}: WordProps) => {
   const isMatch = expected === actual
 
-  let styleObject: any = {color: '#111'}
+  console.log(expected === actual)
+
+  let styleObject: any = {color: '#162020'}
   if (variant === 'done') styleObject = {color: isMatch ? '#1c54ff' : '#f20434'}
   else if (variant === 'current') styleObject.background = '#3bd376'
 

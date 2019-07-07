@@ -1,9 +1,11 @@
 import React from 'react'
 
-import UserStore from '@/stores/user'
+import UserStore from '@/stores/User'
+import GameStore from '@/stores/Game'
 
 const RootStore = {
   UserStore,
+  GameStore,
 }
 
 const StoreContext = React.createContext<any>(null)

@@ -13,14 +13,14 @@ enum TypingState {
   Finished,
 }
 
-interface AppState {
+interface TypeState {
   inputWords: string[]
   i: number
   time: number
   typingState: TypingState
 }
 
-class App extends React.Component<{}, AppState> {
+class Type extends React.Component<{}, TypeState> {
   state = {
     inputWords: [''],
     i: 0,
@@ -109,67 +109,55 @@ class App extends React.Component<{}, AppState> {
     if (this.state.typingState === TypingState.NotStarted) time = 60
 
     return (
-      <div>
-        <div style={{maxWidth: '750px', width: '90%', margin: '10px auto'}}>
-          <div>
-            <div>
-              <div>
-                <div>
-                  Time Left:{' '}
-                  {this.state.typingState === TypingState.AwaitingLastWord
-                    ? 'finish word'
-                    : `${time}s`}
-                </div>
-                <div style={{marginLeft: 20}}>
-                  CPM:{' '}
-                  {this.cpm === Infinity || this.cpm === NaN ? '?' : this.cpm}
-                </div>
-                <div style={{flexGrow: 1}} />
-                {/* <IconButton color="inherit" onClick={this.reset}>
+      <div style={{maxWidth: '750px', width: '90%', margin: '10px auto'}}>
+        <div>
+          Time Left:{' '}
+          {this.state.typingState === TypingState.AwaitingLastWord
+            ? 'finish word'
+            : `${time}s`}
+        </div>
+        <div style={{marginLeft: 20}}>
+          CPM: {this.cpm === Infinity || this.cpm === NaN ? '?' : this.cpm}
+        </div>
+        <div style={{flexGrow: 1}} />
+        {/* <IconButton color="inherit" onClick={this.reset}>
                   <i className="material-icons">replay</i>
                 </IconButton> */}
-              </div>
-            </div>
-            <div style={{padding: '35px 15px'}}>
-              <div
-                ref={this.wordsRef}
-                style={{height: '100px', overflow: 'hidden'}}
-              >
-                {words.map((word, i) => (
-                  <Word
-                    key={i}
-                    expected={word}
-                    actual={this.state.inputWords[i]}
-                    variant={this.getWordType(
-                      i,
-                      this.state.inputWords.length - 1,
-                    )}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-          <div style={{padding: '0px'}}>
-            <input
-              // ref={this.inputRef}
-              placeholder="Start typing here"
-              // margin="none"
-              // fullWidth={true}
-              // variant="outlined"
-              value={current}
-              onKeyDown={e => this.onKeyDown(e)}
-            />
+        <div style={{padding: '35px 15px'}}>
+          <div
+            ref={this.wordsRef}
+            style={{height: '150px', overflow: 'hidden'}}
+          >
+            {words.map((word, i) => (
+              <Word
+                key={i}
+                expected={word}
+                actual={this.state.inputWords[i]}
+                variant={this.getWordType(i, this.state.inputWords.length - 1)}
+              />
+            ))}
           </div>
         </div>
-        {/* <ResultDialog
+        <div style={{padding: '0px'}}>
+          <input
+            // ref={this.inputRef}
+            placeholder="Start typing here"
+            // margin="none"
+            // fullWidth={true}
+            // variant="outlined"
+            value={current}
+            onKeyDown={e => this.onKeyDown(e)}
+          />
+          {/* <ResultDialog
           open={this.state.typingState === TypingState.Finished}
           expected={words}
           actual={this.state.inputWords}
           closeDialog={this.closeDialog}
         /> */}
+        </div>
       </div>
     )
   }
 }
 
-export default App
+export default Type
