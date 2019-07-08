@@ -1,47 +1,59 @@
-import * as React from 'react'
-import styled from 'styled-components'
+import React, {useState, useEffect} from 'react'
+import styled, {css} from 'styled-components'
+import {observer} from 'mobx-react'
 
-import Character from '@/components/Character'
+import {useStore} from '@/stores'
+
+const finishedMatch = css`
+  color: #1c54ff;
+`
+
+const finishedIncorrect = css`
+  color: #f20434;
+`
+
+const current = css`
+  background: #3bd376;
+`
 
 const WordC = styled.span`
-  font-size: 26;
+  font-size: 26px;
   margin-bottom: 4px;
   padding: 4px 5px;
-  border-radius: 5;
+  border-radius: 5px;
   display: inline-block;
+  color: #162020;
+
+  ${p => {
+    if (p.variant === 'done') {
+      return p.isMatch ? `${finishedMatch}` : `${finishedIncorrect}`
+    }
+  }}
+  ${p => (p.variant === 'current' ? `${current}` : null)}
 `
 
 interface WordProps {
-  expected: string
-  actual: string
+  index: number
   variant: 'current' | 'done' | 'awaiting'
 }
 
-const getVariant = (expected: string, actual: string, i: number) => {
-  if (actual === undefined || actual.length - 1 < i) return 'black'
-  return expected[i] === actual[i] ? 'white' : 'red'
-}
+const Word = observer(({variant, index}: WordProps) => {
+  const {GameStore} = useStore()
+  const [isMatch, setMatch] = useState<boolean | undefined>(undefined)
 
-const Word = ({expected, actual, variant}: WordProps) => {
-  const isMatch = expected === actual
-
-  console.log(expected === actual)
-
-  let styleObject: any = {color: '#162020'}
-  if (variant === 'done') styleObject = {color: isMatch ? '#1c54ff' : '#f20434'}
-  else if (variant === 'current') styleObject.background = '#3bd376'
+  useEffect(() => {
+    if (GameStore.typedHistory[index] === GameStore.words[index]) {
+      setMatch(true)
+    } else {
+      setMatch(false)
+    }
+  }, [variant])
 
   return (
-    <WordC style={{...styleObject}}>
-      {variant !== 'current'
-        ? expected
-        : expected.split('').map((c, i) => (
-            <Character key={i} variant={getVariant(expected, actual, i)}>
-              {c}
-            </Character>
-          ))}
+    <WordC isMatch={isMatch} variant={variant}>
+      {GameStore.words[index]}
     </WordC>
   )
-}
+})
 
 export default Word

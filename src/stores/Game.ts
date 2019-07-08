@@ -5,10 +5,13 @@ import {TypingState} from '@/types/game'
 
 class GameStore {
   @observable
-  inputWords: string[] = ['']
+  typedHistory: string[] = new Array(250).fill('')
 
   @observable
-  i: number = 0
+  typedWord: string = ''
+
+  @observable
+  wordIndex: number = 0
 
   @observable
   time: number = 60
@@ -27,7 +30,7 @@ class GameStore {
 
   @action
   calculateCpm(): any {
-    const characters = this.inputWords
+    const characters = this.typedHistory
       .map(word => word.length)
       .reduce((a, b) => a + b + 1, 0)
 
@@ -59,36 +62,57 @@ class GameStore {
   }
 
   @action
-  onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  onKeyDown = (e: React.ChangeEvent<HTMLInputElement>) => {
     // let {inputWords, i, typingState} = this
 
-    if (e.key === 'Backspace') {
-      if (this.inputWords[this.i].length === 0 || e.ctrlKey) {
-        if (this.i > 0) this.i--
-        this.inputWords = this.inputWords.slice(0, this.i + 1)
-      } else {
-        this.inputWords[this.i] = this.inputWords[this.i].slice(
-          0,
-          this.inputWords[this.i].length - 1,
-        )
-      }
-    } else if (e.key === ' ') {
-      this.i++
-      this.inputWords[this.i] = ''
-      this.calculateCpm()
-      if (this.typingState === TypingState.AwaitingLastWord) {
-        this.typingState = TypingState.Finished
-      }
-    } else if (e.key.length === 1) {
-      this.inputWords[this.i] += e.key
-      if (this.typingState === TypingState.NotStarted) {
-        this.typingState = TypingState.InProgress
-        this.runTimer()
-      }
+    // if (e.key === 'Backspace') {
+    //   if (this.inputWords[this.i].length === 0 || e.ctrlKey) {
+    //     if (this.i > 0) this.i--
+    //     this.inputWords = this.inputWords.slice(0, this.i + 1)
+    //   } else {
+    //     this.inputWords[this.i] = this.inputWords[this.i].slice(
+    //       0,
+    //       this.inputWords[this.i].length - 1,
+    //     )
+    //   }
+    // } else if (e.key === ' ') {
+    if (this.typingState === TypingState.NotStarted) {
+      this.typingState = TypingState.InProgress
+      this.runTimer()
     }
+    if (e.target.value !== ' ') {
+      this.typedWord = e.target.value
+    }
+    // if (e.key === ' ') {
+    //   this.i++
+    //   this.inputWords[this.i] = ''
+    //   this.calculateCpm()
+    //   if (this.typingState === TypingState.AwaitingLastWord) {
+    //     this.typingState = TypingState.Finished
+    //   }
+    // // }
+    // } else if (e.key.length === 1) {
+    //   this.inputWords[this.i] += e.key
+    //   if (this.typingState === TypingState.NotStarted) {
+    //     this.typingState = TypingState.InProgress
+    //     this.runTimer()
+    //   }
+    // }
 
     // this.inputWords = inputWords
     // this.i = i
+  }
+
+  @action
+  testWord = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    this.typedHistory[this.wordIndex] = this.typedWord
+    this.typedWord = ''
+    this.wordIndex++
+    this.calculateCpm()
+
+    if (this.typingState === TypingState.AwaitingLastWord) {
+      this.typingState = TypingState.Finished
+    }
   }
 }
 
