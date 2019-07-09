@@ -15,9 +15,9 @@ export const MetaContainer = styled.div`
   border-radius: 6px;
   display: grid;
   grid-auto-flow: column;
-  background: ${colors.border.muted};
+  background: ${colors.background.tint2};
   color: ${colors.black};
-  margin-bottom: 1em;
+  margin: 1em 0;
   padding: 1em;
   justify-content: space-between;
   overflow: hidden;
