@@ -21,6 +21,7 @@ const TypingArea: FC = observer(props => {
         {GameStore.words.length > 0 &&
           GameStore.words.map((word: string, i: number) => (
             <Word
+              word={word}
               index={i}
               key={`${word}-${i}`}
               variant={getWordType(i, GameStore.wordIndex)}
