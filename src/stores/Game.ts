@@ -45,6 +45,7 @@ class GameStore {
       .reduce((a, b) => a + b + 1, 0)
 
     this.cpm = Math.floor((characters * 60) / this.time)
+    this.wpm = (this.cpm - this.corrections) / 5
     // return Math.floor((characters * 60) / this.time)
   }
 
