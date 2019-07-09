@@ -1,15 +1,15 @@
 import styled, {css} from 'styled-components'
 
 const finishedMatch = css`
-  color: #1c54ff;
+  color: #64aa84;
 `
 
 const finishedIncorrect = css`
-  color: #f20434;
+  color: #cb466a;
 `
 
 const current = css`
-  background: #3bd376;
+  color: #5646b2;
 `
 
 interface SingleWordProps {
