@@ -11,13 +11,13 @@ const SingleplayerMeta: FC = observer(() => {
   const {GameStore} = useStore()
 
   useEffect(() => {
-    const newPercent = (GameStore.time / 60) * 100
+    const newPercent = (60 - GameStore.time) / 60
     setPercent(newPercent)
   }, [GameStore.time])
 
   return (
     <MetaContainer>
-      <MetaTimer style={{width: `${percent}%`}} />
+      <MetaTimer style={{width: `${percent * 100}%`}} />
       <span>
         Time Left:{' '}
         {GameStore.typingState === TypingState.AwaitingLastWord
@@ -27,7 +27,7 @@ const SingleplayerMeta: FC = observer(() => {
       <span>
         CPM:{' '}
         {GameStore.cpm === Infinity || isNaN(GameStore.cpm)
-          ? '?'
+          ? 'XX'
           : GameStore.cpm}
       </span>
     </MetaContainer>
