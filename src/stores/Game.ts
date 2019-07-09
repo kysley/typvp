@@ -3,6 +3,7 @@ import randomwords from 'random-words'
 
 import {TypingState} from '@/types/game'
 
+let timeout: any = null
 class GameStore {
   @observable
   typedHistory: string[] = new Array(250).fill('')
@@ -38,13 +39,29 @@ class GameStore {
   correct: number = 0
 
   @action
-  calculateCpm(): any {
+  calculateResults(): any {
     const characters = this.typedHistory
       .map(word => (word !== '' ? word.length : -1))
       .reduce((a, b) => a + b + 1, 0)
 
     this.cpm = Math.floor((characters * 60) / this.time)
     // return Math.floor((characters * 60) / this.time)
+  }
+
+  @action
+  reset = () => {
+    clearTimeout(timeout)
+    this.typedHistory = new Array(250).fill('')
+    this.typedWord = ''
+    this.wordIndex = 0
+    this.time = 0
+    this.typingState = TypingState.NotStarted
+    this.cpm = 0
+    this.wpm = 0
+    this.generateWords()
+    this.corrections = 0
+    this.incorrect = 0
+    this.correct = 0
   }
 
   @action
@@ -59,7 +76,7 @@ class GameStore {
 
   @action
   runTimer = (): void => {
-    setTimeout(() => {
+    timeout = setTimeout(() => {
       const {time} = this
       if (time < 60) {
         this.time++
