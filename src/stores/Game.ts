@@ -14,7 +14,7 @@ class GameStore {
   wordIndex: number = 0
 
   @observable
-  time: number = 60
+  time: number = 0
 
   @observable
   typingState: TypingState = TypingState.NotStarted
@@ -28,14 +28,23 @@ class GameStore {
   @observable
   words: string[] = []
 
+  @observable
+  corrections: number = 0
+
+  @observable
+  incorrect: number = 0
+
+  @observable
+  correct: number = 0
+
   @action
   calculateCpm(): any {
     const characters = this.typedHistory
-      .map(word => word.length)
+      .map(word => (word !== '' ? word.length : -1))
       .reduce((a, b) => a + b + 1, 0)
 
     this.cpm = Math.floor((characters * 60) / this.time)
-    return Math.floor((characters * 60) / this.time)
+    // return Math.floor((characters * 60) / this.time)
   }
 
   @action
@@ -52,8 +61,8 @@ class GameStore {
   runTimer = (): void => {
     setTimeout(() => {
       const {time} = this
-      if (time > 0) {
-        this.time--
+      if (time < 60) {
+        this.time++
         this.runTimer()
       } else {
         this.endTimer()
@@ -63,55 +72,36 @@ class GameStore {
 
   @action
   onKeyDown = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // let {inputWords, i, typingState} = this
-
-    // if (e.key === 'Backspace') {
-    //   if (this.inputWords[this.i].length === 0 || e.ctrlKey) {
-    //     if (this.i > 0) this.i--
-    //     this.inputWords = this.inputWords.slice(0, this.i + 1)
-    //   } else {
-    //     this.inputWords[this.i] = this.inputWords[this.i].slice(
-    //       0,
-    //       this.inputWords[this.i].length - 1,
-    //     )
-    //   }
-    // } else if (e.key === ' ') {
     if (this.typingState === TypingState.NotStarted) {
       this.typingState = TypingState.InProgress
       this.runTimer()
     }
+
     if (e.target.value !== ' ') {
       this.typedWord = e.target.value
     }
-    // if (e.key === ' ') {
-    //   this.i++
-    //   this.inputWords[this.i] = ''
-    //   this.calculateCpm()
-    //   if (this.typingState === TypingState.AwaitingLastWord) {
-    //     this.typingState = TypingState.Finished
-    //   }
-    // // }
-    // } else if (e.key.length === 1) {
-    //   this.inputWords[this.i] += e.key
-    //   if (this.typingState === TypingState.NotStarted) {
-    //     this.typingState = TypingState.InProgress
-    //     this.runTimer()
-    //   }
-    // }
-
-    // this.inputWords = inputWords
-    // this.i = i
   }
 
   @action
-  testWord = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    this.typedHistory[this.wordIndex] = this.typedWord
-    this.typedWord = ''
-    this.wordIndex++
-    this.calculateCpm()
+  onAction = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ') {
+      this.typedHistory[this.wordIndex] = this.typedWord
 
-    if (this.typingState === TypingState.AwaitingLastWord) {
-      this.typingState = TypingState.Finished
+      if (this.typingState === TypingState.AwaitingLastWord) {
+        this.typingState = TypingState.Finished
+      }
+
+      if (this.typedHistory[this.wordIndex] === this.words[this.wordIndex]) {
+        this.correct++
+      } else {
+        this.incorrect++
+      }
+
+      this.typedWord = ''
+      this.wordIndex++
+      // this.calculateCpm()
+    } else if (e.key === 'Backspace') {
+      this.corrections++
     }
   }
 }
