@@ -2,7 +2,7 @@ import React from 'react'
 import {hot} from 'react-hot-loader/root'
 import {Switch, Route} from 'react-router-dom'
 
-import {AppContainer, AppWrapper} from '@/styled/AppContainer'
+import {AppContainer, AppWrapper} from '@/styled/Containers'
 // import Header from '@/components/Header'
 
 const Signup = React.lazy(() => import('@/pages/Signup'))

@@ -2,8 +2,9 @@ import React, {FC, useEffect} from 'react'
 import {observer} from 'mobx-react'
 
 import {useStore} from '@/stores'
-import SoloGameMeta from '@/components/SoloGameMeta'
+import SingleplayerMeta from '@/components/SingleplayerMeta'
 import TypingArea from '@/components/TypingArea'
+import {SingleplayerContainer} from '@/styled/Singleplayer'
 
 const Singleplayer: FC = observer((props: any) => {
   const {GameStore} = useStore()
@@ -13,10 +14,10 @@ const Singleplayer: FC = observer((props: any) => {
   }, [])
 
   return (
-    <div style={{maxWidth: '750px', width: '90%', margin: '10px auto'}}>
-      <SoloGameMeta />
+    <SingleplayerContainer>
+      <SingleplayerMeta />
       <TypingArea />
-    </div>
+    </SingleplayerContainer>
   )
 })
 

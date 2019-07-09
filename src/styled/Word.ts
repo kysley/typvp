@@ -1,5 +1,7 @@
 import styled, {css} from 'styled-components'
 
+import {colors} from '@/styled/Theme'
+
 const finishedMatch = css`
   color: #64aa84;
 `
@@ -18,12 +20,12 @@ interface SingleWordProps {
 }
 
 const SingleWord = styled.span<SingleWordProps>`
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   margin-bottom: 4px;
   padding: 4px 5px;
   border-radius: 5px;
   display: inline-block;
-  color: #162020;
+  color: ${colors.black};
 
   ${p => {
     if (p.variant === 'done') {

@@ -3,6 +3,8 @@ import {observer} from 'mobx-react'
 
 import {useStore} from '@/stores'
 import Word from '@/components/Word'
+import {TypingAreaContainer, TypingAreaInner} from '@/styled/TypingArea'
+import {Input} from '@/styled/TextInput'
 
 const getWordType = (a: number, b: number) => {
   if (a < b) return 'done'
@@ -16,8 +18,11 @@ const TypingArea: FC = observer(props => {
   const {GameStore} = useStore()
 
   return (
-    <div style={{padding: '35px 15px'}}>
-      <div ref={wordsRef} style={{height: '150px', overflow: 'hidden'}}>
+    <TypingAreaContainer>
+      <TypingAreaInner
+        ref={wordsRef}
+        style={{height: '150px', overflow: 'hidden'}}
+      >
         {GameStore.words.length > 0 &&
           GameStore.words.map((word: string, i: number) => (
             <Word
@@ -27,18 +32,14 @@ const TypingArea: FC = observer(props => {
               variant={getWordType(i, GameStore.wordIndex)}
             />
           ))}
-      </div>
-      <div style={{padding: '0px'}}>
-        <input
-          placeholder="Start..."
-          value={GameStore.typedWord}
-          onChange={e => GameStore.onKeyDown(e)}
-          onKeyDown={e => {
-            if (e.key === ' ') GameStore.testWord(e)
-          }}
-        />
-      </div>
-    </div>
+      </TypingAreaInner>
+      <Input
+        placeholder="Start..."
+        value={GameStore.typedWord}
+        onChange={e => GameStore.onKeyDown(e)}
+        onKeyDown={e => GameStore.onAction(e)}
+      />
+    </TypingAreaContainer>
   )
 })
 
