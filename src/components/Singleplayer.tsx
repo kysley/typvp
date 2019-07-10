@@ -20,7 +20,8 @@ const Singleplayer: FC = observer((props: any) => {
       <TypingArea />
       {GameStore.typingState === TypingState.Finished && (
         <>
-          <span>cpm: {GameStore.cpm}</span>
+          <span>cpm (raw): {GameStore.rawCpm}</span>
+          <span>cpm (corrected): {GameStore.cpm}</span>
           <span>wpm: {GameStore.wpm}</span>
           <span>correct: {GameStore.correct}</span>
           <span>incorrect: {GameStore.incorrect}</span>
