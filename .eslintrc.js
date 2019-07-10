@@ -10,7 +10,6 @@ module.exports = {
     'jsx-a11y',
     'react',
     'react-hooks',
-    'emotion',
     'prettier',
   ],
 
