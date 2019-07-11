@@ -1,7 +1,6 @@
 import path from 'path'
 import webpack from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import Stylish from 'webpack-stylish'
 
 export default {
   devtool: 'cheap-module-source-map',
@@ -35,7 +34,6 @@ export default {
         collapseWhitespace: true,
       },
     }),
-    new Stylish(),
   ],
   resolve: {
     extensions: ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx'],
