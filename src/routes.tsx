@@ -6,7 +6,7 @@ import {AppContainer, AppWrapper} from '@/styled/Containers'
 // import Header from '@/components/Header'
 
 const Signup = React.lazy(() => import('@/pages/Signup'))
-const Home = React.lazy(() => import('@/components/Singleplayer'))
+const Singleplayer = React.lazy(() => import('@/components/Singleplayer'))
 const NoMatch = React.lazy(() => import('@/pages/NoMatch'))
 
 const Routes = () => (
@@ -14,7 +14,7 @@ const Routes = () => (
     <AppContainer>
       {/* <Header /> */}
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Singleplayer} />
         <Route exact path="/signup" component={Signup} />
         <Route component={NoMatch} />
       </Switch>
