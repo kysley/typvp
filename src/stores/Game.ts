@@ -131,6 +131,11 @@ class GameStore {
   @action
   onAction = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === ' ') {
+      if (this.typedWord === '') {
+        e.preventDefault()
+        return
+      }
+
       this.typedHistory[this.wordIndex] = this.typedWord
 
       if (this.typingState === TypingState.AwaitingLastWord) {
