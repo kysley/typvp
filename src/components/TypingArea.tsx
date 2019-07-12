@@ -1,4 +1,4 @@
-import React, {FC, useRef} from 'react'
+import React, {FC, useRef, useLayoutEffect} from 'react'
 import {observer} from 'mobx-react'
 
 import {useStore} from '@/stores'
@@ -13,15 +13,21 @@ const getWordType = (a: number, b: number) => {
 }
 
 const TypingArea: FC = observer(props => {
-  const wordsRef = useRef(null)
+  const wordsRef = useRef<null | HTMLDivElement>(null)
 
   const {GameStore} = useStore()
+
+  useLayoutEffect(() => {
+    if (wordsRef.current !== null) {
+      wordsRef.current!.children[GameStore.wordIndex].scrollIntoView(true)
+    }
+  }, [GameStore.wordIndex])
 
   return (
     <TypingAreaContainer>
       <TypingAreaInner
         ref={wordsRef}
-        style={{height: '150px', overflow: 'hidden'}}
+        style={{height: '75px', overflow: 'hidden'}}
       >
         {GameStore.words.length > 0 &&
           GameStore.words.map((word: string, i: number) => (
