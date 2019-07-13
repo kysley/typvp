@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "license": "BSD-3-Clause",
   "scripts": {
-    "start": "webpack-dev-server --mode development --hot --config webpack.dev.babel.js",
-    "build": "webpack --mode production --progress --config webpack.prod.babel.js",
+    "start": "webpack-dev-server m--hot --config webpack.dev.babel.js",
+    "build": "webpack --progress --config webpack.prod.babel.js",
+    "build:remote": "webpack --config webpack.prod.babel.js",
     "test": "jest --coverage --env=jsdom",
     "test:watch": "jest --coverage --env=jsdom --watch"
   },
