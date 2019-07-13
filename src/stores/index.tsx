@@ -1,10 +1,10 @@
 import React from 'react'
 
-import UserStore from '@/stores/User'
+// import UserStore from '@/stores/User'
 import GameStore from '@/stores/Game'
 
 const RootStore = {
-  UserStore,
+  // UserStore,
   GameStore,
 }
 
