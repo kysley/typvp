@@ -12,6 +12,9 @@ const Singleplayer: FC = observer((props: any) => {
 
   useEffect(() => {
     GameStore.generateWords()
+    return () => {
+      GameStore.reset()
+    }
   }, [])
 
   return (
