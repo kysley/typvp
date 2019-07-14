@@ -19,7 +19,7 @@ const SingleplayerMeta: FC = observer(() => {
   return (
     <>
       <Button
-        appearance="primary"
+        appearance="link"
         intent="none"
         style={{justifySelf: 'flex-end'}}
         onClick={GameStore.reset}
