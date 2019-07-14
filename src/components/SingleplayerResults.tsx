@@ -21,6 +21,10 @@ const SingleplayerResults = observer(() => {
         <ResultsNumber>{GameStore.cpm}</ResultsNumber>
       </div>
       <div>
+        <ResultsHeader>wpm</ResultsHeader>
+        <ResultsNumber>{GameStore.wpm}</ResultsNumber>
+      </div>
+      <div>
         <ResultsHeader>correct</ResultsHeader>
         <ResultsNumber>{GameStore.correct}</ResultsNumber>
       </div>
