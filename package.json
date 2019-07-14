@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@kevinwolf/formal-web": "^0.1.1",
+    "framer-motion": "^1.2.2",
     "graphql": "^14.4.2",
     "graphql-tag": "^2.10.1",
     "is-hotkey": "^0.1.4",
