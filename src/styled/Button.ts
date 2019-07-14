@@ -52,13 +52,8 @@ const Button = styled.button<ButtonProps>(
       background-color: ${bundle[appearance][intent].hover};
     }
     ${buttonBaseStyles}
-    ${(p: any) =>
-      p.appearance === 'link'
-        ? css`
-            ${linkButtonStyles}
-          `
-        : null}
-  `,
+    `,
+  (p: ButtonProps) => (p.appearance === 'link' ? linkButtonStyles : null),
 )
 
 // Button.propTypes = {
