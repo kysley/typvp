@@ -18,14 +18,6 @@ const SingleplayerMeta: FC = observer(() => {
 
   return (
     <>
-      <Button
-        appearance="link"
-        intent="none"
-        style={{justifySelf: 'flex-end'}}
-        onClick={GameStore.reset}
-      >
-        reset
-      </Button>
       <MetaContainer>
         <MetaTimer style={{width: `${percent * 100}%`}} />
         <span>
@@ -34,12 +26,9 @@ const SingleplayerMeta: FC = observer(() => {
             ? 'finish word'
             : `${60 - GameStore.time}s`}
         </span>
-        <span>
-          CPM:{' '}
-          {GameStore.cpm === Infinity || isNaN(GameStore.cpm)
-            ? 'XX'
-            : GameStore.cpm}
-        </span>
+        <Button appearance="link" intent="none" onClick={GameStore.reset}>
+          reset
+        </Button>
       </MetaContainer>
     </>
   )

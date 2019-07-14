@@ -4,14 +4,16 @@ import {observer} from 'mobx-react'
 import {useStore} from '@/stores'
 import SingleplayerMeta from '@/components/SingleplayerMeta'
 import TypingArea from '@/components/TypingArea'
+import SingleplayerResults from '@/components/SingleplayerResults'
 import {SingleplayerContainer} from '@/styled/Singleplayer'
 import {TypingState} from '@/types/game'
 
-const Singleplayer: FC = observer((props: any) => {
+const Singleplayer: FC = observer(() => {
   const {GameStore} = useStore()
 
   useEffect(() => {
-    GameStore.generateWords()
+    // 0 is falsy
+    if (!GameStore.words.length) GameStore.generateWords()
     return () => {
       GameStore.reset()
     }
@@ -22,14 +24,7 @@ const Singleplayer: FC = observer((props: any) => {
       <SingleplayerMeta />
       <TypingArea />
       {GameStore.typingState === TypingState.Finished && (
-        <>
-          <span>cpm (raw): {GameStore.rawCpm}</span>
-          <span>cpm (corrected): {GameStore.cpm}</span>
-          <span>wpm: {GameStore.wpm}</span>
-          <span>correct: {GameStore.correct}</span>
-          <span>incorrect: {GameStore.incorrect}</span>
-          <span>corrections: {GameStore.corrections}</span>
-        </>
+        <SingleplayerResults />
       )}
     </SingleplayerContainer>
   )
