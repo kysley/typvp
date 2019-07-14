@@ -3,78 +3,65 @@ import {NavLink} from 'react-router-dom'
 
 import {colors} from '@/styled/Theme'
 
-const HeaderWrapper = styled.header``
+const HeaderWrapper = styled.header`
+  width: 100%;
+`
 
 const HeaderContainer = styled.nav`
-  width: auto;
+  width: 100%;
   display: grid;
   position: relative;
-  grid-template-columns: auto auto auto auto 1fr auto;
-  grid-template-rows: 1fr;
-  grid-template-areas: 'logo discover create library . profile login signup';
-  line-height: 1;
-  /* box-shadow: rgba(22, 23, 26, 0.05) 0px 4px 8px; */
-  /* border-bottom: 1px solid #E4E7EB; */
-  padding: 0 1.5em;
+  grid-template-columns: auto 1fr 1fr auto 1fr auto 1fr 1fr auto;
   z-index: 99;
-  align-items: stretch;
-  background-color: ${colors.white};
+  align-items: center;
+  top: 3vh;
 `
 
 const Tab = styled(NavLink)`
-  margin-left: 1em;
+  margin: 0 1em;
+  position: relative;
   text-decoration: none;
-  color: ${colors.n300};
+  color: ${colors.black};
   display: grid;
-  grid-template-areas: 'icon label';
-  grid-template-rows: auto;
-  grid-template-columns: auto auto;
   align-items: center;
   justify-items: center;
-
+  font-weight: 500;
+  font-size: 0.9rem;
+  :hover {
+    text-decoration: underline;
+  }
   &.active {
-    > button {
-      background-color: ${colors.n200};
-    }
+    color: ${colors.p300};
+    text-decoration: underline;
   }
 `
 
-const DiscoverTab = styled(Tab)`
-  grid-area: discover;
+const LeaderboardTab = styled(Tab)`
+  grid-column: 2;
 `
 
-const CreateTab = styled(Tab)`
-  grid-area: create;
-`
-
-const LibraryTab = styled(Tab)`
-  grid-area: library;
-`
-
-const ProfileTab = styled.div`
-  grid-area: profile;
+const MeTab = styled(Tab)`
+  grid-column: 4;
 `
 
 const LoginTab = styled(Tab)`
-  grid-area: login;
+  grid-column: -2;
 `
 
-const SignupTab = styled(Tab)`
-  grid-area: signup;
+const SigninTab = styled(Tab)`
+  grid-column: -1;
 `
 
 const HeaderLogo = styled('img')`
-  height: 45px;
+  height: 35px;
 `
 
 export {
-  HeaderWrapper,
   HeaderContainer,
-  HeaderLogo,
-  DiscoverTab,
-  CreateTab,
-  LibraryTab,
-  ProfileTab,
+  HeaderWrapper,
+  LeaderboardTab,
+  MeTab,
   LoginTab,
-  SignupTab,
+  SigninTab,
+  HeaderLogo,
 }
