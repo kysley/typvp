@@ -53,9 +53,7 @@ const App: FC = () => (
     <StoreProvider>
       <GlobalStyle />
       <Router>
-        <Suspense fallback={'Loading ...'}>
-          <Routes />
-        </Suspense>
+        <Routes />
       </Router>
     </StoreProvider>
   </ClientProvider>
