@@ -5,6 +5,8 @@ const noFirstName = 'First Name is Required'
 
 const noLastName = 'Last Name is Required'
 
+const noUsername = 'Username is Required'
+
 const invalidEmail = 'Email must be Valid'
 const noEmail = 'Email is Required'
 
@@ -18,6 +20,12 @@ const invalidConfirmPassword = 'Passwords must match'
 const firstNameValidation = yup.string().required(noFirstName)
 
 const lastNameValidation = yup.string().required(noLastName)
+
+const usernameValidation = yup
+  .string()
+  .min(3)
+  .max(15)
+  .required(noUsername)
 
 const emailValidation = yup
   .string()
@@ -37,8 +45,7 @@ const confirmPasswordValidation = yup
 
 // Schema for Signing Up
 export const registerSchema = yup.object().shape({
-  firstName: firstNameValidation,
-  lastName: lastNameValidation,
+  username: usernameValidation,
   email: emailValidation,
   password: passwordValidation,
   confirmPassword: confirmPasswordValidation,

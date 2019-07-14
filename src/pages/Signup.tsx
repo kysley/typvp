@@ -10,8 +10,7 @@ import {useStore} from '@/stores'
 // import SIGNUP from '@/graphql/mutations/signup'
 
 const initialValues = {
-  firstName: '',
-  lastName: '',
+  username: '',
   email: '',
   password: '',
   confirmPassword: '',
@@ -24,8 +23,7 @@ const Login: FC = props => {
     onSubmit: async values => {
       console.log(values)
       await execMutation({
-        firstName: values.firstName,
-        lastName: values.lastName,
+        username: values.username,
         email: values.email,
         password: values.password,
       })
@@ -47,22 +45,13 @@ const Login: FC = props => {
       </div>
       <SignupForm {...formal.getFormProps()}>
         <div>
-          <Label htmlFor="firstName">First Name</Label>
+          <Label htmlFor="username">Username</Label>
           <Input
-            hasWarning={formal.errors.firstName}
-            {...formal.getFieldProps('firstName')}
+            hasWarning={formal.errors.username}
+            {...formal.getFieldProps('username')}
             type="text"
           />
-          {formal.errors.firstName && <div>{formal.errors.firstName}</div>}
-        </div>
-        <div>
-          <Label htmlFor="lastName">Last Name</Label>
-          <Input
-            hasWarning={formal.errors.lastName}
-            {...formal.getFieldProps('lastName')}
-            type="text"
-          />
-          {formal.errors.lastName && <div>{formal.errors.lastName}</div>}
+          {formal.errors.username && <div>{formal.errors.username}</div>}
         </div>
         <div>
           <Label htmlFor="email">Email</Label>
