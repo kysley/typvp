@@ -72,7 +72,7 @@ class GameStore {
 
     this.cpm = Math.floor((goodCharacters / this.time) * 60)
 
-    this.wpm = this.cpm / 5
+    this.wpm = Math.floor(this.cpm / 5)
   }
 
   @action
