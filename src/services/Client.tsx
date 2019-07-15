@@ -2,7 +2,7 @@ import React from 'react'
 import {Provider, createClient} from 'urql'
 
 export const client = createClient({
-  url: 'http://138.197.128.14/',
+  url: 'http://localhost:8081/',
   fetchOptions: () => {
     const token = localStorage.getItem('token')
     if (!token) {

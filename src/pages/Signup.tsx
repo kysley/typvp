@@ -7,7 +7,7 @@ import {Input, Label} from '@/styled/TextInput'
 import {SignupForm, SignupFormContainer} from '@/styled/Forms'
 import Button from '@/styled/Button'
 import {useStore} from '@/stores'
-// import SIGNUP from '@/graphql/mutations/signup'
+import SIGNUP from '@/graphql/mutations/signup'
 
 const initialValues = {
   username: '',
@@ -16,8 +16,8 @@ const initialValues = {
   confirmPassword: '',
 }
 
-const Login: FC = props => {
-  const [mutation, execMutation] = useMutation(null)
+const Signup: FC = props => {
+  const [mutation, execMutation] = useMutation(SIGNUP)
   const formal = useFormal(initialValues, {
     schema: registerSchema,
     onSubmit: async values => {
@@ -83,4 +83,4 @@ const Login: FC = props => {
   )
 }
 
-export default Login
+export default Signup
