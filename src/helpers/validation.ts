@@ -50,3 +50,8 @@ export const registerSchema = yup.object().shape({
   password: passwordValidation,
   confirmPassword: confirmPasswordValidation,
 })
+
+export const loginSchema = yup.object().shape({
+  username: usernameValidation,
+  password: passwordValidation,
+})

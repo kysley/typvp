@@ -2,30 +2,27 @@ import React, {FC, useEffect} from 'react'
 import useFormal from '@kevinwolf/formal-web'
 import {useMutation} from 'urql'
 
-import {registerSchema} from '@/helpers/validation'
+import {loginSchema} from '@/helpers/validation'
 import {Input, Label} from '@/styled/TextInput'
 import {SignupForm, SignupFormContainer} from '@/styled/Forms'
 import Button from '@/styled/Button'
 import {useStore} from '@/stores'
-import SIGNUP from '@/graphql/mutations/signup'
+import LOGIN from '@/graphql/mutations/login'
 
 const initialValues = {
   username: '',
-  email: '',
   password: '',
-  confirmPassword: '',
 }
 
-const Signup: FC = props => {
+const Login: FC = props => {
   const {UserStore} = useStore()
-  const [mutation, execMutation] = useMutation(SIGNUP)
+  const [mutation, execMutation] = useMutation(LOGIN)
   const formal = useFormal(initialValues, {
-    schema: registerSchema,
+    schema: loginSchema,
     onSubmit: async values => {
       console.log(values)
       await execMutation({
         username: values.username,
-        email: values.email,
         password: values.password,
       })
     },
@@ -33,14 +30,22 @@ const Signup: FC = props => {
 
   useEffect(() => {
     console.log(mutation)
+    if (mutation.data && !mutation.error) {
+      const {
+        data: {
+          login: {account, token},
+        },
+      } = mutation
+      UserStore.login(token, account)
+      console.log(UserStore)
+    }
   }, [mutation])
 
   return (
     <SignupFormContainer>
-      <div>{mutation.data && !mutation.error && <p>account created!</p>}</div>
       <div>
         {mutation.data && mutation.error && (
-          <p>something went wrong while creating your account</p>
+          <p>something went wrong while logging you in</p>
         )}
       </div>
       <SignupForm {...formal.getFormProps()}>
@@ -54,21 +59,9 @@ const Signup: FC = props => {
           {formal.errors.username && <div>{formal.errors.username}</div>}
         </div>
         <div>
-          <Label htmlFor="email">Email</Label>
-          <Input {...formal.getFieldProps('email')} type="text" />
-          {formal.errors.email && <div>{formal.errors.email}</div>}
-        </div>
-        <div>
           <Label htmlFor="password">Password</Label>
           <Input {...formal.getFieldProps('password')} type="text" />
           {formal.errors.password && <div>{formal.errors.password}</div>}
-        </div>
-        <div>
-          <Label htmlFor="confirmPassword">Confirm Password</Label>
-          <Input {...formal.getFieldProps('confirmPassword')} type="text" />
-          {formal.errors.confirmPassword && (
-            <div>{formal.errors.confirmPassword}</div>
-          )}
         </div>
         <Button
           intent="none"
@@ -76,11 +69,11 @@ const Signup: FC = props => {
           {...formal.getSubmitButtonProps()}
           type="submit"
         >
-          Submit
+          Login
         </Button>
       </SignupForm>
     </SignupFormContainer>
   )
 }
 
-export default Signup
+export default Login

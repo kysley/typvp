@@ -6,6 +6,7 @@ import {AppContainer, AppWrapper} from '@/styled/Containers'
 import Header from '@/components/Header'
 
 const Signup = lazy(() => import('@/pages/Signup'))
+const Login = lazy(() => import('@/pages/Login'))
 const Singleplayer = lazy(() => import('@/components/Singleplayer'))
 const NoMatch = lazy(() => import('@/pages/NoMatch'))
 
@@ -17,6 +18,7 @@ const Routes = () => (
         <Switch>
           <Route exact path="/" component={Singleplayer} />
           <Route exact path="/signup" component={Signup} />
+          <Route exact path="/login" component={Login} />
           <Route component={NoMatch} />
         </Switch>
       </Suspense>
