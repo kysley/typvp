@@ -2,7 +2,7 @@ import React from 'react'
 import {Provider, createClient} from 'urql'
 
 export const client = createClient({
-  url: 'http://localhost:8081/',
+  url: 'https://api.typvp.xyz',
   fetchOptions: () => {
     const token = localStorage.getItem('token')
     if (!token) {
