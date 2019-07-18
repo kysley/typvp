@@ -19,7 +19,7 @@ yarn -v
 Clone typvp
 
 ```
-git clone https://github.com/kysley/typvp.git
+git clone https://github.com/typvp/typvp.git
 ```
 
 Install dependencies
