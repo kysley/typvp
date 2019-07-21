@@ -60,12 +60,12 @@ const Signup: FC = props => {
         </div>
         <div>
           <Label htmlFor="password">Password</Label>
-          <Input {...formal.getFieldProps('password')} type="text" />
+          <Input {...formal.getFieldProps('password')} type="password" />
           {formal.errors.password && <div>{formal.errors.password}</div>}
         </div>
         <div>
           <Label htmlFor="confirmPassword">Confirm Password</Label>
-          <Input {...formal.getFieldProps('confirmPassword')} type="text" />
+          <Input {...formal.getFieldProps('confirmPassword')} type="password" />
           {formal.errors.confirmPassword && (
             <div>{formal.errors.confirmPassword}</div>
           )}

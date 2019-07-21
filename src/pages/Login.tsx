@@ -60,7 +60,7 @@ const Login: FC = props => {
         </div>
         <div>
           <Label htmlFor="password">Password</Label>
-          <Input {...formal.getFieldProps('password')} type="text" />
+          <Input {...formal.getFieldProps('password')} type="password" />
           {formal.errors.password && <div>{formal.errors.password}</div>}
         </div>
         <Button
