@@ -7,19 +7,20 @@ const inputBaseStyles = css`
   border: none;
   border-width: 1px;
   border-style: solid;
-  border-color: ${colors.border.default};
+  border-color: ${colors.border.muted};
   border-radius: 4px;
-  box-shadow: rgba(8, 35, 51, 0.05) 0px 3px 6px;
+  box-shadow: rgba(8, 35, 51, 0.05) 0px 1px 3px;
   padding: 0.75rem 0.75rem;
   margin-bottom: 2em;
-  transition: border-color 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
   width: 100%;
   font-size: 0.8725rem;
 
   &:focus,
   &:active {
-    border-color: ${colors.n200};
+    border-color: ${colors.border.default};
     outline: none;
+    box-shadow: rgba(8, 35, 51, 0.05) 0px 6px 10px;
   }
 
   &::placeholder {
