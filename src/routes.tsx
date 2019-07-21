@@ -9,6 +9,7 @@ const Signup = lazy(() => import('@/pages/Signup'))
 const Login = lazy(() => import('@/pages/Login'))
 const Singleplayer = lazy(() => import('@/components/Singleplayer'))
 const NoMatch = lazy(() => import('@/pages/NoMatch'))
+const Leaderboard = lazy(() => import('@/pages/Leaderboard'))
 
 const Routes = () => (
   <AppWrapper>
@@ -19,6 +20,7 @@ const Routes = () => (
           <Route exact path="/" component={Singleplayer} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/leaderboard" component={Leaderboard} />
           <Route component={NoMatch} />
         </Switch>
       </Suspense>
