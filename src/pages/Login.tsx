@@ -55,6 +55,7 @@ const Login: FC = props => {
             hasWarning={formal.errors.username}
             {...formal.getFieldProps('username')}
             type="text"
+            autoComplete="off"
           />
           {formal.errors.username && <div>{formal.errors.username}</div>}
         </div>

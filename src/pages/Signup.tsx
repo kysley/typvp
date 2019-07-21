@@ -50,12 +50,17 @@ const Signup: FC = props => {
             hasWarning={formal.errors.username}
             {...formal.getFieldProps('username')}
             type="text"
+            autoComplete="off"
           />
           {formal.errors.username && <div>{formal.errors.username}</div>}
         </div>
         <div>
           <Label htmlFor="email">Email</Label>
-          <Input {...formal.getFieldProps('email')} type="text" />
+          <Input
+            {...formal.getFieldProps('email')}
+            type="text"
+            autoComplete="off"
+          />
           {formal.errors.email && <div>{formal.errors.email}</div>}
         </div>
         <div>
