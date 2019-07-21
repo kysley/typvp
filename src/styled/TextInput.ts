@@ -7,19 +7,18 @@ const inputBaseStyles = css`
   border: none;
   border-width: 1px;
   border-style: solid;
-  border-color: ${colors.n200};
+  border-color: ${colors.border.default};
   border-radius: 4px;
-  /* box-shadow: rgba(8, 35, 51, 0.05) 0px 3px 6px; */
+  box-shadow: rgba(8, 35, 51, 0.05) 0px 3px 6px;
   padding: 0.75rem 0.75rem;
   margin-bottom: 2em;
   transition: border-color 200ms ease-in-out;
   width: 100%;
-  /* ${typography.text.small}; */
   font-size: 0.8725rem;
 
   &:focus,
   &:active {
-    border-color: ${colors.intent.none};
+    border-color: ${colors.n200};
     outline: none;
   }
 
@@ -32,16 +31,6 @@ const inputBaseStyles = css`
     background-color: ${colors.background.tint1};
     &:active {
       border: 1px solid ${colors.background.tint2};
-    }
-  }
-`
-
-const inputWarningStyles = css`
-  &:not(:focus) {
-    border-color: ${colors.intent.warning};
-
-    &::placeholder {
-      color: ${colors.y200};
     }
   }
 `
