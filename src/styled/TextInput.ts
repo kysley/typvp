@@ -9,7 +9,7 @@ const inputBaseStyles = css`
   border-style: solid;
   border-color: ${colors.border.muted};
   border-radius: 4px;
-  box-shadow: rgba(8, 35, 51, 0.05) 0px 1px 3px;
+  /* box-shadow: rgba(8, 35, 51, 0.05) 0px 1px 3px; */
   padding: 0.75rem 0.75rem;
   margin-bottom: 2em;
   transition: all 200ms ease-in-out;

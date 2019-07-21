@@ -8,15 +8,14 @@ const buttonBaseStyles = css`
   border: 0;
   outline: 0;
   border-radius: 4px;
-  /* ${typography.text.small}; */
-  font-size: .8725rem;
+  font-size: 0.8725rem;
   padding: 0 1.5em;
   margin-right: 1em;
   cursor: pointer;
   display: inline-block;
   text-decoration: none;
-  /* transition: ${transitions.default}; */
   text-align: center;
+  transition: all 200ms ease-in-out;
 
   :last-of-type {
     margin-right: 0;
@@ -36,6 +35,7 @@ const buttonBaseStyles = css`
 const linkButtonStyles = css`
   :hover {
     text-decoration: underline;
+    box-shadow: none;
   }
 `
 
@@ -49,6 +49,9 @@ const Button = styled.button<ButtonProps>(
     background-color: ${bundle[appearance][intent].bg};
     color: ${bundle[appearance][intent].text};
     :hover {
+      box-shadow: rgba(8,35,51,0.12) 0px 6px 10px;
+    }
+    :active {
       background-color: ${bundle[appearance][intent].hover};
     }
     ${buttonBaseStyles}
