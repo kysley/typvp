@@ -28,12 +28,15 @@ const Tab = styled(NavLink)`
   justify-items: center;
   font-weight: 500;
   font-size: 0.9rem;
+  padding: 0.75em;
+  border-radius: 6px;
   :hover {
     text-decoration: underline;
   }
   &.active {
     color: ${colors.p300};
     text-decoration: underline;
+    background-color: ${colors.background.tint1};
   }
 `
 
