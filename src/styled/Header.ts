@@ -11,10 +11,11 @@ const HeaderContainer = styled.nav`
   width: 100%;
   display: grid;
   position: relative;
-  grid-template-columns: auto 1fr 1fr auto 1fr auto 1fr 1fr auto;
+  grid-template-columns: auto auto 1fr auto auto;
   z-index: 99;
   align-items: center;
-  top: 3vh;
+  margin-top: 3vh;
+  margin-bottom: 7vh;
 `
 
 const Tab = styled(NavLink)`
@@ -54,6 +55,16 @@ const SigninTab = styled(Tab)`
 
 const HeaderLogo = styled('img')`
   height: 35px;
+`
+export const HeaderGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  background-color: ${colors.background.tint1};
+  grid-column: 4;
+  justify-content: space-evenly;
+  min-width: 14em;
+  height: 100%;
+  border-radius: 6px;
 `
 
 export {

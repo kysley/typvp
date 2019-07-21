@@ -8,7 +8,7 @@ export const SingleplayerContainer = styled.div`
   max-width: 750px;
   display: grid;
   align-self: center;
-  margin-top: 20vh;
+  margin-top: 16vh;
 `
 
 export const MetaContainer = styled.div`

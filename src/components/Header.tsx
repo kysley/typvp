@@ -13,6 +13,7 @@ import {
   MeTab,
   LoginTab,
   SigninTab,
+  HeaderGroup,
 } from '@/styled/Header'
 import ME from '@/graphql/queries/me'
 import {useStore} from '@/stores'
@@ -48,19 +49,21 @@ const Header = observer(() => {
         <Link to="/">
           <HeaderLogo src={logo} />
         </Link>
-        {/* <LeaderboardTab to="/create">leaderboards</LeaderboardTab> */}
-        {UserStore.me ? (
-          <MeTab to="/">user: {UserStore.me.username}</MeTab>
-        ) : (
-          <>
-            {!result.fetching && pause && (
-              <>
-                <LoginTab to="/login">login</LoginTab>
-                <SigninTab to="/signup">sign up</SigninTab>
-              </>
-            )}
-          </>
-        )}
+        <LeaderboardTab to="/leaderboard">leaderboards</LeaderboardTab>
+        <HeaderGroup>
+          {UserStore.me ? (
+            <MeTab to="/">{UserStore.me.username}</MeTab>
+          ) : (
+            <>
+              {!result.fetching && pause && (
+                <>
+                  <LoginTab to="/login">login</LoginTab>
+                  <SigninTab to="/signup">sign up</SigninTab>
+                </>
+              )}
+            </>
+          )}
+        </HeaderGroup>
       </HeaderContainer>
     </HeaderWrapper>
   )
