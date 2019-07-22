@@ -17,29 +17,21 @@ import {
 } from '@/styled/Header'
 import ME from '@/graphql/queries/me'
 import {useStore} from '@/stores'
+import Button from '@/styled/Button'
 
 const Header = observer(() => {
   const {UserStore} = useStore()
-  const [pause, setPause] = useState<boolean>(true)
+
   const [result] = useQuery({
     query: ME,
-    pause,
   })
-
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      setPause(false)
-    }
-  }, [])
 
   useEffect(() => {
     if (result.data && !result.error) {
       const {
         data: {me},
       } = result
-      console.log(me)
       UserStore.persist(me)
-      console.log(UserStore)
     }
   }, [result])
 
@@ -52,10 +44,19 @@ const Header = observer(() => {
         <LeaderboardTab to="/leaderboard">leaderboards</LeaderboardTab>
         <HeaderGroup>
           {UserStore.me ? (
-            <MeTab to="/">{UserStore.me.username}</MeTab>
+            <>
+              <MeTab to="/">{UserStore.me.username}</MeTab>
+              <Button
+                onClick={UserStore.logout}
+                appearance="link"
+                intent="none"
+              >
+                Logout
+              </Button>
+            </>
           ) : (
             <>
-              {!result.fetching && pause && (
+              {!result.fetching && (
                 <>
                   <LoginTab to="/login">login</LoginTab>
                   <SigninTab to="/signup">sign up</SigninTab>

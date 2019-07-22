@@ -21,6 +21,12 @@ class UserStore {
   persist = (me: IMe): void => {
     this.me = me
   }
+
+  @action
+  logout = () => {
+    localStorage.removeItem('token')
+    this.me = undefined
+  }
 }
 
 export default new UserStore()
