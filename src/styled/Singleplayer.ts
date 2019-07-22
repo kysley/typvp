@@ -59,3 +59,13 @@ export const ResultsNumber = styled.span`
   font-size: 1.5rem;
   color: ${colors.p300};
 `
+
+export const ResultsStatus = styled.span`
+  font-style: italic;
+  font-size: 0.65rem;
+  color: ${colors.p300};
+
+  a {
+    color: ${colors.p400};
+  }
+`

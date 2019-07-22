@@ -1,15 +1,17 @@
 import React from 'react'
 import {observer} from 'mobx-react'
+import {Link} from 'react-router-dom'
 
 import {useStore} from '@/stores'
 import {
   ResultsContainer,
   ResultsHeader,
   ResultsNumber,
+  ResultsStatus,
 } from '@/styled/Singleplayer'
 
 const SingleplayerResults = observer(() => {
-  const {GameStore} = useStore()
+  const {GameStore, UserStore} = useStore()
   return (
     <ResultsContainer animate={{y: [0, 30, 25]}} initial>
       <div>
@@ -36,6 +38,16 @@ const SingleplayerResults = observer(() => {
         <ResultsHeader>corrections</ResultsHeader>
         <ResultsNumber>{GameStore.corrections}</ResultsNumber>
       </div>
+      <ResultsStatus>
+        {UserStore.me ? (
+          <>Your results have been saved!</>
+        ) : (
+          <>
+            <Link to="/signup">Signup</Link> or <Link to="/login">Login</Link>{' '}
+            to save your results!
+          </>
+        )}{' '}
+      </ResultsStatus>
     </ResultsContainer>
   )
 })
