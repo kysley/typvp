@@ -22,7 +22,6 @@ const Signup: FC = props => {
   const formal = useFormal(initialValues, {
     schema: registerSchema,
     onSubmit: async values => {
-      console.log(values)
       await execMutation({
         username: values.username,
         email: values.email,
@@ -33,6 +32,15 @@ const Signup: FC = props => {
 
   useEffect(() => {
     console.log(mutation)
+    if (mutation.data && !mutation.error) {
+      const {
+        data: {
+          signup: {account, token},
+        },
+      } = mutation
+      UserStore.login(token, account)
+      props.history.push('/')
+    }
   }, [mutation])
 
   return (

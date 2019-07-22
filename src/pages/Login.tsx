@@ -20,7 +20,6 @@ const Login: FC = props => {
   const formal = useFormal(initialValues, {
     schema: loginSchema,
     onSubmit: async values => {
-      console.log(values)
       await execMutation({
         username: values.username,
         password: values.password,
@@ -37,7 +36,7 @@ const Login: FC = props => {
         },
       } = mutation
       UserStore.login(token, account)
-      console.log(UserStore)
+      props.history.push('/')
     }
   }, [mutation])
 
