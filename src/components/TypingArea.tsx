@@ -12,7 +12,11 @@ const getWordType = (a: number, b: number) => {
   return 'awaiting'
 }
 
-const TypingArea: FC = observer(props => {
+interface ITypingArea {
+  isGameOver: boolean
+}
+
+const TypingArea: FC<ITypingArea> = observer(props => {
   const wordsRef = useRef<null | HTMLDivElement>(null)
 
   const {GameStore} = useStore()
@@ -40,6 +44,7 @@ const TypingArea: FC = observer(props => {
           ))}
       </TypingAreaInner>
       <Input
+        disabled={props.isGameOver}
         placeholder="Start..."
         value={GameStore.typedWord}
         onChange={e => GameStore.onKeyDown(e)}
