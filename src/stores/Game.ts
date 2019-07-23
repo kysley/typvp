@@ -123,38 +123,40 @@ class GameStore {
       this.runTimer()
     }
 
-    if (e.target.value !== ' ') {
+    if (e.target.value !== ' ' && this.typingState !== TypingState.Finished) {
       this.typedWord = e.target.value
     }
   }
 
   @action
   onAction = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === ' ') {
-      if (this.typedWord === '') {
-        e.preventDefault()
-        return
+    if (this.typingState !== TypingState.Finished) {
+      if (e.key === ' ') {
+        if (this.typedWord === '') {
+          e.preventDefault()
+          return
+        }
+
+        this.typedHistory[this.wordIndex] = this.typedWord
+
+        if (this.typingState === TypingState.AwaitingLastWord) {
+          this.typingState = TypingState.Finished
+          this.calculateResults()
+        }
+
+        if (this.typedHistory[this.wordIndex] === this.words[this.wordIndex]) {
+          this.correct++
+        } else {
+          this.incorrect++
+          this.incorrectIndex.push(this.wordIndex)
+        }
+
+        this.typedWord = ''
+        this.wordIndex++
+        // this.calculateCpm()
+      } else if (e.key === 'Backspace') {
+        this.corrections++
       }
-
-      this.typedHistory[this.wordIndex] = this.typedWord
-
-      if (this.typingState === TypingState.AwaitingLastWord) {
-        this.typingState = TypingState.Finished
-        this.calculateResults()
-      }
-
-      if (this.typedHistory[this.wordIndex] === this.words[this.wordIndex]) {
-        this.correct++
-      } else {
-        this.incorrect++
-        this.incorrectIndex.push(this.wordIndex)
-      }
-
-      this.typedWord = ''
-      this.wordIndex++
-      // this.calculateCpm()
-    } else if (e.key === 'Backspace') {
-      this.corrections++
     }
   }
 }
