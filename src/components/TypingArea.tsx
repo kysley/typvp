@@ -45,6 +45,7 @@ const TypingArea: FC<ITypingArea> = observer(props => {
           ))}
       </TypingAreaInner>
       <Input
+        hasWarning={GameStore.isSpellingIncorrect}
         disabled={props.isGameOver}
         placeholder="Start..."
         value={GameStore.typedWord}

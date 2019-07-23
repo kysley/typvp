@@ -43,6 +43,9 @@ class GameStore {
 
   incorrectIndex: number[] = []
 
+  @observable
+  isSpellingIncorrect: boolean = false
+
   @action
   calculateResults = (): any => {
     /*
@@ -78,7 +81,7 @@ class GameStore {
   @action
   reset = () => {
     clearTimeout(timeout)
-    this.typedHistory = new Array(250).fill('')
+    this.typedHistory = new Array(250).fill(null)
     this.typedWord = ''
     this.wordIndex = 0
     this.time = 0
@@ -91,6 +94,7 @@ class GameStore {
     this.incorrect = 0
     this.correct = 0
     this.incorrectIndex = []
+    this.isSpellingIncorrect = false
   }
 
   @action
@@ -117,6 +121,19 @@ class GameStore {
   }
 
   @action
+  validateInput = (): void => {
+    const target = this.words[this.wordIndex]
+    for (let i = 0; i < this.typedWord.length; i++) {
+      if (this.typedWord[i] !== target[i]) {
+        this.isSpellingIncorrect = true
+        return
+      } else {
+        this.isSpellingIncorrect = false
+      }
+    }
+  }
+
+  @action
   onKeyDown = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (this.typingState === TypingState.NotStarted) {
       this.typingState = TypingState.InProgress
@@ -125,6 +142,7 @@ class GameStore {
 
     if (e.target.value !== ' ' && this.typingState !== TypingState.Finished) {
       this.typedWord = e.target.value
+      this.validateInput()
     }
   }
 
@@ -153,9 +171,10 @@ class GameStore {
 
         this.typedWord = ''
         this.wordIndex++
-        // this.calculateCpm()
+        this.isSpellingIncorrect = false
       } else if (e.key === 'Backspace') {
         this.corrections++
+        this.validateInput()
       }
     }
   }
