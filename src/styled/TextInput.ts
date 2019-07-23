@@ -43,29 +43,33 @@ const inputOptionalStyles = css`
 `
 
 const inputDangerStyles = css`
-  &:not(:focus) {
-    border-color: ${colors.intent.danger};
+  /* &:not(:focus) { */
+  border-color: ${colors.intent.danger} !important;
+  background: ${colors.r200};
 
-    &::placeholder {
-      color: ${colors.r200};
-    }
+  &::placeholder {
+    color: ${colors.r200};
   }
+  /* } */
 `
 
-const Input = styled('input')`
+interface IInput {
+  isOptional?: boolean
+  hasWarning?: boolean
+}
+
+const Input = styled.input<IInput>`
   ${inputBaseStyles};
-  ${(p: any) =>
-    p.isOptional
-      ? css`
-          ${inputOptionalStyles}
-        `
-      : null};
-  ${(p: any) =>
-    p.hasWarning
-      ? css`
-          ${inputDangerStyles}
-        `
-      : null};
+  ${p =>
+    p.isOptional &&
+    css`
+      ${inputOptionalStyles}
+    `};
+  ${p =>
+    p.hasWarning &&
+    css`
+      ${inputDangerStyles}
+    `};
 `
 
 const Label = styled.label`
