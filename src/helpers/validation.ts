@@ -6,6 +6,7 @@ const noFirstName = 'First Name is Required'
 const noLastName = 'Last Name is Required'
 
 const noUsername = 'Username is Required'
+const shortUsername = 'Username must be at least 3 characters'
 
 const invalidEmail = 'Email must be Valid'
 const noEmail = 'Email is Required'
@@ -23,7 +24,7 @@ const lastNameValidation = yup.string().required(noLastName)
 
 const usernameValidation = yup
   .string()
-  .min(3)
+  .min(3, shortUsername)
   .max(15)
   .required(noUsername)
 

@@ -10,7 +10,6 @@
     "test:watch": "jest --coverage --env=jsdom --watch"
   },
   "dependencies": {
-    "@kevinwolf/formal-web": "^0.1.1",
     "framer-motion": "^1.2.2",
     "graphql": "^14.4.2",
     "graphql-tag": "^2.10.1",
@@ -21,6 +20,7 @@
     "random-words": "^1.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-hook-form": "^3.18.10",
     "react-hot-loader": "^4.12.6",
     "react-router-dom": "^5.0.1",
     "stop-runaway-react-effects": "^1.2.0",

@@ -1,5 +1,5 @@
 import React, {FC, useEffect} from 'react'
-import useFormal from '@kevinwolf/formal-web'
+import useForm from 'react-hook-form'
 import {useMutation} from 'urql'
 
 import {loginSchema} from '@/helpers/validation'
@@ -14,18 +14,24 @@ const initialValues = {
   password: '',
 }
 
+interface ILoginSchema {
+  username: string
+  password: string
+}
+
 const Login: FC = props => {
   const {UserStore} = useStore()
   const [mutation, execMutation] = useMutation(LOGIN)
-  const formal = useFormal(initialValues, {
-    schema: loginSchema,
-    onSubmit: async values => {
-      await execMutation({
-        username: values.username,
-        password: values.password,
-      })
-    },
+  const {formState, register, handleSubmit, errors} = useForm<ILoginSchema>({
+    validationSchema: loginSchema,
   })
+
+  const onSubmit = async (values: ILoginSchema) => {
+    await execMutation({
+      username: values.username,
+      password: values.password,
+    })
+  }
 
   useEffect(() => {
     console.log(mutation)
@@ -47,26 +53,33 @@ const Login: FC = props => {
           <p>something went wrong while logging you in</p>
         )}
       </div>
-      <SignupForm {...formal.getFormProps()}>
+      <SignupForm onSubmit={handleSubmit(onSubmit)}>
         <div>
           <Label htmlFor="username">Username</Label>
           <Input
-            hasWarning={formal.errors.username}
-            {...formal.getFieldProps('username')}
+            name="username"
+            hasWarning={!!errors.username}
+            ref={register}
             type="text"
             autoComplete="off"
           />
-          {formal.errors.username && <div>{formal.errors.username}</div>}
+          {errors.username && <div>{errors.username}</div>}
         </div>
         <div>
           <Label htmlFor="password">Password</Label>
-          <Input {...formal.getFieldProps('password')} type="password" />
-          {formal.errors.password && <div>{formal.errors.password}</div>}
+          <Input
+            name="password"
+            type="password"
+            hasWarning={!!errors.password}
+            ref={register}
+            autoComplete="current-password"
+          />
+          {errors.password && <div>{errors.password}</div>}
         </div>
         <Button
           intent="none"
           appearance="primary"
-          {...formal.getSubmitButtonProps()}
+          disabled={!formState.isValid}
           type="submit"
         >
           Login
