@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import {useQuery} from 'urql'
 import {observer} from 'mobx-react'
@@ -11,8 +11,6 @@ import {
   HeaderLogo,
   LeaderboardTab,
   MeTab,
-  LoginTab,
-  SigninTab,
   HeaderGroup,
 } from '@/styled/Header'
 import ME from '@/graphql/queries/me'
@@ -58,8 +56,16 @@ const Header = observer(() => {
             <>
               {!result.fetching && (
                 <>
-                  <LoginTab to="/login">login</LoginTab>
-                  <SigninTab to="/signup">sign up</SigninTab>
+                  <Link to="/login">
+                    <Button appearance="primary" intent="none">
+                      Login
+                    </Button>
+                  </Link>
+                  <Link to="/signup">
+                    <Button appearance="default" intent="none">
+                      Sign Up
+                    </Button>
+                  </Link>
                 </>
               )}
             </>

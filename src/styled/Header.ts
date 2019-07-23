@@ -62,10 +62,9 @@ const HeaderLogo = styled('img')`
 export const HeaderGroup = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: ${colors.background.tint1};
   grid-column: 4;
-  justify-content: space-evenly;
-  min-width: 14em;
+  justify-content: space-between;
+  min-width: 12em;
   height: 100%;
   border-radius: 6px;
 `
