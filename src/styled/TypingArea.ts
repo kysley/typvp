@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
 
 import {colors} from '@/styled/Theme'
 
@@ -11,9 +11,29 @@ const TypingAreaContainer = styled.div`
   padding: 1em;
 `
 
-const TypingAreaInner = styled.div`
+interface ITypingAreaInner {
+  disabled?: boolean
+}
+
+const TypingAreaInner = styled.div<ITypingAreaInner>`
+  position: relative;
   height: 150px;
   overflow: hidden;
+
+  ${p =>
+    p.disabled &&
+    css`
+      &::after {
+        display: block;
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        background: ${colors.background.tint2};
+        top: 0;
+        opacity: 0.5;
+      }
+    `}
 `
 
 export {TypingAreaContainer, TypingAreaInner}
