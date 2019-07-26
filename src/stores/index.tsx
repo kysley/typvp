@@ -8,7 +8,15 @@ const RootStore = {
   GameStore,
 }
 
-const StoreContext = React.createContext<any>(null)
+type TUser = typeof UserStore
+type TGame = typeof GameStore
+
+interface IRootStore {
+  UserStore: TUser
+  GameStore: TGame
+}
+
+const StoreContext = React.createContext<IRootStore | null>(null)
 
 export const StoreProvider = ({children}: any) => {
   const store = RootStore
