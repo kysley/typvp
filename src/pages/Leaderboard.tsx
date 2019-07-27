@@ -27,19 +27,17 @@ const Leaderboard = observer(() => {
   return (
     <LeaderboardGrid>
       <LeaderboardHeader>
-        <span>Pos.</span>
-        <span>wpm</span>
+        <span>Pos/wpm</span>
         <span>cpm</span>
         <span>correct</span>
-        <span>corrections</span>
         <span>incorrect</span>
+        <span>corrections</span>
       </LeaderboardHeader>
       {leaderboard.map((c: any, idx) => (
         <LeaderboardRanking>
           <p>
             {(idx += 1)}: {c.wpm}
           </p>
-          <p>{c.rawCpm}</p>
           <p>{c.cpm}</p>
           <p>{c.correct}</p>
           <p>{c.incorrect}</p>

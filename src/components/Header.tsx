@@ -62,7 +62,7 @@ const Header = observer(() => {
                     </Button>
                   </Link>
                   <Link to="/signup">
-                    <Button appearance="default" intent="none">
+                    <Button appearance="link" intent="none">
                       Sign Up
                     </Button>
                   </Link>
