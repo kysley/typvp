@@ -1,15 +1,16 @@
 import styled from 'styled-components'
 
 export const AppWrapper = styled.main`
-  max-width: 80vw;
+  max-width: 100vw;
   position: relative;
   display: flex;
-  margin: auto;
   min-height: 100vh;
+  background: ${({theme}) => theme.backgrounds.background};
+  justify-content: center;
 `
 
 export const AppContainer = styled.div`
-  width: 100%;
+  width: 80%;
   position: relative;
   display: flex;
   flex-direction: column;
