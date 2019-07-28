@@ -1,5 +1,5 @@
 import React, {FC, useRef, useEffect} from 'react'
-import {observer} from 'mobx-react'
+import {observer} from 'mobx-react-lite'
 
 import {useStore} from '@/stores'
 import Word from '@/components/Word'

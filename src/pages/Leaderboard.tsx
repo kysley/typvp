@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {useQuery} from 'urql'
-import {observer} from 'mobx-react'
+import {observer} from 'mobx-react-lite'
 
 import LEADERBOARD from '@/graphql/queries/leaderboard'
 import {

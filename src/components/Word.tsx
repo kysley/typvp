@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {observer} from 'mobx-react'
+import {observer} from 'mobx-react-lite'
 
 import {useStore} from '@/stores'
 import SingleWord from '@/styled/Word'

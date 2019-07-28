@@ -1,5 +1,5 @@
 import React, {FC, useEffect} from 'react'
-import {observer} from 'mobx-react'
+import {observer} from 'mobx-react-lite'
 import {useMutation} from 'urql'
 
 import {useStore} from '@/stores'

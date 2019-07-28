@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import {useQuery} from 'urql'
-import {observer} from 'mobx-react'
+import {observer} from 'mobx-react-lite'
 
 import logo from '@/assets/images/typvp.svg'
 
