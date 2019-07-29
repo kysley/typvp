@@ -5,7 +5,8 @@ export const AppWrapper = styled.main`
   position: relative;
   display: flex;
   min-height: 100vh;
-  background: ${({theme}) => theme.backgrounds.background};
+  /* background: ${({theme}) => theme.backgrounds.background};
+   */
   justify-content: center;
 `
 
