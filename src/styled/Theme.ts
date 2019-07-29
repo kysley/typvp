@@ -9,6 +9,8 @@ const border = {
 const background = {
   tint1: '#F9F9FB',
   tint2: '#F5F6F7',
+  darkTint1: '#23272A',
+  darkTint2: '#2C2F33',
 }
 
 const neutrals = {
@@ -215,4 +217,19 @@ export const bundle: Dic = {
   minimal,
   default: normal,
   link,
+}
+
+export const dark = {
+  backgrounds: {
+    background: background.darkTint1,
+    accent: background.darkTint2,
+  },
+  colors: {},
+}
+
+export const light = {
+  backgrounds: {
+    background: white,
+    accent: background.tint2,
+  },
 }
