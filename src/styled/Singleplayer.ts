@@ -16,8 +16,11 @@ export const MetaContainer = styled.div`
   border-radius: 6px;
   display: grid;
   grid-auto-flow: column;
-  background: ${colors.background.tint2};
-  color: ${colors.black};
+  /* background: ${colors.background.tint2}; */
+  background: ${({theme}) => theme.backgrounds.accent};
+  /* color: ${colors.black}; */
+  color: ${({theme}) => theme.colors.text};
+  border: 1px solid ${({theme}) => theme.border.default};
   margin: 1em 0;
   padding: 0.5em 1em;
   justify-content: space-between;

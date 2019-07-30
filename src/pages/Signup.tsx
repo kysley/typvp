@@ -53,9 +53,11 @@ const Signup: FC = props => {
 
   return (
     <SignupFormContainer>
+      <h1>Get Started</h1>
+      <p>Create your typvp account to track your results & more!</p>
       <div>{mutation.data && !mutation.error && <p>account created!</p>}</div>
       <div>
-        {mutation.data && mutation.error && (
+        {!mutation.data && mutation.error && (
           <p>something went wrong while creating your account</p>
         )}
       </div>
@@ -110,7 +112,7 @@ const Signup: FC = props => {
           disabled={!formState.isValid && !formState.isSubmitting}
           type="submit"
         >
-          Submit
+          Sign Up
         </Button>
       </SignupForm>
     </SignupFormContainer>

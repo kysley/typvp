@@ -48,8 +48,10 @@ const Login: FC = props => {
 
   return (
     <SignupFormContainer>
+      <h1>Welcome back!</h1>
+      <p>Log In to your typvp account.</p>
       <div>
-        {mutation.data && mutation.error && (
+        {!mutation.data && mutation.error && (
           <p>something went wrong while logging you in</p>
         )}
       </div>
@@ -57,6 +59,7 @@ const Login: FC = props => {
         <div>
           <Label htmlFor="username">Username</Label>
           <Input
+            placeholder="Username"
             name="username"
             hasWarning={!!errors.username}
             ref={register}
@@ -68,6 +71,7 @@ const Login: FC = props => {
         <div>
           <Label htmlFor="password">Password</Label>
           <Input
+            placeholder="Password"
             name="password"
             type="password"
             hasWarning={!!errors.password}
@@ -82,7 +86,7 @@ const Login: FC = props => {
           disabled={!formState.isValid}
           type="submit"
         >
-          Login
+          Log In
         </Button>
       </SignupForm>
     </SignupFormContainer>

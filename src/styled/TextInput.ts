@@ -4,10 +4,11 @@ import {colors} from '@/styled/Theme'
 
 const inputBaseStyles = css`
   /* background-color: ${colors.n100}; */
-  border: none;
+  border: 1px solid ${({theme}) => theme.border.default};
+  /* border: none;
   border-width: 1px;
   border-style: solid;
-  border-color: ${colors.border.muted};
+  border-color: ${colors.border.muted}; */
   border-radius: 4px;
   /* box-shadow: rgba(8, 35, 51, 0.05) 0px 1px 3px; */
   padding: 0.75rem 0.75rem;
@@ -15,10 +16,12 @@ const inputBaseStyles = css`
   transition: all 200ms ease-in-out;
   width: 100%;
   font-size: 0.8725rem;
+  background-color: ${({theme}) => theme.backgrounds.input};
+  color: ${({theme}) => theme.colors.text};
 
   &:focus,
   &:active {
-    border-color: ${colors.border.default};
+    border-color: ${({theme}) => theme.border.active};
     outline: none;
     box-shadow: rgba(8, 35, 51, 0.05) 0px 6px 10px;
   }
@@ -29,9 +32,9 @@ const inputBaseStyles = css`
   }
   &[disabled],
   &:disabled {
-    background-color: ${colors.background.tint1};
+    background-color: ${({theme}) => theme.backgrounds.input};
     &:active {
-      border: 1px solid ${colors.background.tint2};
+      border: 1px solid ${({theme}) => theme.border.active};
     }
   }
 `
@@ -44,8 +47,8 @@ const inputOptionalStyles = css`
 
 const inputDangerStyles = css`
   /* &:not(:focus) { */
-  border-color: ${colors.intent.danger} !important;
-  background: ${colors.r200};
+  border-color: ${colors.r400} !important;
+  background: ${colors.r300};
 
   &::placeholder {
     color: ${colors.r200};

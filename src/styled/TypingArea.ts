@@ -6,7 +6,9 @@ const TypingAreaContainer = styled.div`
   display: grid;
   grid-row-gap: 1em;
   justify-self: center;
-  background: ${colors.background.tint1};
+  /* background: ${colors.background.tint1}; */
+  background: ${({theme}) => theme.backgrounds.accent};
+  border: 1px solid ${({theme}) => theme.border.default};
   border-radius: 6px;
   padding: 1em;
 `

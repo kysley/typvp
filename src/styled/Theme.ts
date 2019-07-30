@@ -1,16 +1,29 @@
 const white = '#FFF'
 const black = '#16171A'
 
+const wordVariants = {
+  match: '#64aa84',
+  incorrect: '#cb466a',
+  current: '#5646b2',
+}
+
 const border = {
   default: '#E4E7EB',
   muted: '#EDF0F2',
+  dark: {
+    default: '#2b2c2d',
+    active: '#3e4044',
+  },
 }
 
 const background = {
   tint1: '#F9F9FB',
   tint2: '#F5F6F7',
-  darkTint1: '#23272A',
-  darkTint2: '#2C2F33',
+  darkTint1: '#17171a',
+  // darkTint1: '#23272A',
+  darkTint2: '#0f1012',
+  darkTint3: '#0a0a0b',
+  // darkTint2: '#3F4145',
 }
 
 const neutrals = {
@@ -223,13 +236,33 @@ export const dark = {
   backgrounds: {
     background: background.darkTint1,
     accent: background.darkTint2,
+    input: background.darkTint1,
   },
-  colors: {},
+  colors: {
+    text: colors.white,
+    current: wordVariants.current,
+    incorrect: wordVariants.incorrect,
+    match: wordVariants.match,
+  },
+  border: {
+    default: border.dark.default,
+    active: border.dark.active,
+  },
 }
 
 export const light = {
   backgrounds: {
     background: white,
     accent: background.tint2,
+  },
+  colors: {
+    text: colors.black,
+    current: wordVariants.current,
+    incorrect: wordVariants.incorrect,
+    match: wordVariants.match,
+  },
+  border: {
+    default: border.default,
+    active: border.muted,
   },
 }

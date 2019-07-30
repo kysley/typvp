@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react'
+import React, {FC} from 'react'
 import {observer} from 'mobx-react-lite'
 
 import sunmoon from '@/assets/images/sunmoon.svg'
@@ -11,9 +11,9 @@ const ThemeToggle: FC = observer(() => {
       alt="nopthing"
       src={sunmoon}
       style={{
-        position: 'absolute',
-        bottom: 0,
-        right: 0,
+        position: 'fixed',
+        bottom: '1vh',
+        right: '1vw',
         width: '2em',
         cursor: 'pointer',
       }}

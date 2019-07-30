@@ -4,10 +4,10 @@ import {light, dark} from '@/styled/Theme'
 
 class GlobalStore {
   @observable
-  theme: any = light
+  mode: string = localStorage.getItem('mode') || 'light'
 
   @observable
-  mode: string = 'light'
+  theme: any = this.mode === 'light' ? light : dark
 
   @action
   toggleTheme = () => {
