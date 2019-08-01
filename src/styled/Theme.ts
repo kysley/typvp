@@ -19,11 +19,9 @@ const border = {
 const background = {
   tint1: '#F9F9FB',
   tint2: '#F5F6F7',
-  darkTint1: '#17171a',
-  // darkTint1: '#23272A',
-  darkTint2: '#0f1012',
-  darkTint3: '#0a0a0b',
-  // darkTint2: '#3F4145',
+  darkTint1: '#1e1f23',
+  darkTint2: '#121416',
+  darkTint3: '#090a0c',
 }
 
 const neutrals = {
@@ -89,6 +87,10 @@ const intent = {
   warning: oranges.o300,
 }
 
+const brand = {
+  blue: '#0064ff',
+}
+
 export const colors = {
   white,
   black,
@@ -103,6 +105,7 @@ export const colors = {
   ...reds,
   ...greens,
   ...oranges,
+  ...brand,
 }
 
 export const intentMeta = {
@@ -243,6 +246,7 @@ export const dark = {
     current: wordVariants.current,
     incorrect: wordVariants.incorrect,
     match: wordVariants.match,
+    primary: brand.blue,
   },
   border: {
     default: border.dark.default,
@@ -260,6 +264,7 @@ export const light = {
     current: wordVariants.current,
     incorrect: wordVariants.incorrect,
     match: wordVariants.match,
+    primary: brand.blue,
   },
   border: {
     default: border.default,
