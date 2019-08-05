@@ -3,17 +3,10 @@ import styled, {css} from 'styled-components'
 import {colors} from '@/styled/Theme'
 
 const inputBaseStyles = css`
-  /* background-color: ${colors.n100}; */
   border: 1px solid ${({theme}) => theme.border.default};
-  /* border: none;
-  border-width: 1px;
-  border-style: solid;
-  border-color: ${colors.border.muted}; */
   border-radius: 4px;
-  /* box-shadow: rgba(8, 35, 51, 0.05) 0px 1px 3px; */
   padding: 0.75rem 0.75rem;
   margin-bottom: 2em;
-  transition: all 200ms ease-in-out;
   width: 100%;
   font-size: 0.8725rem;
   background-color: ${({theme}) => theme.backgrounds.input};
@@ -26,10 +19,6 @@ const inputBaseStyles = css`
     box-shadow: rgba(8, 35, 51, 0.05) 0px 6px 10px;
   }
 
-  &::placeholder {
-    color: #9DA7B1;
-    transition: color 200ms ease-in-out;
-  }
   &[disabled],
   &:disabled {
     background-color: ${({theme}) => theme.backgrounds.input};
@@ -46,14 +35,13 @@ const inputOptionalStyles = css`
 `
 
 const inputDangerStyles = css`
-  /* &:not(:focus) { */
   border-color: ${colors.r400} !important;
-  background: ${colors.r300};
+  background: ${colors.r200};
+  color: ${colors.black};
 
   &::placeholder {
     color: ${colors.r200};
   }
-  /* } */
 `
 
 interface IInput {
