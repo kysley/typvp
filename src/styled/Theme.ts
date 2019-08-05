@@ -1,5 +1,6 @@
 const white = '#FFF'
 const black = '#16171A'
+const altBlack = '#808898'
 
 const border = {
   default: '#E4E7EB',
@@ -196,22 +197,34 @@ export const primary = {
 
 export const link = {
   none: {
-    text: colors.brand.blue,
+    text: {
+      light: colors.brand.blue,
+      dark: altBlack,
+    },
     hover: 'transparent',
     bg: 'transparent',
   },
   success: {
-    text: colors.g300,
+    text: {
+      light: colors.g300,
+      dark: colors.g300,
+    },
     hover: 'transparent',
     bg: 'transparent',
   },
   warning: {
-    text: colors.o300,
+    text: {
+      light: colors.o300,
+      dark: colors.o300,
+    },
     hover: 'transparent',
     bg: 'transparent',
   },
   danger: {
-    text: colors.r300,
+    text: {
+      light: colors.r300,
+      dark: colors.r300,
+    },
     hover: 'transparent',
     bg: 'transparent',
   },
@@ -298,6 +311,7 @@ export const dark = {
   },
   colors: {
     text: colors.white,
+    accentText: altBlack,
     current: wordVariants.current,
     incorrect: wordVariants.incorrect,
     match: wordVariants.match,
@@ -317,6 +331,7 @@ export const light = {
   },
   colors: {
     text: colors.black,
+    accentText: altBlack,
     current: wordVariants.current,
     incorrect: wordVariants.incorrect,
     match: wordVariants.match,

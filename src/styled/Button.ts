@@ -58,11 +58,11 @@ const Button = styled.button<ButtonProps>`
       color: ${bundle.default[intent].text[theme.name]};
   `}
 
-  ${({intent, appearance}) =>
+  ${({theme, intent, appearance}) =>
     appearance === 'link' &&
     `
      background: none;
-     color: ${bundle.link[intent].text};
+     color: ${bundle.link[intent].text[theme.name]};
      &:hover {
        text-decoration: underline;
    `}
