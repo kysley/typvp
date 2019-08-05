@@ -57,12 +57,12 @@ const Header = observer(() => {
               {!result.fetching && (
                 <>
                   <Link to="/login">
-                    <Button appearance="primary" intent="none">
+                    <Button appearance="default" intent="none">
                       Login
                     </Button>
                   </Link>
                   <Link to="/signup">
-                    <Button appearance="link" intent="none">
+                    <Button appearance="primary" intent="none">
                       Sign Up
                     </Button>
                   </Link>
