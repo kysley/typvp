@@ -41,9 +41,6 @@ const Button = styled.button<ButtonProps>`
     `
       background: ${bundle.primary[intent].bg};
       color: ${bundle.primary[intent].text};
-      :hover {
-        background-color: ${bundle.primary[intent].hover};
-      }
     `}
 
   ${({theme, intent, appearance}) =>

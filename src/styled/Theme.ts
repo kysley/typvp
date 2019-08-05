@@ -138,22 +138,36 @@ export const normal = {
       light: colors.b200,
       dark: colors.background.darkTint2,
     },
-    hover: colors.n200,
   },
   success: {
-    text: colors.g300,
-    bg: colors.background.tint1,
-    hover: colors.n200,
+    text: {
+      light: colors.g400,
+      dark: colors.g300,
+    },
+    bg: {
+      light: colors.g200,
+      dark: colors.background.darkTint2,
+    },
   },
   warning: {
-    text: colors.o300,
-    bg: colors.background.tint1,
-    hover: colors.n200,
+    text: {
+      light: colors.o400,
+      dark: colors.o300,
+    },
+    bg: {
+      light: colors.o200,
+      dark: colors.background.darkTint2,
+    },
   },
   danger: {
-    text: colors.r300,
-    bg: colors.background.tint1,
-    hover: colors.n200,
+    text: {
+      light: colors.r300,
+      dark: colors.r300,
+    },
+    bg: {
+      light: colors.r200,
+      dark: colors.background.darkTint2,
+    },
   },
 }
 
@@ -161,7 +175,7 @@ export const primary = {
   none: {
     text: colors.white,
     bg: colors.brand.blue,
-    hover: colors.b400,
+    hover: colors.b200,
   },
   success: {
     text: colors.white,
