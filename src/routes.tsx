@@ -1,4 +1,4 @@
-import React, {lazy, Suspense, useEffect} from 'react'
+import React, {lazy, Suspense} from 'react'
 import {hot} from 'react-hot-loader/root'
 import {Switch, Route} from 'react-router-dom'
 import {ThemeProvider} from 'styled-components'
