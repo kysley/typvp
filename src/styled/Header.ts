@@ -22,7 +22,7 @@ const Tab = styled(NavLink)`
   margin: 0 1em;
   position: relative;
   text-decoration: none;
-  color: ${colors.black};
+  color: ${({theme}) => theme.colors.text};
   display: grid;
   align-items: center;
   justify-items: center;
@@ -34,9 +34,9 @@ const Tab = styled(NavLink)`
     text-decoration: underline;
   }
   &.active {
-    color: ${colors.p300};
+    color: ${({theme}) => theme.colors.text};
     text-decoration: underline;
-    background-color: ${colors.background.tint1};
+    background-color: ${({theme}) => theme.backgrounds.accent};
   }
 `
 
