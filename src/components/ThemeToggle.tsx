@@ -17,7 +17,7 @@ const ThemeToggle: FC = observer(() => {
         width: '2em',
         cursor: 'pointer',
       }}
-      onClick={() => GlobalStore.toggleTheme()}
+      onClick={GlobalStore.toggleTheme}
     />
   )
 })
