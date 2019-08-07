@@ -1,6 +1,7 @@
 const white = '#FFF'
+const altWhite = '#5e6165'
 const black = '#16171A'
-const altBlack = '#808898'
+const altBlack = '#dcddde'
 
 const border = {
   default: '#E4E7EB',
@@ -331,7 +332,7 @@ export const light = {
   },
   colors: {
     text: colors.black,
-    accentText: altBlack,
+    accentText: altWhite,
     current: wordVariants.current,
     incorrect: wordVariants.incorrect,
     match: wordVariants.match,

@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-import {colors} from '@/styled/Theme'
-
 export const LeaderboardGrid = styled.main`
   display: grid;
   grid-row-gap: 0.5em;
@@ -17,7 +15,7 @@ export const LeaderboardHeader = styled.div`
   font-weight: 900;
   font-size: 1.25rem;
   border-radius: 6px;
-  color: ${({theme}) => theme.colors.text};
+  color: ${({theme}) => theme.colors.accentText};
   background-color: ${({theme}) => theme.backgrounds.background};
 
   span:not(:first-of-type) {
