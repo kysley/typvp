@@ -1,14 +1,23 @@
 const white = '#FFF'
+const altWhite = '#5e6165'
 const black = '#16171A'
+const altBlack = '#dcddde'
 
 const border = {
   default: '#E4E7EB',
   muted: '#EDF0F2',
+  dark: {
+    default: '#2b2c2d',
+    active: '#3e4044',
+  },
 }
 
 const background = {
   tint1: '#F9F9FB',
   tint2: '#F5F6F7',
+  darkTint1: '#1e1f23',
+  darkTint2: '#121416',
+  darkTint3: '#090a0c',
 }
 
 const neutrals = {
@@ -74,6 +83,13 @@ const intent = {
   warning: oranges.o300,
 }
 
+const brand = {
+  blue: '#0064ff',
+  green: '#38cd83',
+  purple: '#7948ff',
+  red: '#ff5c56',
+}
+
 export const colors = {
   white,
   black,
@@ -88,6 +104,7 @@ export const colors = {
   ...reds,
   ...greens,
   ...oranges,
+  brand,
 }
 
 export const intentMeta = {
@@ -115,32 +132,52 @@ export const intentMeta = {
 
 export const normal = {
   none: {
-    text: colors.p300,
-    bg: colors.background.tint1,
-    hover: colors.n200,
+    text: {
+      light: colors.brand.blue,
+      dark: colors.white,
+    },
+    bg: {
+      light: colors.b200,
+      dark: colors.background.darkTint2,
+    },
   },
   success: {
-    text: colors.g300,
-    bg: colors.background.tint1,
-    hover: colors.n200,
+    text: {
+      light: colors.g400,
+      dark: colors.g300,
+    },
+    bg: {
+      light: colors.g200,
+      dark: colors.background.darkTint2,
+    },
   },
   warning: {
-    text: colors.o300,
-    bg: colors.background.tint1,
-    hover: colors.n200,
+    text: {
+      light: colors.o400,
+      dark: colors.o300,
+    },
+    bg: {
+      light: colors.o200,
+      dark: colors.background.darkTint2,
+    },
   },
   danger: {
-    text: colors.r300,
-    bg: colors.background.tint1,
-    hover: colors.n200,
+    text: {
+      light: colors.r300,
+      dark: colors.r300,
+    },
+    bg: {
+      light: colors.r200,
+      dark: colors.background.darkTint2,
+    },
   },
 }
 
 export const primary = {
   none: {
     text: colors.white,
-    bg: colors.p300,
-    hover: colors.p400,
+    bg: colors.brand.blue,
+    hover: colors.b200,
   },
   success: {
     text: colors.white,
@@ -159,50 +196,99 @@ export const primary = {
   },
 }
 
-export const minimal = {
+export const link = {
   none: {
-    text: colors.n400,
-    hover: colors.background.tint1,
+    text: {
+      light: colors.brand.blue,
+      dark: altBlack,
+    },
+    hover: 'transparent',
     bg: 'transparent',
   },
   success: {
-    text: colors.g300,
-    hover: colors.background.tint1,
+    text: {
+      light: colors.g300,
+      dark: colors.g300,
+    },
+    hover: 'transparent',
     bg: 'transparent',
   },
   warning: {
-    text: colors.o300,
-    hover: colors.background.tint1,
+    text: {
+      light: colors.o300,
+      dark: colors.o300,
+    },
+    hover: 'transparent',
     bg: 'transparent',
   },
   danger: {
-    text: colors.r300,
-    hover: colors.background.tint1,
+    text: {
+      light: colors.r300,
+      dark: colors.r300,
+    },
+    hover: 'transparent',
     bg: 'transparent',
   },
 }
 
-export const link = {
+export const secondary = {
   none: {
-    text: colors.p300,
+    text: {
+      dark: colors.white,
+      light: colors.brand.blue,
+    },
     hover: 'transparent',
     bg: 'transparent',
+    border: {
+      light: colors.brand.blue,
+      dark: colors.border.dark.active,
+    },
   },
   success: {
-    text: colors.g300,
+    text: {
+      dark: colors.g300,
+      light: colors.g300,
+    },
     hover: 'transparent',
     bg: 'transparent',
+    border: {
+      light: colors.g400,
+      dark: colors.g400,
+    },
   },
   warning: {
-    text: colors.o300,
+    text: {
+      dark: colors.o300,
+      light: colors.o300,
+    },
     hover: 'transparent',
     bg: 'transparent',
+    border: {
+      light: colors.o300,
+      dark: colors.o300,
+    },
   },
   danger: {
-    text: colors.r300,
+    text: {
+      dark: colors.r300,
+      light: colors.r300,
+    },
     hover: 'transparent',
     bg: 'transparent',
+    border: {
+      light: colors.r400,
+      dark: colors.r400,
+    },
   },
+}
+
+const wordVariants = {
+  // match: '#64aa84',    old
+  // incorrect: '#cb466a',old
+  // current: '#5646b2',  old
+  match: brand.green,
+  incorrect: brand.red,
+  current: brand.purple,
 }
 
 interface Dic {
@@ -212,7 +298,48 @@ interface Dic {
 export const bundle: Dic = {
   intent: intentMeta,
   primary,
-  minimal,
   default: normal,
   link,
+  secondary,
+}
+
+export const dark = {
+  name: 'dark',
+  backgrounds: {
+    background: background.darkTint1,
+    accent: background.darkTint2,
+    input: background.darkTint1,
+  },
+  colors: {
+    text: colors.white,
+    accentText: altBlack,
+    current: wordVariants.current,
+    incorrect: wordVariants.incorrect,
+    match: wordVariants.match,
+    primary: brand.blue,
+  },
+  border: {
+    default: border.dark.default,
+    active: border.dark.active,
+  },
+}
+
+export const light = {
+  name: 'light',
+  backgrounds: {
+    background: white,
+    accent: background.tint2,
+  },
+  colors: {
+    text: colors.black,
+    accentText: altWhite,
+    current: wordVariants.current,
+    incorrect: wordVariants.incorrect,
+    match: wordVariants.match,
+    primary: brand.blue,
+  },
+  border: {
+    default: border.default,
+    active: border.muted,
+  },
 }

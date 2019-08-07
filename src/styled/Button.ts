@@ -1,9 +1,14 @@
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
 
 import {bundle} from '@/styled/Theme'
 
-const buttonBaseStyles = css`
-  height: 40px;
+interface ButtonProps {
+  intent: 'none' | 'success' | 'warning' | 'danger'
+  appearance: 'default' | 'primary' | 'secondary' | 'link'
+}
+
+const Button = styled.button<ButtonProps>`
+  height: 32px;
   width: auto;
   border: 0;
   outline: 0;
@@ -15,7 +20,7 @@ const buttonBaseStyles = css`
   display: inline-block;
   text-decoration: none;
   text-align: center;
-  transition: all 200ms ease-in-out;
+  /* transition: all 200ms ease-in-out; */
 
   :last-of-type {
     margin-right: 0;
@@ -30,44 +35,42 @@ const buttonBaseStyles = css`
   & > svg {
     margin-right: 0.35em;
   }
+
+  ${({intent, appearance}) =>
+    appearance === 'primary' &&
+    `
+      background: ${bundle.primary[intent].bg};
+      color: ${bundle.primary[intent].text};
+    `}
+
+  ${({theme, intent, appearance}) =>
+    appearance === 'secondary' &&
+    `
+      background: ${bundle.secondary[intent].bg};
+      color: ${bundle.secondary[intent].text[theme.name]};
+      border: 1px solid ${bundle.secondary[intent].border[theme.name]};
+    `}
+
+  ${({theme, intent, appearance}) =>
+    appearance === 'default' &&
+    `
+      background: ${bundle.default[intent].bg[theme.name]};
+      color: ${bundle.default[intent].text[theme.name]};
+  `}
+
+  ${({theme, intent, appearance}) =>
+    appearance === 'link' &&
+    `
+     background: none;
+     color: ${bundle.link[intent].text[theme.name]};
+     &:hover {
+       text-decoration: underline;
+   `}
 `
 
-const linkButtonStyles = css`
-  :hover {
-    text-decoration: underline;
-    box-shadow: none;
-  }
-`
-
-interface ButtonProps {
-  intent: 'none' | 'success' | 'warning' | 'primary'
-  appearance: 'default' | 'minimal' | 'primary' | 'link'
+Button.defaultProps = {
+  intent: 'none',
+  appearance: 'default',
 }
-
-const Button = styled.button<ButtonProps>(
-  ({appearance, intent}: ButtonProps) => `
-    background-color: ${bundle[appearance][intent].bg};
-    color: ${bundle[appearance][intent].text};
-    :hover {
-      box-shadow: rgba(8,35,51,0.12) 0px 6px 10px;
-    }
-    :active {
-      background-color: ${bundle[appearance][intent].hover};
-    }
-    ${buttonBaseStyles}
-    `,
-  (p: ButtonProps) => (p.appearance === 'link' ? linkButtonStyles : null),
-)
-
-// Button.propTypes = {
-//   intent: PropTypes.oneOf(['none', 'success', 'warning', 'danger']),
-//   appearance: PropTypes.oneOf(['default', 'minimal', 'primary', 'link'])
-//     .isRequired,
-// }
-
-// Button.defaultProps = {
-//   intent: 'none',
-//   appearance: 'default',
-// }
 
 export default Button

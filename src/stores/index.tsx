@@ -2,18 +2,22 @@ import React from 'react'
 
 import UserStore from '@/stores/User'
 import GameStore from '@/stores/Game'
+import GlobalStore from '@/stores/Global'
 
 const RootStore = {
   UserStore,
   GameStore,
+  GlobalStore,
 }
 
 type TUser = typeof UserStore
 type TGame = typeof GameStore
+type TGlobal = typeof GlobalStore
 
 interface IRootStore {
   UserStore: TUser
   GameStore: TGame
+  GlobalStore: TGlobal
 }
 
 const StoreContext = React.createContext<IRootStore | null>(null)

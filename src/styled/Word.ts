@@ -2,18 +2,6 @@ import styled, {css} from 'styled-components'
 
 import {colors} from '@/styled/Theme'
 
-const finishedMatch = css`
-  color: #64aa84;
-`
-
-const finishedIncorrect = css`
-  color: #cb466a;
-`
-
-const current = css`
-  color: #5646b2;
-`
-
 interface SingleWordProps {
   variant: 'current' | 'done' | 'awaiting'
   isMatch: boolean | undefined
@@ -25,14 +13,14 @@ const SingleWord = styled.span<SingleWordProps>`
   padding: 4px 5px;
   border-radius: 5px;
   display: inline-block;
-  color: ${colors.black};
 
-  ${p => {
-    if (p.variant === 'done') {
-      return p.isMatch ? `${finishedMatch}` : `${finishedIncorrect}`
-    }
-  }}
-  ${p => (p.variant === 'current' ? `${current}` : null)}
+  color: ${({variant, isMatch, theme}) =>
+    variant === 'done'
+      ? isMatch
+        ? theme.colors.match
+        : theme.colors.incorrect
+      : theme.colors.text};
+  color: ${({variant, theme}) => variant === 'current' && theme.colors.current};
 `
 
 export default SingleWord

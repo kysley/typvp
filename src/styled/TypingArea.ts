@@ -6,7 +6,9 @@ const TypingAreaContainer = styled.div`
   display: grid;
   grid-row-gap: 1em;
   justify-self: center;
-  background: ${colors.background.tint1};
+  /* background: ${colors.background.tint1}; */
+  background: ${({theme}) => theme.backgrounds.accent};
+  border: 1px solid ${({theme}) => theme.border.default};
   border-radius: 6px;
   padding: 1em;
 `
@@ -29,8 +31,8 @@ const TypingAreaInner = styled.div<ITypingAreaInner>`
         content: '';
         width: 100%;
         height: 100%;
-        background: ${colors.background.tint2};
-        top: 0;
+        background: ${({theme}) => theme.backgrounds.accent};
+        top: 180%;
         opacity: 0.5;
       }
     `}
