@@ -31,8 +31,8 @@ const TypingAreaInner = styled.div<ITypingAreaInner>`
         content: '';
         width: 100%;
         height: 100%;
-        background: ${colors.background.tint2};
-        top: 0;
+        background: ${({theme}) => theme.backgrounds.accent};
+        top: 180%;
         opacity: 0.5;
       }
     `}

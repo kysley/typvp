@@ -16,9 +16,7 @@ export const MetaContainer = styled.div`
   border-radius: 6px;
   display: grid;
   grid-auto-flow: column;
-  /* background: ${colors.background.tint2}; */
   background: ${({theme}) => theme.backgrounds.accent};
-  /* color: ${colors.black}; */
   color: ${({theme}) => theme.colors.text};
   border: 1px solid ${({theme}) => theme.border.default};
   margin: 1em 0;
@@ -44,7 +42,8 @@ export const ResultsContainer = styled(motion.div)`
   display: relative;
   padding: 1em;
   border-radius: 6px;
-  background: ${colors.background.tint2};
+  background: ${({theme}) => theme.backgrounds.accent};
+  color: ${({theme}) => theme.colors.text};
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-row-gap: 1em;
@@ -69,6 +68,6 @@ export const ResultsStatus = styled.span`
   color: ${colors.p300};
 
   a {
-    color: ${colors.p400};
+    color: ${({theme}) => theme.colors.accentText};
   }
 `
