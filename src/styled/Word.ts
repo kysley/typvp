@@ -1,6 +1,4 @@
-import styled, {css} from 'styled-components'
-
-import {colors} from '@/styled/Theme'
+import styled from 'styled-components'
 
 interface SingleWordProps {
   variant: 'current' | 'done' | 'awaiting'
