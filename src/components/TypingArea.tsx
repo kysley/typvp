@@ -51,6 +51,7 @@ const TypingArea: FC<ITypingArea> = observer(props => {
         value={GameStore.typedWord}
         onChange={e => GameStore.onKeyDown(e)}
         onKeyDown={e => GameStore.onAction(e)}
+        aria-label="Text Input"
       />
     </TypingAreaContainer>
   )

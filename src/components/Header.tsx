@@ -36,8 +36,8 @@ const Header = observer(() => {
   return (
     <HeaderWrapper>
       <HeaderContainer>
-        <Link to="/">
-          <HeaderLogo src={logo} />
+        <Link to="/" aria-label="Home">
+          <HeaderLogo src={logo} alt="" />
         </Link>
         <LeaderboardTab to="/leaderboard">leaderboards</LeaderboardTab>
         <HeaderGroup>
