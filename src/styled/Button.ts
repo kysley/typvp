@@ -20,7 +20,7 @@ const Button = styled.button<ButtonProps>`
   display: inline-block;
   text-decoration: none;
   text-align: center;
-  /* transition: all 200ms ease-in-out; */
+  transition: background 200ms ease-in-out;
 
   :last-of-type {
     margin-right: 0;
@@ -41,6 +41,9 @@ const Button = styled.button<ButtonProps>`
     `
       background: ${bundle.primary[intent].bg};
       color: ${bundle.primary[intent].text};
+      &:hover {
+        background: ${bundle.primary[intent].hover};
+      }
     `}
 
   ${({theme, intent, appearance}) =>

@@ -35,60 +35,88 @@ const teals = {
 }
 
 const purples = {
-  p100: '#F8F7FC',
-  p200: '#EAE7F8',
-  p300: '#735DD0',
-  p400: '#37248F',
+  // p100: '#F8F7FC',
+  // p200: '#EAE7F8',
+  // p300: '#735DD0',
+  // p400: '#37248F',
+  p50: '#EAE6FF',
+  p75: '#C0B6F2',
+  p100: '#998DD9',
+  p200: '#8777D9',
+  p300: '#6554C0',
+  p400: '#5243AA',
+  p500: '#403294',
 }
 
 const blues = {
-  b100: '#F7F9FD',
-  b200: '#DDEBF7',
-  b300: '#1070CA',
-  b400: '#084B8A',
+  // b100: '#F7F9FD',
+  // b200: '#DDEBF7',
+  // b300: '#1070CA',
+  // b400: '#084B8A',
+  b50: '#DEEBFF',
+  b75: '#B3D4FF',
+  b100: '#4C9AFF',
+  b200: '#2684FF',
+  b300: '#0065FF',
+  b400: '#0052CC',
+  b500: '#0747A6',
 }
 
 const yellows = {
-  y100: '#FEF8E7',
-  y200: '#FBE6A2',
-  y300: '#F7D154',
-  y400: '#7E6514',
+  // y100: '#FEF8E7',
+  // y200: '#FBE6A2',
+  // y300: '#F7D154',
+  // y400: '#7E6514',
+  y50: '#FFFAE6',
+  y75: '#FFF0B3',
+  y100: '#FFE380',
+  y200: '#FFC400',
+  y300: '#FFAB00',
+  y400: '#FF991F',
+  y500: '#FF8B00',
 }
 
 const reds = {
-  r100: '#FEF6F6',
-  r200: '#FAE2E2',
-  r300: '#EC4C47',
-  r400: '#BF0E08',
+  // r100: '#FEF6F6',
+  // r200: '#FAE2E2',
+  // r300: '#EC4C47',
+  // r400: '#BF0E08',
+  r50: '#FFEBE6',
+  r75: '#FFBDAD',
+  r100: '#FF8F73',
+  r200: '#FF7452',
+  r300: '#FF5630',
+  r400: '#DE350B',
+  r500: '#BF2600',
 }
 
 const greens = {
-  g100: '#F1FAF5',
-  g200: '#D4EEE2',
-  g300: '#47B881',
-  g400: '#00783E',
-}
-
-const oranges = {
-  o100: '#FDF8F3',
-  o200: '#FAE3CD',
-  o300: '#D9822B',
-  o400: '#95591E',
+  // g100: '#F1FAF5',
+  // g200: '#D4EEE2',
+  // g300: '#47B881',
+  // g400: '#00783E',
+  g50: '#E3FCEF',
+  g75: '#ABF5D1',
+  g100: '#79F2C0',
+  g200: '#57D9A3',
+  g300: '#36B37E',
+  g400: '#00875A',
+  g500: '#006644',
 }
 
 const intent = {
   none: blues.b300,
   success: greens.g300,
   danger: reds.r300,
-  warning: oranges.o300,
+  warning: yellows.y300,
 }
 
-const brand = {
-  blue: '#0064ff',
-  green: '#38cd83',
-  purple: '#7948ff',
-  red: '#ff5c56',
-}
+// const brand = {
+//   blue: '#0064ff',
+//   green: '#38cd83',
+//   purple: '#7948ff',
+//   red: '#ff5c56',
+// }
 
 export const colors = {
   white,
@@ -103,8 +131,7 @@ export const colors = {
   ...yellows,
   ...reds,
   ...greens,
-  ...oranges,
-  brand,
+  // brand,
 }
 
 export const intentMeta = {
@@ -133,41 +160,41 @@ export const intentMeta = {
 export const normal = {
   none: {
     text: {
-      light: colors.brand.blue,
+      light: colors.b500,
       dark: colors.white,
     },
     bg: {
-      light: colors.b200,
+      light: colors.b50,
       dark: colors.background.darkTint2,
     },
   },
   success: {
     text: {
-      light: colors.g400,
+      light: colors.g500,
       dark: colors.g300,
     },
     bg: {
-      light: colors.g200,
+      light: colors.g50,
       dark: colors.background.darkTint2,
     },
   },
   warning: {
     text: {
-      light: colors.o400,
-      dark: colors.o300,
+      light: colors.y500,
+      dark: colors.y300,
     },
     bg: {
-      light: colors.o200,
+      light: colors.y50,
       dark: colors.background.darkTint2,
     },
   },
   danger: {
     text: {
-      light: colors.r300,
+      light: colors.r500,
       dark: colors.r300,
     },
     bg: {
-      light: colors.r200,
+      light: colors.r50,
       dark: colors.background.darkTint2,
     },
   },
@@ -176,7 +203,7 @@ export const normal = {
 export const primary = {
   none: {
     text: colors.white,
-    bg: colors.brand.blue,
+    bg: colors.b300,
     hover: colors.b200,
   },
   success: {
@@ -186,8 +213,8 @@ export const primary = {
   },
   warning: {
     text: colors.white,
-    bg: colors.o300,
-    hover: colors.o400,
+    bg: colors.y300,
+    hover: colors.y400,
   },
   danger: {
     text: colors.white,
@@ -199,7 +226,7 @@ export const primary = {
 export const link = {
   none: {
     text: {
-      light: colors.brand.blue,
+      light: colors.b300,
       dark: altBlack,
     },
     hover: 'transparent',
@@ -215,8 +242,8 @@ export const link = {
   },
   warning: {
     text: {
-      light: colors.o300,
-      dark: colors.o300,
+      light: colors.y500,
+      dark: colors.y300,
     },
     hover: 'transparent',
     bg: 'transparent',
@@ -234,50 +261,50 @@ export const link = {
 export const secondary = {
   none: {
     text: {
+      light: colors.b300,
       dark: colors.white,
-      light: colors.brand.blue,
     },
     hover: 'transparent',
     bg: 'transparent',
     border: {
-      light: colors.brand.blue,
+      light: colors.b300,
       dark: colors.border.dark.active,
     },
   },
   success: {
     text: {
+      light: colors.g400,
       dark: colors.g300,
-      light: colors.g300,
     },
     hover: 'transparent',
     bg: 'transparent',
     border: {
       light: colors.g400,
-      dark: colors.g400,
+      dark: colors.g300,
     },
   },
   warning: {
     text: {
-      dark: colors.o300,
-      light: colors.o300,
+      light: colors.y500,
+      dark: colors.y300,
     },
     hover: 'transparent',
     bg: 'transparent',
     border: {
-      light: colors.o300,
-      dark: colors.o300,
+      light: colors.y500,
+      dark: colors.y300,
     },
   },
   danger: {
     text: {
+      light: colors.r400,
       dark: colors.r300,
-      light: colors.r300,
     },
     hover: 'transparent',
     bg: 'transparent',
     border: {
       light: colors.r400,
-      dark: colors.r400,
+      dark: colors.r300,
     },
   },
 }
@@ -286,9 +313,12 @@ const wordVariants = {
   // match: '#64aa84',    old
   // incorrect: '#cb466a',old
   // current: '#5646b2',  old
-  match: brand.green,
-  incorrect: brand.red,
-  current: brand.purple,
+  // match: brand.green,
+  // incorrect: brand.red,
+  // current: brand.purple,
+  match: colors.g300,
+  incorrect: colors.r300,
+  current: colors.p300,
 }
 
 interface Dic {
@@ -316,7 +346,7 @@ export const dark = {
     current: wordVariants.current,
     incorrect: wordVariants.incorrect,
     match: wordVariants.match,
-    primary: brand.blue,
+    primary: colors.b300,
   },
   border: {
     default: border.dark.default,
@@ -336,7 +366,7 @@ export const light = {
     current: wordVariants.current,
     incorrect: wordVariants.incorrect,
     match: wordVariants.match,
-    primary: brand.blue,
+    primary: colors.b300,
   },
   border: {
     default: border.default,

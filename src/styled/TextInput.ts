@@ -35,12 +35,12 @@ const inputOptionalStyles = css`
 `
 
 const inputDangerStyles = css`
-  border-color: ${colors.r400} !important;
-  background: ${colors.r200};
+  border-color: ${colors.r500} !important;
+  background: ${colors.r75};
   color: ${colors.black};
 
   &::placeholder {
-    color: ${colors.r200};
+    color: ${colors.r500};
   }
 `
 
