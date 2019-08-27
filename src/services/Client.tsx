@@ -11,6 +11,7 @@ export const client = createClient({
     return {
       headers: {
         authorization: `Bearer ${token}`,
+        origin: 'https://typvp.xyz',
       },
     }
   },
