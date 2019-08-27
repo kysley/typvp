@@ -6,19 +6,11 @@ export const client = createClient({
   fetchOptions: () => {
     const token = localStorage.getItem('token')
     if (!token) {
-      return {
-        credentials: 'include',
-        headers: {
-          authorization: '',
-          origin: 'https://typvp.xyz',
-        },
-      }
+      return {}
     }
     return {
-      credentials: 'include',
       headers: {
         authorization: `Bearer ${token}`,
-        origin: 'https://typvp.xyz',
       },
     }
   },
