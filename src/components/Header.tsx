@@ -10,6 +10,7 @@ import {
   HeaderContainer,
   HeaderLogo,
   LeaderboardTab,
+  TrialsTab,
   MeTab,
   HeaderGroup,
 } from '@/styled/Header'
@@ -39,7 +40,8 @@ const Header = observer(() => {
         <Link to="/" aria-label="Home">
           <HeaderLogo src={logo} alt="" />
         </Link>
-        <LeaderboardTab to="/leaderboard">leaderboards</LeaderboardTab>
+        <LeaderboardTab to="/leaderboard">leaderboard</LeaderboardTab>
+        <TrialsTab to="/trials">trials</TrialsTab>
         <HeaderGroup>
           {UserStore.me ? (
             <>

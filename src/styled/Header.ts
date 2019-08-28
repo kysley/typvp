@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import {NavLink} from 'react-router-dom'
 
-import {colors} from '@/styled/Theme'
-
 const HeaderWrapper = styled.header`
   width: 100%;
 `
@@ -11,7 +9,7 @@ const HeaderContainer = styled.nav`
   width: 100%;
   display: grid;
   position: relative;
-  grid-template-columns: auto auto 1fr auto auto;
+  grid-template-columns: auto auto auto 1fr auto auto;
   z-index: 99;
   align-items: center;
   margin-top: 3vh;
@@ -44,8 +42,12 @@ const LeaderboardTab = styled(Tab)`
   grid-column: 2;
 `
 
+const TrialsTab = styled(Tab)`
+  grid-column: 3;
+`
+
 const MeTab = styled(Tab)`
-  grid-column: 4;
+  grid-column: 5;
 `
 
 const LoginTab = styled(Tab)`
@@ -62,7 +64,8 @@ const HeaderLogo = styled('img')`
 export const HeaderGroup = styled.div`
   display: flex;
   flex-direction: row;
-  grid-column: 4;
+  grid-column: 5;
+  align-items: center;
   justify-content: space-between;
   min-width: 12em;
   height: 100%;
@@ -73,6 +76,7 @@ export {
   HeaderContainer,
   HeaderWrapper,
   LeaderboardTab,
+  TrialsTab,
   MeTab,
   LoginTab,
   SigninTab,
