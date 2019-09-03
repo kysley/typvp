@@ -43,6 +43,7 @@ export default {
     ],
     alias: {
       '@': path.join(__dirname, 'src'),
+      'react-dom': '@hot-loader/react-dom',
     },
   },
   module: {
