@@ -12,6 +12,10 @@ export const TrialCardGrid = styled.div`
   }
 `
 
+interface IDifficulty {
+  difficulty: 'EASY' | 'NORMAL' | 'MEDIUM' | 'HARD'
+}
+
 const DifficultyColour = {
   EASY: colors.g300,
   NORMAL: colors.b300,
@@ -19,13 +23,12 @@ const DifficultyColour = {
   HARD: colors.r300,
 }
 
-export const TrialCard = styled.div`
+export const TrialCard = styled.div<IDifficulty>`
   border-radius: 6px;
   background: ${({theme}) => theme.backgrounds.accent};
   color: ${({theme}) => theme.colors.text};
   padding: 1em;
-  border-top: 3px solid
-    ${({difficulty}: string) => DifficultyColour[difficulty]};
+  border-top: 3px solid ${({difficulty}) => DifficultyColour[difficulty]};
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 `
@@ -36,12 +39,12 @@ export const TrialName = styled.h1`
   margin: 0;
 `
 
-export const TrialDifficulty = styled.span`
+export const TrialDifficulty = styled.span<IDifficulty>`
   display: inline-block;
   font-size: 0.82rem;
   border: 1px solid ${({theme}) => theme.border.default};
   border-radius: 3px;
-  color: ${({difficulty}: string) => DifficultyColour[difficulty]};
+  color: ${({difficulty}) => DifficultyColour[difficulty]};
   padding: 0.25em;
   margin: 1em 0;
   font-weight: 700;
