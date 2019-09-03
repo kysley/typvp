@@ -4,7 +4,7 @@ import {useMutation} from 'urql'
 
 import {loginSchema} from '@/helpers/validation'
 import {Input, Label} from '@/styled/TextInput'
-import {SignupForm, SignupFormContainer} from '@/styled/Forms'
+import {SignupForm, SignupFormContainer, FormErrorMsg} from '@/styled/Forms'
 import Button from '@/styled/Button'
 import {useStore} from '@/stores'
 import LOGIN from '@/graphql/mutations/login'
@@ -66,7 +66,9 @@ const Login: FC = props => {
             type="text"
             autoComplete="off"
           />
-          {errors.username && <div>{errors.username}</div>}
+          {errors.username && (
+            <FormErrorMsg>{errors.username.message}</FormErrorMsg>
+          )}
         </div>
         <div>
           <Label htmlFor="password">Password</Label>
@@ -78,7 +80,9 @@ const Login: FC = props => {
             ref={register}
             autoComplete="current-password"
           />
-          {errors.password && <div>{errors.password}</div>}
+          {errors.password && (
+            <FormErrorMsg>{errors.password.message}</FormErrorMsg>
+          )}
         </div>
         <Button
           intent="none"

@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import {colors} from '@/styled/Theme'
+
 export const SignupFormContainer = styled.div`
   position: relative;
   max-width: 30vw;
@@ -15,11 +17,6 @@ export const SignupFormContainer = styled.div`
     font-size: 2.65rem;
     font-weight: 700;
   }
-
-  p {
-    margin: 0 0 2em 0;
-    line-break: auto;
-  }
 `
 
 export const SignupForm = styled.form`
@@ -31,7 +28,16 @@ export const SignupForm = styled.form`
   div {
     grid-column: span 2;
   }
+
   button {
     grid-column: span 2;
   }
+`
+
+export const FormErrorMsg = styled.p`
+  color: ${colors.r300};
+  font-size: 0.85rem;
+  margin-top: -2em;
+  margin-bottom: 0.82em;
+  /* display: block; */
 `

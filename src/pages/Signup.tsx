@@ -4,7 +4,7 @@ import {useMutation} from 'urql'
 
 import {registerSchema} from '@/helpers/validation'
 import {Input, Label} from '@/styled/TextInput'
-import {SignupForm, SignupFormContainer} from '@/styled/Forms'
+import {SignupForm, SignupFormContainer, FormErrorMsg} from '@/styled/Forms'
 import Button from '@/styled/Button'
 import {useStore} from '@/stores'
 import SIGNUP from '@/graphql/mutations/signup'
@@ -71,7 +71,9 @@ const Signup: FC = props => {
             type="text"
             autoComplete="off"
           />
-          {errors.username && <div>{errors.username}</div>}
+          {errors.username && (
+            <FormErrorMsg>{errors.username.message}</FormErrorMsg>
+          )}
         </div>
         <div>
           <Label htmlFor="email">Email</Label>
@@ -82,7 +84,7 @@ const Signup: FC = props => {
             type="text"
             autoComplete="off"
           />
-          {errors.email && <div>{errors.email}</div>}
+          {errors.email && <FormErrorMsg>{errors.email.message}</FormErrorMsg>}
         </div>
         <div>
           <Label htmlFor="password">Password</Label>
@@ -93,7 +95,9 @@ const Signup: FC = props => {
             autoComplete="new-password"
             ref={register}
           />
-          {errors.password && <div>{errors.password}</div>}
+          {errors.password && (
+            <FormErrorMsg>{errors.password.message}</FormErrorMsg>
+          )}
         </div>
         <div>
           <Label htmlFor="confirmPassword">Confirm Password</Label>
@@ -104,7 +108,9 @@ const Signup: FC = props => {
             autoComplete="new-password"
             ref={register}
           />
-          {errors.confirmPassword && <div>{errors.confirmPassword}</div>}
+          {errors.confirmPassword && (
+            <FormErrorMsg>{errors.confirmPassword.message}</FormErrorMsg>
+          )}
         </div>
         <Button
           intent="none"
