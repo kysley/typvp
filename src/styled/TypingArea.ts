@@ -8,7 +8,7 @@ const TypingAreaContainer = styled.div`
   justify-self: center;
   /* background: ${colors.background.tint1}; */
   background: ${({theme}) => theme.backgrounds.accent};
-  border: 1px solid ${({theme}) => theme.border.default};
+  /* border: 1px solid ${({theme}) => theme.border.default}; */
   border-radius: 6px;
   padding: 1em;
 `

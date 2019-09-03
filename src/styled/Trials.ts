@@ -51,7 +51,7 @@ export const TrialFold = styled.div`
   border-top: 1px solid ${({theme}) => theme.border.default};
   display: flex;
   justify-content: space-around;
-  padding-top: 0.25em;
+  padding-top: 1em;
 
   p {
     font-size: 0.85rem;

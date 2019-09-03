@@ -14,9 +14,10 @@ const inputBaseStyles = css`
 
   &:focus,
   &:active {
-    border-color: ${({theme}) => theme.border.active};
+    /* border-color: ${({theme}) => theme.border.active}; */
+    border-color: ${colors.b300};
     outline: none;
-    box-shadow: rgba(8, 35, 51, 0.05) 0px 6px 10px;
+    /* box-shadow: rgba(8, 35, 51, 0.05) 0px 6px 10px; */
   }
 
   &[disabled],

@@ -18,7 +18,7 @@ export const MetaContainer = styled.div`
   grid-auto-flow: column;
   background: ${({theme}) => theme.backgrounds.accent};
   color: ${({theme}) => theme.colors.text};
-  border: 1px solid ${({theme}) => theme.border.default};
+  /* border: 1px solid ${({theme}) => theme.border.default}; */
   margin: 1em 0;
   padding: 0.5em 1em;
   justify-content: space-between;
