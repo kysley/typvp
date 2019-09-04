@@ -6,6 +6,8 @@ export const TrialCardGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 2em;
+  width: 80%;
+  align-self: center;
 
   a {
     text-decoration: none !important;
@@ -28,9 +30,29 @@ export const TrialCard = styled.div<IDifficulty>`
   background: ${({theme}) => theme.backgrounds.accent};
   color: ${({theme}) => theme.colors.text};
   padding: 1em;
-  border-top: 3px solid ${({difficulty}) => DifficultyColour[difficulty]};
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.1s ease-in-out;
+
+  &:before {
+    display: block;
+    position: absolute;
+    content: '';
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: transparent;
+    height: 0px;
+    transition: all 0.1s ease-in-out;
+    background: ${({difficulty}) => DifficultyColour[difficulty]};
+  }
+
+  :hover {
+    transform: translateY(-3px);
+    &:before {
+      height: 2px;
+    }
+  }
 `
 
 export const TrialName = styled.h1`
