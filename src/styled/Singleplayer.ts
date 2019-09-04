@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import {motion} from 'framer-motion'
 
 import {colors} from '@/styled/Theme'
+import {TypingAreaContainer} from '@/styled/TypingArea'
 
 export const SingleplayerContainer = styled.div`
   width: 90%;
@@ -9,6 +10,10 @@ export const SingleplayerContainer = styled.div`
   display: grid;
   align-self: center;
   margin-top: 16vh;
+`
+
+export const TrialContainer = styled(SingleplayerContainer)`
+  margin-top: 0;
 `
 
 export const MetaContainer = styled.div`

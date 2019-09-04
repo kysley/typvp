@@ -15,9 +15,11 @@ const Singleplayer: FC = observer(() => {
   const [mutation, execMutation] = useMutation(ADD_RESULT)
 
   useEffect(() => {
+    GameStore.mode = 'Singleplayer'
     // 0 is falsy
     if (!GameStore.words.length) GameStore.generateWords()
     return () => {
+      GameStore.mode = undefined
       GameStore.reset()
     }
   }, [])

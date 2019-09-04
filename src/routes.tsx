@@ -15,6 +15,7 @@ const Singleplayer = lazy(() => import('@/components/Singleplayer'))
 const NoMatch = lazy(() => import('@/pages/NoMatch'))
 const Leaderboard = lazy(() => import('@/pages/Leaderboard'))
 const Trials = lazy(() => import('@/pages/Trials'))
+const Trial = lazy(() => import('@/components/Trial'))
 
 const Routes = observer(() => {
   const {GlobalStore} = useStore()
@@ -31,6 +32,7 @@ const Routes = observer(() => {
               <Route exact path="/login" component={Login} />
               <Route exact path="/leaderboard" component={Leaderboard} />
               <Route exact path="/trials" component={Trials} />
+              <Route exact path="/trial/:id" component={Trial} />
               <Route component={NoMatch} />
             </Switch>
           </Suspense>

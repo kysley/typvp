@@ -13,4 +13,17 @@ const TRIALS = gql`
   }
 `
 
+export const TRIAL = gql`
+  query trial($trialId: ID!) {
+    trial(trialId: $trialId) {
+      name
+      id
+      wordSet
+      difficulty
+      minWordLength
+      maxWordLength
+    }
+  }
+`
+
 export default TRIALS

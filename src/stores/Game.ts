@@ -46,6 +46,9 @@ class GameStore {
   @observable
   isSpellingIncorrect: boolean = false
 
+  @observable
+  mode?: 'Singleplayer' | 'Trial'
+
   @action
   calculateResults = (): any => {
     /*
@@ -89,7 +92,9 @@ class GameStore {
     this.cpm = 0
     this.rawCpm = 0
     this.wpm = 0
-    this.generateWords()
+    if (this.mode !== 'Trial') {
+      this.generateWords()
+    }
     this.corrections = 0
     this.incorrect = 0
     this.correct = 0
@@ -98,8 +103,14 @@ class GameStore {
   }
 
   @action
-  generateWords = () => {
+  generateWords = (): void => {
     this.words = randomwords({exactly: 250, maxLength: 8})
+  }
+
+  @action
+  loadWordSet = (wordSet: string): void => {
+    this.reset()
+    this.words = wordSet.split('|')
   }
 
   @action

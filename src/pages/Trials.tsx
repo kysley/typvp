@@ -29,7 +29,7 @@ const Trials = () => {
   return (
     <TrialCardGrid>
       {trials.map((t: any) => (
-        <Link to={`trials/${t.id}`} key={t.id}>
+        <Link to={`trial/${t.id}`} key={t.id}>
           <TrialCard difficulty={t.difficulty}>
             <TrialName>{t.name}</TrialName>
             <TrialDifficulty difficulty={t.difficulty}>
