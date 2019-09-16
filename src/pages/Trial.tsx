@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react'
 import {observer} from 'mobx-react-lite'
 import {useMutation, useQuery} from 'urql'
-import {Link} from 'react-router-dom'
+import {Link, RouteComponentProps} from 'react-router-dom'
 
 import {useStore} from '@/stores'
 import SingleplayerMeta from '@/components/SingleplayerMeta'
@@ -13,7 +13,13 @@ import {ADD_RESULT_TO_TRIAL} from '@/graphql/mutations/addResult'
 import {TRIAL} from '@/graphql/queries/trials'
 import Button from '@/styled/Button'
 
-const Trial: FC = observer(props => {
+interface MatchParams {
+  id: string
+}
+
+interface TrialProps extends RouteComponentProps<MatchParams> {}
+
+const Trial: FC<TrialProps> = observer(props => {
   const [trial, setTrial] = useState()
   const {GameStore, UserStore} = useStore()
   const [mutation, execMutation] = useMutation(ADD_RESULT_TO_TRIAL)

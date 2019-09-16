@@ -11,11 +11,11 @@ import {useStore} from '@/stores'
 
 const Signup = lazy(() => import('@/pages/Signup'))
 const Login = lazy(() => import('@/pages/Login'))
-const Singleplayer = lazy(() => import('@/components/Singleplayer'))
+const Singleplayer = lazy(() => import('@/pages/Singleplayer'))
 const NoMatch = lazy(() => import('@/pages/NoMatch'))
 const Leaderboard = lazy(() => import('@/pages/Leaderboard'))
 const Trials = lazy(() => import('@/pages/Trials'))
-const Trial = lazy(() => import('@/components/Trial'))
+const Trial = lazy(() => import('@/pages/Trial'))
 
 const Routes = observer(() => {
   const {GlobalStore} = useStore()
