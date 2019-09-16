@@ -65,7 +65,7 @@ const Trial: FC = observer(props => {
             isGameOver={GameStore.typingState === TypingState.Finished}
           />
           <SingleplayerResults
-            isVisible={GameStore.typingState === TypingState.Finished}
+            isVisible={GameStore.typingState === TypingState.InProgress}
           />
         </>
       )}
