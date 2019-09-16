@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import {motion} from 'framer-motion'
 
 import {colors} from '@/styled/Theme'
-import {TypingAreaContainer} from '@/styled/TypingArea'
 
 export const SingleplayerContainer = styled.div`
   width: 90%;
@@ -10,6 +9,11 @@ export const SingleplayerContainer = styled.div`
   display: grid;
   align-self: center;
   margin-top: 16vh;
+`
+
+export const TrialInfo = styled.div<any>`
+  opacity: ${({isHidden}) => (isHidden === true ? 0 : 1)};
+  transition: opacity 0.2s ease-in-out;
 `
 
 export const TrialContainer = styled(SingleplayerContainer)`
@@ -52,6 +56,7 @@ export const ResultsContainer = styled(motion.div)`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-row-gap: 1em;
+  z-index: 0;
 `
 
 export const ResultsHeader = styled.h3`
