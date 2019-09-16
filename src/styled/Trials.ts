@@ -4,7 +4,8 @@ import {colors} from '@/styled/Theme'
 
 export const TrialCardGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  /* grid-template-columns: 1fr 1fr 1fr; */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   grid-gap: 2em;
   width: 80%;
   align-self: center;

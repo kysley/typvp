@@ -1,6 +1,7 @@
 import React from 'react'
 import {observer} from 'mobx-react-lite'
 import {Link} from 'react-router-dom'
+import {AnimatePresence} from 'framer-motion'
 
 import {useStore} from '@/stores'
 import {
@@ -10,46 +11,61 @@ import {
   ResultsStatus,
 } from '@/styled/Singleplayer'
 
-const SingleplayerResults = observer(() => {
-  const {GameStore, UserStore} = useStore()
-  return (
-    <ResultsContainer animate={{y: [0, 30, 25]}} initial>
-      <div>
-        <ResultsHeader>cpm (raw)</ResultsHeader>
-        <ResultsNumber>{GameStore.rawCpm}</ResultsNumber>
-      </div>
-      <div>
-        <ResultsHeader>cpm (corrected)</ResultsHeader>
-        <ResultsNumber>{GameStore.cpm}</ResultsNumber>
-      </div>
-      <div>
-        <ResultsHeader>wpm</ResultsHeader>
-        <ResultsNumber>{GameStore.wpm}</ResultsNumber>
-      </div>
-      <div>
-        <ResultsHeader>correct</ResultsHeader>
-        <ResultsNumber>{GameStore.correct}</ResultsNumber>
-      </div>
-      <div>
-        <ResultsHeader>incorrect</ResultsHeader>
-        <ResultsNumber>{GameStore.incorrect}</ResultsNumber>
-      </div>
-      <div>
-        <ResultsHeader>corrections</ResultsHeader>
-        <ResultsNumber>{GameStore.corrections}</ResultsNumber>
-      </div>
-      <ResultsStatus>
-        {UserStore.me ? (
-          <>Your results have been saved!</>
-        ) : (
-          <>
-            <Link to="/signup">Signup</Link> or <Link to="/login">Login</Link>{' '}
-            to save your results!
-          </>
-        )}{' '}
-      </ResultsStatus>
-    </ResultsContainer>
-  )
-})
+interface ISingleplayerResults {
+  isVisible: boolean
+}
+
+const SingleplayerResults: React.FC<ISingleplayerResults> = observer(
+  ({isVisible}) => {
+    const {GameStore, UserStore} = useStore()
+    return (
+      <AnimatePresence>
+        {isVisible && (
+          <ResultsContainer
+            animate={{y: [-170, 30, 25]}}
+            initial
+            transition={{duration: 0.2}}
+            exit={{opacity: 0}}
+          >
+            <div>
+              <ResultsHeader>cpm (raw)</ResultsHeader>
+              <ResultsNumber>{GameStore.rawCpm}</ResultsNumber>
+            </div>
+            <div>
+              <ResultsHeader>cpm (corrected)</ResultsHeader>
+              <ResultsNumber>{GameStore.cpm}</ResultsNumber>
+            </div>
+            <div>
+              <ResultsHeader>wpm</ResultsHeader>
+              <ResultsNumber>{GameStore.wpm}</ResultsNumber>
+            </div>
+            <div>
+              <ResultsHeader>correct</ResultsHeader>
+              <ResultsNumber>{GameStore.correct}</ResultsNumber>
+            </div>
+            <div>
+              <ResultsHeader>incorrect</ResultsHeader>
+              <ResultsNumber>{GameStore.incorrect}</ResultsNumber>
+            </div>
+            <div>
+              <ResultsHeader>corrections</ResultsHeader>
+              <ResultsNumber>{GameStore.corrections}</ResultsNumber>
+            </div>
+            <ResultsStatus>
+              {UserStore.me ? (
+                <>Your results have been saved!</>
+              ) : (
+                <>
+                  <Link to="/signup">Signup</Link> or{' '}
+                  <Link to="/login">Login</Link> to save your results!
+                </>
+              )}{' '}
+            </ResultsStatus>
+          </ResultsContainer>
+        )}
+      </AnimatePresence>
+    )
+  },
+)
 
 export default SingleplayerResults
