@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 const ADD_RESULT = gql`
-  mutation addResults(
+  mutation addNewResult(
     $cpm: Int!
     $rawCpm: Int!
     $wpm: Int!
@@ -9,13 +9,15 @@ const ADD_RESULT = gql`
     $incorrect: Int!
     $corrections: Int!
   ) {
-    addResults(
-      cpm: $cpm
-      rawCpm: $rawCpm
-      wpm: $wpm
-      correct: $correct
-      incorrect: $incorrect
-      corrections: $corrections
+    addNewResult(
+      result: {
+        cpm: $cpm
+        rawCpm: $rawCpm
+        wpm: $wpm
+        correct: $correct
+        incorrect: $incorrect
+        corrections: $corrections
+      }
     ) {
       cpm
       rawCpm
@@ -28,7 +30,7 @@ const ADD_RESULT = gql`
 `
 
 export const ADD_RESULT_TO_TRIAL = gql`
-  mutation addResultsToTrial(
+  mutation addNewTrialResult(
     $trialId: ID!
     $cpm: Int!
     $rawCpm: Int!
@@ -37,14 +39,16 @@ export const ADD_RESULT_TO_TRIAL = gql`
     $incorrect: Int!
     $corrections: Int!
   ) {
-    addResultsToTrial(
-      trialId: $trialId
-      cpm: $cpm
-      rawCpm: $rawCpm
-      wpm: $wpm
-      correct: $correct
-      incorrect: $incorrect
-      corrections: $corrections
+    addNewTrialResult(
+      result: {
+        trialId: $trialId
+        cpm: $cpm
+        rawCpm: $rawCpm
+        wpm: $wpm
+        correct: $correct
+        incorrect: $incorrect
+        corrections: $corrections
+      }
     ) {
       cpm
       rawCpm
