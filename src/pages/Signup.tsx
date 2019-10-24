@@ -28,6 +28,7 @@ const Signup: FC = props => {
   const [mutation, execMutation] = useMutation(SIGNUP)
   const {formState, register, handleSubmit, errors} = useForm<ISignupSchema>({
     validationSchema: registerSchema,
+    mode: 'onBlur',
   })
 
   const onSubmit = async (values: ISignupSchema) => {

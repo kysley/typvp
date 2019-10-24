@@ -24,6 +24,7 @@ const Login: FC = props => {
   const [mutation, execMutation] = useMutation(LOGIN)
   const {formState, register, handleSubmit, errors} = useForm<ILoginSchema>({
     validationSchema: loginSchema,
+    mode: 'onBlur',
   })
 
   const onSubmit = async (values: ILoginSchema) => {
