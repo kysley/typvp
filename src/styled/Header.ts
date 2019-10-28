@@ -67,9 +67,12 @@ export const HeaderGroup = styled.div`
   grid-column: 5;
   align-items: center;
   justify-content: space-between;
-  min-width: 12em;
   height: 100%;
   border-radius: 6px;
+
+  a {
+    margin-right: 0.5em;
+  }
 `
 
 export {

@@ -11,15 +11,23 @@ import {
   HeaderLogo,
   LeaderboardTab,
   TrialsTab,
-  MeTab,
   HeaderGroup,
 } from '@/styled/Header'
 import ME from '@/graphql/queries/me'
 import {useStore} from '@/stores'
 import Button from '@/styled/Button'
+import {
+  DropdownMenu,
+  DropdownItems,
+  DropdownItem,
+  DropdownBorder,
+} from '@/styled/Dropdown'
+import {UserIcon} from '@/components/icons/User'
+import {EnterIcon} from '@/components/icons/Enter'
+import {Dropdown} from '@/components/Dropdown'
 
 const Header = observer(() => {
-  const {UserStore} = useStore()
+  const {UserStore, GlobalStore} = useStore()
 
   const [result] = useQuery({
     query: ME,
@@ -45,14 +53,27 @@ const Header = observer(() => {
         <HeaderGroup>
           {UserStore.me ? (
             <>
-              <MeTab to="/">{UserStore.me.username}</MeTab>
-              <Button
-                onClick={UserStore.logout}
-                appearance="link"
-                intent="none"
-              >
-                Logout
-              </Button>
+              <Dropdown header={UserStore.me.username}>
+                <DropdownMenu>
+                  <DropdownItems>
+                    <DropdownItem intent="none">
+                      <Link to="/me">My Profile</Link>
+                    </DropdownItem>
+                    <DropdownItem
+                      intent="none"
+                      onClick={GlobalStore.toggleTheme}
+                    >
+                      {GlobalStore.mode === 'light'
+                        ? 'Lights Off'
+                        : 'Lights On'}
+                    </DropdownItem>
+                    <DropdownBorder />
+                    <DropdownItem intent="danger" onClick={UserStore.logout}>
+                      Logout
+                    </DropdownItem>
+                  </DropdownItems>
+                </DropdownMenu>
+              </Dropdown>
             </>
           ) : (
             <>
@@ -68,6 +89,30 @@ const Header = observer(() => {
                       Sign Up
                     </Button>
                   </Link>
+                  <Dropdown header={<UserIcon />}>
+                    <DropdownMenu>
+                      <DropdownItems>
+                        <DropdownItem
+                          intent="none"
+                          onClick={GlobalStore.toggleTheme}
+                        >
+                          {GlobalStore.mode === 'light'
+                            ? 'Lights Off'
+                            : 'Lights On'}
+                        </DropdownItem>
+                        <DropdownBorder />
+                        <DropdownItem
+                          intent="success"
+                          onClick={UserStore.logout}
+                        >
+                          <EnterIcon />
+                          <Link style={{marginLeft: '0.5em'}} to="/signup">
+                            Sign Up
+                          </Link>
+                        </DropdownItem>
+                      </DropdownItems>
+                    </DropdownMenu>
+                  </Dropdown>
                 </>
               )}
             </>

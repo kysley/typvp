@@ -6,7 +6,6 @@ import {observer} from 'mobx-react-lite'
 
 import {AppContainer, AppWrapper} from '@/styled/Containers'
 import Header from '@/components/Header'
-import ThemeToggle from '@/components/ThemeToggle'
 import {useStore} from '@/stores'
 
 const Signup = lazy(() => import('@/pages/Signup'))
@@ -24,7 +23,6 @@ const Routes = observer(() => {
       <AppWrapper>
         <AppContainer>
           <Header />
-          <ThemeToggle />
           <Suspense fallback={<div>Loading ...</div>}>
             <Switch>
               <Route exact path="/" component={Singleplayer} />
