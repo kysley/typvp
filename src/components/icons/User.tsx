@@ -6,7 +6,7 @@ const SVG = styled.svg`
   /* width: 2em; */
   height: 1.5em;
   cursor: pointer;
-  fill: ${({theme}) => theme.colors.accentText};
+  fill: ${({theme}) => theme.colors.text};
 `
 
 export const UserIcon: FC = () => (
