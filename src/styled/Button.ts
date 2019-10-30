@@ -5,6 +5,7 @@ import {bundle} from '@/styled/Theme'
 interface ButtonProps {
   intent: 'none' | 'success' | 'warning' | 'danger'
   appearance: 'default' | 'primary' | 'secondary' | 'link'
+  to?: string
 }
 
 const Button = styled.button<ButtonProps>`
@@ -17,23 +18,24 @@ const Button = styled.button<ButtonProps>`
   padding: 0 1.5em;
   margin-right: 1em;
   cursor: pointer;
-  display: inline-block;
   text-decoration: none;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: background 200ms ease-in-out;
 
-  :last-of-type {
+  :last-of-type & :not(:last-child) {
+    margin-right: 0;
+  }
+
+  :last-child {
     margin-right: 0;
   }
 
   &[disabled],
   &:disabled {
     opacity: 0.4;
-    pointer-events: none;
-  }
-
-  & > svg {
-    margin-right: 0.35em;
+    cursor: not-allowed;
   }
 
   ${({intent, appearance}) =>
@@ -59,6 +61,9 @@ const Button = styled.button<ButtonProps>`
     `
       background: ${bundle.default[intent].bg[theme.name]};
       color: ${bundle.default[intent].text[theme.name]};
+      &:hover {
+        background: ${bundle.default[intent].hover[theme.name]};
+      }
   `}
 
   ${({theme, intent, appearance}) =>

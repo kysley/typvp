@@ -167,6 +167,10 @@ export const normal = {
       light: colors.b50,
       dark: colors.background.darkTint2,
     },
+    hover: {
+      light: colors.b75,
+      dark: colors.background.darkTint3,
+    },
   },
   success: {
     text: {
@@ -176,6 +180,10 @@ export const normal = {
     bg: {
       light: colors.g50,
       dark: colors.background.darkTint2,
+    },
+    hover: {
+      light: colors.g75,
+      dark: colors.background.darkTint3,
     },
   },
   warning: {
@@ -187,6 +195,10 @@ export const normal = {
       light: colors.y50,
       dark: colors.background.darkTint2,
     },
+    hover: {
+      light: colors.y75,
+      dark: colors.background.darkTint3,
+    },
   },
   danger: {
     text: {
@@ -196,6 +208,10 @@ export const normal = {
     bg: {
       light: colors.r50,
       dark: colors.background.darkTint2,
+    },
+    hover: {
+      light: colors.r75,
+      dark: colors.background.darkTint3,
     },
   },
 }
