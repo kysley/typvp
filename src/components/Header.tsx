@@ -106,7 +106,7 @@ const Header = observer(() => {
                             : 'Lights On'}
                         </DropdownItem>
                         <DropdownBorder />
-                        <DropdownItem intent="none" onClick={UserStore.logout}>
+                        <DropdownItem intent="none">
                           <EnterIcon />
                           <Link style={{marginLeft: '0.5em'}} to="/signup">
                             Sign Up
