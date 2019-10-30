@@ -4,7 +4,7 @@ import {observer} from 'mobx-react-lite'
 import {useStore} from '@/stores'
 import {TypingState} from '@/types/game'
 import {MetaContainer, MetaTimer} from '@/styled/Singleplayer'
-import Button from '@/styled/Button'
+import {RefreshIcon} from '@/components/icons/Refresh'
 
 const SingleplayerMeta: FC = observer(() => {
   const [percent, setPercent] = useState<number>(100)
@@ -26,9 +26,9 @@ const SingleplayerMeta: FC = observer(() => {
             ? 'finish word'
             : `${60 - GameStore.time}s`}
         </span>
-        <Button appearance="link" intent="none" onClick={GameStore.reset}>
-          reset
-        </Button>
+        <div onClick={GameStore.reset}>
+          <RefreshIcon />
+        </div>
       </MetaContainer>
     </>
   )
