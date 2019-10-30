@@ -18,14 +18,7 @@ const ADD_RESULT = gql`
         incorrect: $incorrect
         corrections: $corrections
       }
-    ) {
-      cpm
-      rawCpm
-      wpm
-      correct
-      incorrect
-      corrections
-    }
+    )
   }
 `
 
@@ -49,14 +42,7 @@ export const ADD_RESULT_TO_TRIAL = gql`
         incorrect: $incorrect
         corrections: $corrections
       }
-    ) {
-      cpm
-      rawCpm
-      wpm
-      correct
-      incorrect
-      corrections
-    }
+    )
   }
 `
 
