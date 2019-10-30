@@ -78,16 +78,22 @@ const Header = observer(() => {
             <>
               {!result.fetching && (
                 <>
-                  <Link to="/login">
-                    <Button appearance="default" intent="none">
-                      Login
-                    </Button>
-                  </Link>
-                  <Link to="/signup">
-                    <Button appearance="primary" intent="none">
-                      Sign Up
-                    </Button>
-                  </Link>
+                  <Button
+                    as={Link}
+                    to="/login"
+                    appearance="default"
+                    intent="none"
+                  >
+                    Login
+                  </Button>
+                  <Button
+                    as={Link}
+                    to="/signup"
+                    appearance="primary"
+                    intent="none"
+                  >
+                    Sign Up
+                  </Button>
                   <Dropdown header={<UserIcon />}>
                     <DropdownMenu>
                       <DropdownItems>
