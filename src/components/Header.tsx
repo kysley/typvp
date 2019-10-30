@@ -4,7 +4,6 @@ import {useQuery} from 'urql'
 import {observer} from 'mobx-react-lite'
 
 import logo from '@/assets/images/typvp.svg'
-
 import {
   HeaderWrapper,
   HeaderContainer,
@@ -101,10 +100,7 @@ const Header = observer(() => {
                             : 'Lights On'}
                         </DropdownItem>
                         <DropdownBorder />
-                        <DropdownItem
-                          intent="success"
-                          onClick={UserStore.logout}
-                        >
+                        <DropdownItem intent="none" onClick={UserStore.logout}>
                           <EnterIcon />
                           <Link style={{marginLeft: '0.5em'}} to="/signup">
                             Sign Up

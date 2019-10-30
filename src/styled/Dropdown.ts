@@ -6,6 +6,10 @@ interface ItemProps {
   intent: 'none' | 'success' | 'warning' | 'danger'
 }
 
+interface DropdownProps {
+  isOpen: boolean
+}
+
 export const DropdownMenu = styled.div`
   width: 100%;
   min-width: 150px;
@@ -21,7 +25,7 @@ export const DropdownMenu = styled.div`
   color: ${({theme}) => theme.colors.text};
 `
 
-export const DropdownWrapper = styled.div`
+export const DropdownWrapper = styled.div<DropdownProps>`
   position: relative;
   width: auto;
   min-height: 34px;
@@ -34,6 +38,13 @@ export const DropdownWrapper = styled.div`
   background: ${({theme}) => theme.backgrounds.accent};
   border-radius: 4px;
   color: ${({theme}) => theme.colors.text};
+
+  ${({isOpen, theme}) =>
+    isOpen &&
+    `
+      background: ${theme.border.active};
+
+    `}
 `
 
 export const DropdownItems = styled.ul`
