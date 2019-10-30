@@ -1,6 +1,7 @@
 import React, {FC, useEffect} from 'react'
 import useForm from 'react-hook-form'
 import {useMutation} from 'urql'
+import {useHistory} from 'react-router-dom'
 
 import {registerSchema} from '@/helpers/validation'
 import {Input, Label} from '@/styled/TextInput'
@@ -23,7 +24,8 @@ interface ISignupSchema {
   confirmPassword: string
 }
 
-const Signup: FC = props => {
+const Signup: FC = () => {
+  const history = useHistory()
   const {UserStore} = useStore()
   const [mutation, execMutation] = useMutation(SIGNUP)
   const {formState, register, handleSubmit, errors} = useForm<ISignupSchema>({
@@ -48,7 +50,7 @@ const Signup: FC = props => {
         },
       } = mutation
       UserStore.login(token, account)
-      props.history.push('/')
+      history.push('/')
     }
   }, [mutation])
 

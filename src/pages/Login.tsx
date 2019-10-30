@@ -1,4 +1,5 @@
 import React, {FC, useEffect} from 'react'
+import {useHistory} from 'react-router-dom'
 import useForm from 'react-hook-form'
 import {useMutation} from 'urql'
 
@@ -19,7 +20,8 @@ interface ILoginSchema {
   password: string
 }
 
-const Login: FC = props => {
+const Login: FC = () => {
+  const history = useHistory()
   const {UserStore} = useStore()
   const [mutation, execMutation] = useMutation(LOGIN)
   const {formState, register, handleSubmit, errors} = useForm<ILoginSchema>({
@@ -43,7 +45,7 @@ const Login: FC = props => {
         },
       } = mutation
       UserStore.login(token, account)
-      props.history.push('/')
+      history.push('/')
     }
   }, [mutation])
 
