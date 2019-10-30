@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react'
 import {observer} from 'mobx-react-lite'
 import {useMutation, useQuery} from 'urql'
-import {Link, RouteComponentProps} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 
 import {useStore} from '@/stores'
 import SingleplayerMeta from '@/components/SingleplayerMeta'
@@ -13,20 +13,15 @@ import {ADD_RESULT_TO_TRIAL} from '@/graphql/mutations/addResult'
 import {TRIAL} from '@/graphql/queries/trials'
 import Button from '@/styled/Button'
 
-interface MatchParams {
-  id: string
-}
-
-interface TrialProps extends RouteComponentProps<MatchParams> {}
-
-const Trial: FC<TrialProps> = observer(props => {
+const Trial: FC = observer(() => {
+  const {id} = useParams()
   const [trial, setTrial] = useState()
   const {GameStore, UserStore} = useStore()
   const [mutation, execMutation] = useMutation(ADD_RESULT_TO_TRIAL)
   const [result] = useQuery({
     query: TRIAL,
     variables: {
-      trialId: props.match.params.id,
+      trialId: id,
     },
   })
 
@@ -48,6 +43,21 @@ const Trial: FC<TrialProps> = observer(props => {
     }
   }, [])
 
+  useEffect(() => {
+    if (GameStore.typingState === TypingState.Finished && UserStore.me) {
+      const {cpm, rawCpm, wpm, correct, incorrect, corrections} = GameStore
+      execMutation({
+        trialId: id,
+        cpm,
+        rawCpm,
+        wpm,
+        correct,
+        incorrect,
+        corrections,
+      })
+    }
+  }, [GameStore.typingState])
+
   return (
     <TrialContainer>
       {trial && (
@@ -58,11 +68,9 @@ const Trial: FC<TrialProps> = observer(props => {
               (TypingState.InProgress || TypingState.AwaitingLastWord)
             }
           >
-            <Link to="/trials">
-              <Button appearance="secondary" intent="none">
-                Back to Trials
-              </Button>
-            </Link>
+            <Button as={Link} to="/trials" appearance="secondary" intent="none">
+              Back to Trials
+            </Button>
             <h1>{trial.name}</h1>
             <h2>{trial.difficulty}</h2>
           </TrialInfo>
