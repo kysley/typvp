@@ -8,6 +8,7 @@ const ADD_RESULT = gql`
     $correct: Int!
     $incorrect: Int!
     $corrections: Int!
+    $wordIndex: Int!
   ) {
     addNewResult(
       result: {
@@ -17,6 +18,7 @@ const ADD_RESULT = gql`
         correct: $correct
         incorrect: $incorrect
         corrections: $corrections
+        wordIndex: $wordIndex
       }
     )
   }
@@ -31,6 +33,7 @@ export const ADD_RESULT_TO_TRIAL = gql`
     $correct: Int!
     $incorrect: Int!
     $corrections: Int!
+    $wordIndex: Int!
   ) {
     addNewTrialResult(
       result: {
@@ -41,6 +44,7 @@ export const ADD_RESULT_TO_TRIAL = gql`
         correct: $correct
         incorrect: $incorrect
         corrections: $corrections
+        wordIndex: $wordIndex
       }
     )
   }

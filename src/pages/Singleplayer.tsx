@@ -26,7 +26,15 @@ const Singleplayer: FC = observer(() => {
 
   useEffect(() => {
     if (GameStore.typingState === TypingState.Finished && UserStore.me) {
-      const {cpm, rawCpm, wpm, correct, incorrect, corrections} = GameStore
+      const {
+        cpm,
+        rawCpm,
+        wpm,
+        correct,
+        incorrect,
+        corrections,
+        wordIndex,
+      } = GameStore
       execMutation({
         cpm,
         rawCpm,
@@ -34,6 +42,7 @@ const Singleplayer: FC = observer(() => {
         correct,
         incorrect,
         corrections,
+        wordIndex,
       })
     }
   }, [GameStore.typingState])
