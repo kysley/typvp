@@ -1,16 +1,14 @@
 import gql from 'graphql-tag'
 
+import {ResultFragment} from '@/graphql/fragments'
+
 const LEADERBOARD = gql`
   query leaderboard {
     leaderboard {
-      wpm
-      correct
-      corrections
-      incorrect
-      cpm
-      rawCpm
+      ...ResultFragment
     }
   }
+  ${ResultFragment}
 `
 
 export default LEADERBOARD
