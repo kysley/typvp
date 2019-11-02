@@ -5,6 +5,9 @@ interface IMe {
   id: number
   email: string
   role: string
+  lastSeen: number
+  lastPlayed: string
+  results: any
 }
 
 class UserStore {

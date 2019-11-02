@@ -56,7 +56,7 @@ const Header = observer(() => {
                 <DropdownMenu>
                   <DropdownItems>
                     <DropdownItem intent="none">
-                      <Link to="/me">My Profile</Link>
+                      <Link to="/profile">My Profile</Link>
                     </DropdownItem>
                     <DropdownItem
                       intent="none"

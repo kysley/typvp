@@ -3,7 +3,7 @@ import styled, {css} from 'styled-components'
 import {colors} from '@/styled/Theme'
 
 const inputBaseStyles = css`
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   border-radius: 4px;
   padding: 0.75rem 0.75rem;
   margin-bottom: 2em;
