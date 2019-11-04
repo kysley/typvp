@@ -375,6 +375,7 @@ export const light = {
   backgrounds: {
     background: white,
     accent: background.tint2,
+    input: background.tint1,
   },
   colors: {
     text: colors.black,

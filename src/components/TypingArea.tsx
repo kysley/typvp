@@ -4,6 +4,7 @@ import {observer} from 'mobx-react-lite'
 import {useStore} from '@/stores'
 import Word from '@/components/Word'
 import {TypingAreaContainer, TypingAreaInner} from '@/styled/TypingArea'
+import {SkeletonLine} from '@/styled/Skeleton'
 import {Input} from '@/styled/TextInput'
 
 const getWordType = (a: number, b: number) => {
@@ -34,15 +35,20 @@ const TypingArea: FC<ITypingArea> = observer(props => {
         style={{height: '75px', overflow: 'hidden'}}
         disabled={props.isGameOver}
       >
-        {GameStore.words.length > 0 &&
-          GameStore.words.map((word: string, i: number) => (
-            <Word
-              word={word}
-              index={i}
-              key={`${word}-${i}`}
-              variant={getWordType(i, GameStore.wordIndex)}
-            />
-          ))}
+        {GameStore.fetchingWords ? (
+          <SkeletonLine />
+        ) : (
+          <>
+            {GameStore.words.map((word: string, i: number) => (
+              <Word
+                word={word}
+                index={i}
+                key={`${word}-${i}`}
+                variant={getWordType(i, GameStore.wordIndex)}
+              />
+            ))}
+          </>
+        )}
       </TypingAreaInner>
       <Input
         hasWarning={GameStore.isSpellingIncorrect}

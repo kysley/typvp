@@ -10,7 +10,7 @@ export const AppWrapper = styled.main`
 `
 
 export const AppContainer = styled.div`
-  width: 80%;
+  width: 95%;
   position: relative;
   display: flex;
   flex-direction: column;

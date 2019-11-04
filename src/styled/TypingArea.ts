@@ -12,6 +12,7 @@ const TypingAreaContainer = styled.div`
   border-radius: 6px;
   padding: 1em;
   z-index: 1;
+  width: 100%;
 `
 
 interface ITypingAreaInner {
