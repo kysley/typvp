@@ -15,11 +15,8 @@ const Singleplayer: FC = observer(() => {
   const [mutation, execMutation] = useMutation(ADD_RESULT)
 
   useEffect(() => {
-    async function t() {
-      GameStore.mode = 'Singleplayer'
-      await GameStore.generateWords()
-    }
-    t()
+    GameStore.mode = 'Singleplayer'
+    GameStore.generateWords()
     return () => {
       GameStore.empty()
     }
