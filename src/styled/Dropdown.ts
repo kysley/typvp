@@ -54,14 +54,21 @@ export const DropdownItems = styled.ul`
   border-top: none;
   border-radius: 4px;
   font-size: 14px;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    margin-right: 0;
+    display: block;
+  }
 `
 
 export const DropdownItem = styled.li<ItemProps>`
   width: 100%;
-  display: block;
   line-height: normal;
   list-style: none;
   padding: 12px;
+  height: 100%;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -74,11 +81,6 @@ export const DropdownItem = styled.li<ItemProps>`
 
   &:hover {
     background-color: ${({theme}) => theme.backgrounds.background};
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
   }
 `
 

@@ -39,9 +39,9 @@ const Header = observer(() => {
             <Dropdown header={UserStore.me.username}>
               <DropdownMenu>
                 <DropdownItems>
-                  <DropdownItem intent="none">
-                    <Link to="/profile">My Profile</Link>
-                  </DropdownItem>
+                  <Link to="/profile">
+                    <DropdownItem intent="none">My Profile</DropdownItem>
+                  </Link>
                   <DropdownItem intent="none" onClick={GlobalStore.toggleTheme}>
                     {GlobalStore.mode === 'light' ? 'Lights Off' : 'Lights On'}
                   </DropdownItem>

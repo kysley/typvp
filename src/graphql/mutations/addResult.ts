@@ -50,4 +50,10 @@ export const ADD_RESULT_TO_TRIAL = gql`
   }
 `
 
+export const GET_WORD_SET = gql`
+  mutation getWordSet {
+    getWordSet
+  }
+`
+
 export default ADD_RESULT

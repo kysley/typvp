@@ -1,7 +1,9 @@
-import {observable, action} from 'mobx'
+import {observable, action, flow, runInAction} from 'mobx'
 import randomwords from 'random-words'
 
 import {TypingState} from '@/types/game'
+import {client} from '@/services/Client'
+import {GET_WORD_SET} from '@/graphql/mutations/addResult'
 
 let timeout: any = null
 class GameStore {
@@ -48,6 +50,9 @@ class GameStore {
 
   @observable
   mode?: 'Singleplayer' | 'Trial'
+
+  @observable
+  fetchingWords: boolean = false
 
   @action
   calculateResults = (): any => {
@@ -103,13 +108,40 @@ class GameStore {
   }
 
   @action
-  generateWords = (): void => {
-    this.words = randomwords({exactly: 250, maxLength: 8})
+  empty = () => {
+    clearTimeout(timeout)
+    this.typedHistory = new Array(250).fill(null)
+    this.typedWord = ''
+    this.wordIndex = 0
+    this.time = 0
+    this.typingState = TypingState.NotStarted
+    this.cpm = 0
+    this.rawCpm = 0
+    this.wpm = 0
+    this.words = []
+    this.corrections = 0
+    this.incorrect = 0
+    this.correct = 0
+    this.incorrectIndex = []
+    this.isSpellingIncorrect = false
+    this.mode = undefined
   }
+
+  generateWords = flow(function*(
+    this: GameStore,
+  ): Generator<Promise<any>, void, any> {
+    if (!this.fetchingWords) {
+      this.fetchingWords = true
+      const {
+        data: {getWordSet},
+      } = yield client.mutation(GET_WORD_SET).toPromise()
+      this.loadWordSet(getWordSet)
+      this.fetchingWords = false
+    }
+  })
 
   @action
   loadWordSet = (wordSet: string): void => {
-    this.reset()
     this.words = wordSet.split('|')
   }
 

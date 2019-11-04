@@ -38,8 +38,7 @@ const Trial: FC = observer(() => {
   useEffect(() => {
     GameStore.mode = 'Trial'
     return () => {
-      GameStore.mode = undefined
-      GameStore.reset()
+      GameStore.empty()
     }
   }, [])
 

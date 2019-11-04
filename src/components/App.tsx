@@ -1,7 +1,7 @@
 import React, {FC, useEffect} from 'react'
 import {BrowserRouter as Router} from 'react-router-dom'
 import {createGlobalStyle} from 'styled-components'
-import {autorun} from 'mobx'
+import {autorun, reaction, when} from 'mobx'
 
 import {StoreProvider, useStore} from '@/stores'
 import {ClientProvider} from '@/services/Client'
@@ -29,10 +29,13 @@ const GlobalStyle = createGlobalStyle`
 export const PersistLogin = () => {
   const {UserStore} = useStore()
   useEffect(
-    autorun(() => {
-      UserStore.persist()
-      console.log('running persist')
-    }),
+    when(
+      () => UserStore.me === undefined,
+      () => {
+        UserStore.persist()
+        console.log('running persist')
+      },
+    ),
     [],
   )
   return null
