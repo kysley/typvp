@@ -9,13 +9,7 @@ import {SignupForm, SignupFormContainer, FormErrorMsg} from '@/styled/Forms'
 import Button from '@/styled/Button'
 import {useStore} from '@/stores'
 import SIGNUP from '@/graphql/mutations/signup'
-
-const initialValues = {
-  username: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-}
+import {containsError} from '@/pages/Login'
 
 interface ISignupSchema {
   username: string
@@ -69,50 +63,52 @@ const Signup: FC = () => {
           <Label htmlFor="username">Username</Label>
           <Input
             name="username"
-            hasWarning={!!errors.username}
+            hasWarning={containsError(errors, formState, 'username')}
             ref={register}
             type="text"
             autoComplete="off"
           />
-          {errors.username && (
-            <FormErrorMsg>{errors.username.message}</FormErrorMsg>
+          {containsError(errors, formState, 'username') && (
+            <FormErrorMsg>{errors.username!.message}</FormErrorMsg>
           )}
         </div>
         <div>
           <Label htmlFor="email">Email</Label>
           <Input
             name="email"
-            hasWarning={!!errors.email}
+            hasWarning={containsError(errors, formState, 'email')}
             ref={register}
             type="text"
             autoComplete="off"
           />
-          {errors.email && <FormErrorMsg>{errors.email.message}</FormErrorMsg>}
+          {containsError(errors, formState, 'email') && (
+            <FormErrorMsg>{errors.email!.message}</FormErrorMsg>
+          )}
         </div>
         <div>
           <Label htmlFor="password">Password</Label>
           <Input
             name="password"
-            hasWarning={!!errors.password}
+            hasWarning={containsError(errors, formState, 'password')}
             type="password"
             autoComplete="new-password"
             ref={register}
           />
-          {errors.password && (
-            <FormErrorMsg>{errors.password.message}</FormErrorMsg>
+          {containsError(errors, formState, 'password') && (
+            <FormErrorMsg>{errors.password!.message}</FormErrorMsg>
           )}
         </div>
         <div>
           <Label htmlFor="confirmPassword">Confirm Password</Label>
           <Input
             name="confirmPassword"
-            hasWarning={!!errors.confirmPassword}
+            hasWarning={containsError(errors, formState, 'confirmPassword')}
             type="password"
             autoComplete="new-password"
             ref={register}
           />
-          {errors.confirmPassword && (
-            <FormErrorMsg>{errors.confirmPassword.message}</FormErrorMsg>
+          {containsError(errors, formState, 'confirmPassword') && (
+            <FormErrorMsg>{errors.confirmPassword!.message}</FormErrorMsg>
           )}
         </div>
         <Button

@@ -10,14 +10,18 @@ import Button from '@/styled/Button'
 import {useStore} from '@/stores'
 import LOGIN from '@/graphql/mutations/login'
 
-const initialValues = {
-  username: '',
-  password: '',
-}
-
 interface ILoginSchema {
   username: string
   password: string
+}
+
+export function containsError(errors: any, formState: any, name: string) {
+  if (formState.touched.includes(name)) {
+    if (!!errors[name]) {
+      return true
+    }
+  }
+  return false
 }
 
 const Login: FC = () => {
@@ -37,7 +41,6 @@ const Login: FC = () => {
   }
 
   useEffect(() => {
-    console.log(mutation)
     if (mutation.data && !mutation.error) {
       const {
         data: {
@@ -62,29 +65,29 @@ const Login: FC = () => {
         <div>
           <Label htmlFor="username">Username</Label>
           <Input
-            placeholder="Username"
+            // placeholder="Username"
             name="username"
-            hasWarning={!!errors.username}
+            hasWarning={containsError(errors, formState, 'username')}
             ref={register}
             type="text"
             autoComplete="off"
           />
-          {errors.username && (
-            <FormErrorMsg>{errors.username.message}</FormErrorMsg>
+          {containsError(errors, formState, 'username') && (
+            <FormErrorMsg>{errors.username!.message}</FormErrorMsg>
           )}
         </div>
         <div>
           <Label htmlFor="password">Password</Label>
           <Input
-            placeholder="Password"
+            // placeholder="Password"
             name="password"
             type="password"
-            hasWarning={!!errors.password}
+            hasWarning={containsError(errors, formState, 'password')}
             ref={register}
             autoComplete="current-password"
           />
-          {errors.password && (
-            <FormErrorMsg>{errors.password.message}</FormErrorMsg>
+          {containsError(errors, formState, 'password') && (
+            <FormErrorMsg>{errors.password!.message}</FormErrorMsg>
           )}
         </div>
         <Button
