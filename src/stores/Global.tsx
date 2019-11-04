@@ -12,10 +12,10 @@ function setColorScheme() {
 
   window
     .matchMedia('(prefers-color-scheme: dark)')
-    .addListener(e => e.matches && handleDefaultMode(true))
+    .addListener(e => e.matches && handleDefaultMode(true, true))
   window
     .matchMedia('(prefers-color-scheme: light)')
-    .addListener(e => e.matches && handleDefaultMode(false))
+    .addListener(e => e.matches && handleDefaultMode(false, true))
 
   if (isDarkMode) handleDefaultMode(true)
   if (isLightMode) handleDefaultMode(false)
@@ -31,10 +31,9 @@ function setColorScheme() {
   }
 }
 
-function handleDefaultMode(isDark: boolean): string {
-  const savedMode = localStorage.getItem('mode')
+function handleDefaultMode(isDark: boolean, override: boolean = false): void {
   const performedDefaultThemeAdjust = localStorage.getItem('pdta')
-  if (performedDefaultThemeAdjust === 'true') return savedMode || 'light'
+  if (performedDefaultThemeAdjust === 'true' && !override) return
 
   if (isDark) {
     localStorage.setItem('mode', 'dark')
@@ -43,8 +42,6 @@ function handleDefaultMode(isDark: boolean): string {
   }
 
   localStorage.setItem('pdta', 'true')
-
-  return localStorage.getItem('mode') as string
 }
 
 setColorScheme()
