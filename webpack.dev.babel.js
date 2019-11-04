@@ -6,9 +6,7 @@ export default {
   devtool: 'cheap-module-source-map',
   mode: 'development',
   entry: {
-    app: [
-      path.join(__dirname, 'src', 'index.tsx'),
-    ],
+    app: [path.join(__dirname, 'src', 'index.tsx')],
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -21,6 +19,7 @@ export default {
     historyApiFallback: true,
     progress: true,
     stats: 'none',
+    port: 8082,
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -37,10 +36,7 @@ export default {
   ],
   resolve: {
     extensions: ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx'],
-    modules: [
-      path.join(__dirname, 'src'),
-      'node_modules',
-    ],
+    modules: [path.join(__dirname, 'src'), 'node_modules'],
     alias: {
       '@': path.join(__dirname, 'src'),
       'react-dom': '@hot-loader/react-dom',
