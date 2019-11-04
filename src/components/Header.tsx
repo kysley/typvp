@@ -53,40 +53,50 @@ const Header = observer(() => {
               </DropdownMenu>
             </Dropdown>
           ) : (
-            // <>
-            // {!result.fetching && (
             <>
-              <Button as={Link} to="/login" appearance="default" intent="none">
-                Login
-              </Button>
-              <Button as={Link} to="/signup" appearance="primary" intent="none">
-                Sign Up
-              </Button>
-              <Dropdown header={<UserIcon />}>
-                <DropdownMenu>
-                  <DropdownItems>
-                    <DropdownItem
-                      intent="none"
-                      onClick={GlobalStore.toggleTheme}
-                    >
-                      {GlobalStore.mode === 'light'
-                        ? 'Lights Off'
-                        : 'Lights On'}
-                    </DropdownItem>
-                    <DropdownBorder />
-                    <DropdownItem intent="none">
-                      <EnterIcon />
-                      <Link style={{marginLeft: '0.5em'}} to="/signup">
-                        Sign Up
-                      </Link>
-                    </DropdownItem>
-                  </DropdownItems>
-                </DropdownMenu>
-              </Dropdown>
+              {!UserStore.fetchingUser && (
+                <>
+                  <Button
+                    as={Link}
+                    to="/login"
+                    appearance="default"
+                    intent="none"
+                  >
+                    Login
+                  </Button>
+                  <Button
+                    as={Link}
+                    to="/signup"
+                    appearance="primary"
+                    intent="none"
+                  >
+                    Sign Up
+                  </Button>
+                  <Dropdown header={<UserIcon />}>
+                    <DropdownMenu>
+                      <DropdownItems>
+                        <DropdownItem
+                          intent="none"
+                          onClick={GlobalStore.toggleTheme}
+                        >
+                          {GlobalStore.mode === 'light'
+                            ? 'Lights Off'
+                            : 'Lights On'}
+                        </DropdownItem>
+                        <DropdownBorder />
+                        <DropdownItem intent="none">
+                          <EnterIcon />
+                          <Link style={{marginLeft: '0.5em'}} to="/signup">
+                            Sign Up
+                          </Link>
+                        </DropdownItem>
+                      </DropdownItems>
+                    </DropdownMenu>
+                  </Dropdown>
+                </>
+              )}
             </>
           )}
-          {/* </> */}
-          {/* )} */}
         </HeaderGroup>
       </HeaderContainer>
     </HeaderWrapper>
