@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import {AccountFragmentWithResults} from '@/graphql/fragments'
+import {AccountFragmentWithResults, ResultFragment} from '@/graphql/fragments'
 
 const ME = gql`
   query me {
@@ -9,6 +9,15 @@ const ME = gql`
     }
   }
   ${AccountFragmentWithResults}
+`
+
+export const MY_RESULTS = gql`
+  query myResults {
+    myResults {
+      ...ResultFragment
+    }
+  }
+  ${ResultFragment}
 `
 
 export default ME
