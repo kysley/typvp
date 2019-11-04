@@ -17,6 +17,9 @@ class UserStore {
   @observable
   me: IMe | undefined = undefined
 
+  @observable
+  fetchingUser: boolean = true
+
   @action
   login = (token: string, account: IMe): void => {
     this.me = account
@@ -26,10 +29,17 @@ class UserStore {
   persist = flow(function*(
     this: UserStore,
   ): Generator<Promise<any>, void, any> {
-    const {
-      data: {me},
-    } = yield client.query(ME).toPromise()
-    this.me = me
+    try {
+      this.fetchingUser = true
+      const {
+        data: {me},
+      } = yield client.query(ME).toPromise()
+      if (me) this.me = me
+    } catch (e) {
+      console.log(e)
+    } finally {
+      this.fetchingUser = false
+    }
   })
 
   @action
