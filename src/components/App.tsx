@@ -27,16 +27,6 @@ const GlobalStyle = createGlobalStyle`
 
 export const PersistLogin = () => {
   const {UserStore} = useStore()
-  // useEffect(
-  //   when(
-  //     () => UserStore.me === undefined,
-  //     () => {
-  //       UserStore.persist()
-  //       console.log('running persist')
-  //     },
-  //   ),
-  //   [],
-  // )
   useEffect(() => {
     UserStore.persist()
   }, [])
