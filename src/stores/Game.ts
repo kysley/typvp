@@ -1,5 +1,4 @@
-import {observable, action, flow, runInAction} from 'mobx'
-import randomwords from 'random-words'
+import {observable, action, flow} from 'mobx'
 
 import {TypingState} from '@/types/game'
 import {client} from '@/services/Client'
@@ -131,6 +130,7 @@ class GameStore {
     this: GameStore,
   ): Generator<Promise<any>, void, any> {
     if (!this.fetchingWords) {
+      console.log('not busy, generating words')
       this.fetchingWords = true
       const {
         data: {getWordSet},
