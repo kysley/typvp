@@ -1,4 +1,7 @@
-import {observable, action} from 'mobx'
+import {observable, action, flow} from 'mobx'
+
+import {client} from '@/services/Client'
+import ME from '@/graphql/queries/me'
 
 interface IMe {
   username: string
@@ -12,7 +15,7 @@ interface IMe {
 
 class UserStore {
   @observable
-  me: IMe | undefined
+  me: IMe | undefined = undefined
 
   @action
   login = (token: string, account: IMe): void => {
@@ -20,10 +23,14 @@ class UserStore {
     localStorage.setItem('token', token)
   }
 
-  @action
-  persist = (me: IMe): void => {
+  persist = flow(function*(
+    this: UserStore,
+  ): Generator<Promise<any>, void, any> {
+    const {
+      data: {me},
+    } = yield client.query(ME).toPromise()
     this.me = me
-  }
+  })
 
   @action
   logout = () => {
