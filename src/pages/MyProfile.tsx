@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import {observer} from 'mobx-react-lite'
 import {useHistory} from 'react-router'
 import TimeAgo from 'timeago-react'
@@ -20,7 +20,13 @@ import {MY_RESULTS} from '@/graphql/queries/me'
 const MyProfile: FC = observer(() => {
   const {UserStore} = useStore()
   const history = useHistory()
-  const [result] = useQuery({query: MY_RESULTS})
+  const [pagination, setPagination] = useState({first: 15, skip: 0})
+  const [result] = useQuery({
+    query: MY_RESULTS,
+    variables: {
+      ...pagination,
+    },
+  })
 
   if (UserStore.me === undefined && !UserStore.fetchingUser) {
     history.push('/login')
@@ -58,7 +64,9 @@ const MyProfile: FC = observer(() => {
             {UserStore.me.results &&
               UserStore.me.results.map((result: any) => (
                 <ResultWrapper key={result.id}>
-                  <p>{result.type}</p>
+                  <p>
+                    {result.type} | <TimeAgo datetime={result.createdAt} />
+                  </p>
                   <ResultHeader>wpm</ResultHeader>
                   <ResultValue>{result.wpm}</ResultValue>
                   <ResultHeader>cpm</ResultHeader>

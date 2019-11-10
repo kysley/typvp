@@ -28,6 +28,7 @@ export const AboutArea = styled.div`
 export const ResultsArea = styled.div`
   display: grid;
   grid-row-gap: 2em;
+  margin-bottom: auto;
 `
 
 export const ResultWrapper = styled.div`
@@ -36,7 +37,7 @@ export const ResultWrapper = styled.div`
   border-radius: 4px;
   padding: 1em;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   text-align: right;
 
   h1 {
@@ -54,6 +55,7 @@ export const ResultWrapper = styled.div`
     margin: 0;
     font-size: 0.725rem;
     text-align: left;
+    grid-area: 1 / span 2;
   }
 `
 

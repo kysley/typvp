@@ -11,6 +11,7 @@ export const ResultFragment = gql`
     corrections
     wordIndex
     type
+    createdAt
   }
 `
 
