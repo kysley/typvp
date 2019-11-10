@@ -1,16 +1,37 @@
 import React, {FC} from 'react'
-import styled from 'styled-components'
+import styled, {keyframes, css} from 'styled-components'
 
-const SVG = styled.svg`
-  /* right: 1vw; */
-  /* width: 2em; */
+const pulse = keyframes`
+    0% {
+      transform: rotate(50deg)
+    }
+    100% {
+      transform: rotate(360deg)
+    }
+  `
+interface IRefreshIcon {
+  isSpinning: boolean
+}
+
+const SVG = styled.svg<IRefreshIcon>`
   height: 1.5em;
   cursor: pointer;
   fill: ${({theme}) => theme.colors.text};
+  transition: all 0.3s ease-out;
+
+  &:hover {
+    transform: rotate(50deg);
+  }
+
+  ${({isSpinning}) =>
+    isSpinning &&
+    css`
+      animation: ${pulse} 0.8s ease-in-out infinite;
+    `}
 `
 
-export const RefreshIcon: FC = () => (
-  <SVG viewBox="0 0 100 100">
+export const RefreshIcon: FC<IRefreshIcon> = ({isSpinning}) => (
+  <SVG viewBox="0 0 100 100" isSpinning={isSpinning}>
     <path
       fillRule="evenodd"
       clipRule="evenodd"
