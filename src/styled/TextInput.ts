@@ -5,7 +5,7 @@ import {colors} from '@/styled/Theme'
 const inputBaseStyles = css`
   border: 2px solid transparent;
   border-radius: 4px;
-  padding: 0.75rem 0.75rem;
+  padding: 0.5rem 0.5rem;
   margin-bottom: 2em;
   width: 100%;
   font-size: 0.8725rem;

@@ -13,11 +13,20 @@ const border = {
 }
 
 const background = {
-  tint1: '#F9F9FB',
-  tint2: '#F5F6F7',
-  darkTint1: '#1e1f23',
-  darkTint2: '#121416',
-  darkTint3: '#090a0c',
+  light: {
+    primary: white,
+    secondary: '#f9f9f9',
+    hover: '#f2f2f2',
+    active: '#e5e5e5',
+    input: '#efeff1',
+  },
+  dark: {
+    primary: '#1e1f23',
+    secondary: '#18181b',
+    hover: '#121416',
+    active: '#090a0c',
+    input: '#3a3a3d',
+  },
 }
 
 const neutrals = {
@@ -165,11 +174,11 @@ export const normal = {
     },
     bg: {
       light: colors.b50,
-      dark: colors.background.darkTint2,
+      dark: colors.background.dark.hover,
     },
     hover: {
       light: colors.b75,
-      dark: colors.background.darkTint3,
+      dark: colors.background.dark.active,
     },
   },
   success: {
@@ -179,11 +188,11 @@ export const normal = {
     },
     bg: {
       light: colors.g50,
-      dark: colors.background.darkTint2,
+      dark: colors.background.dark.hover,
     },
     hover: {
       light: colors.g75,
-      dark: colors.background.darkTint3,
+      dark: colors.background.dark.active,
     },
   },
   warning: {
@@ -193,11 +202,11 @@ export const normal = {
     },
     bg: {
       light: colors.y50,
-      dark: colors.background.darkTint2,
+      dark: colors.background.dark.hover,
     },
     hover: {
       light: colors.y75,
-      dark: colors.background.darkTint3,
+      dark: colors.background.dark.active,
     },
   },
   danger: {
@@ -207,11 +216,11 @@ export const normal = {
     },
     bg: {
       light: colors.r50,
-      dark: colors.background.darkTint2,
+      dark: colors.background.dark.hover,
     },
     hover: {
       light: colors.r75,
-      dark: colors.background.darkTint3,
+      dark: colors.background.dark.active,
     },
   },
 }
@@ -352,9 +361,11 @@ export const bundle: Dic = {
 export const dark = {
   name: 'dark',
   backgrounds: {
-    background: background.darkTint1,
-    accent: background.darkTint2,
-    input: background.darkTint1,
+    primary: background.dark.primary,
+    secondary: background.dark.secondary,
+    hover: background.dark.hover,
+    active: background.dark.active,
+    input: background.dark.input,
   },
   colors: {
     text: colors.white,
@@ -373,9 +384,11 @@ export const dark = {
 export const light = {
   name: 'light',
   backgrounds: {
-    background: white,
-    accent: background.tint2,
-    input: background.tint1,
+    primary: background.light.primary,
+    secondary: background.light.secondary,
+    hover: background.light.hover,
+    active: background.light.active,
+    input: background.light.input,
   },
   colors: {
     text: colors.black,

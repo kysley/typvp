@@ -12,7 +12,7 @@ export const ProfileGrid = styled.main`
   color: ${({theme}) => theme.colors.text};
 
   > div {
-    background: ${({theme}) => theme.backgrounds.accent};
+    background: ${({theme}) => theme.backgrounds.secondary};
     padding: 1em;
     border-radius: 6px;
   }
@@ -32,7 +32,7 @@ export const ResultsArea = styled.div`
 
 export const ResultWrapper = styled.div`
   display: grid;
-  background: ${({theme}) => theme.backgrounds.background};
+  background: ${({theme}) => theme.backgrounds.primary};
   border-radius: 4px;
   padding: 1em;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;

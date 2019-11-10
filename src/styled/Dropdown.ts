@@ -19,7 +19,7 @@ export const DropdownMenu = styled.div`
   margin-top: 3px;
   right: 0;
   z-index: 4;
-  background: ${({theme}) => theme.backgrounds.accent};
+  background: ${({theme}) => theme.backgrounds.secondary};
   user-select: none;
   border-radius: 4px;
   color: ${({theme}) => theme.colors.text};
@@ -35,15 +35,18 @@ export const DropdownWrapper = styled.div<DropdownProps>`
   height: 32px;
   cursor: pointer;
   user-select: none;
-  background: ${({theme}) => theme.backgrounds.accent};
+  background: ${({theme}) => theme.backgrounds.secondary};
   border-radius: 4px;
   color: ${({theme}) => theme.colors.text};
+
+  &:hover {
+    background: ${({theme}) => theme.backgrounds.hover};
+  }
 
   ${({isOpen, theme}) =>
     isOpen &&
     `
-      background: ${theme.border.active};
-
+      background: ${theme.backgrounds.active};
     `}
 `
 
@@ -80,11 +83,15 @@ export const DropdownItem = styled.li<ItemProps>`
     `}
 
   &:hover {
-    background-color: ${({theme}) => theme.backgrounds.background};
+    background-color: ${({theme}) => theme.backgrounds.hover};
+  }
+
+  &:active {
+    background-color: ${({theme}) => theme.backgrounds.active};
   }
 `
 
 export const DropdownBorder = styled.div`
-  border-top: 1px solid ${({theme}) => theme.backgrounds.background};
+  border-top: 1px solid ${({theme}) => theme.backgrounds.primary};
   margin-top: 0.5em;
 `

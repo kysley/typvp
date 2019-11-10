@@ -22,9 +22,9 @@ const SingleplayerResults: React.FC<ISingleplayerResults> = observer(
       <AnimatePresence>
         {isVisible && (
           <ResultsContainer
-            animate={{y: [-170, 30, 25]}}
+            animate={{opacity: [0, 1]}}
             initial
-            transition={{duration: 0.2}}
+            transition={{duration: 0.425}}
             exit={{opacity: 0}}
           >
             <div>

@@ -16,7 +16,7 @@ export const LeaderboardHeader = styled.div`
   font-size: 1.25rem;
   border-radius: 6px;
   color: ${({theme}) => theme.colors.accentText};
-  background-color: ${({theme}) => theme.backgrounds.background};
+  background-color: ${({theme}) => theme.backgrounds.primary};
 
   span:not(:first-of-type) {
     text-align: right;
@@ -35,6 +35,6 @@ export const LeaderboardRanking = styled.div`
   }
 
   :nth-child(odd) {
-    background-color: ${({theme}) => theme.backgrounds.accent};
+    background-color: ${({theme}) => theme.backgrounds.secondary};
   }
 `

@@ -9,6 +9,7 @@ export const SingleplayerContainer = styled.div`
   display: grid;
   align-self: center;
   margin-top: 16vh;
+  grid-row-gap: 1em;
 `
 
 export const TrialInfo = styled.div<any>`
@@ -25,10 +26,8 @@ export const MetaContainer = styled.div`
   border-radius: 6px;
   display: grid;
   grid-auto-flow: column;
-  background: ${({theme}) => theme.backgrounds.accent};
+  background: ${({theme}) => theme.backgrounds.secondary};
   color: ${({theme}) => theme.colors.text};
-  /* border: 1px solid ${({theme}) => theme.border.default}; */
-  margin: 1em 0;
   padding: 0.5em 1em;
   justify-content: space-between;
   overflow: hidden;
@@ -51,7 +50,7 @@ export const ResultsContainer = styled(motion.div)`
   display: relative;
   padding: 1em;
   border-radius: 6px;
-  background: ${({theme}) => theme.backgrounds.accent};
+  background: ${({theme}) => theme.backgrounds.secondary};
   color: ${({theme}) => theme.colors.text};
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

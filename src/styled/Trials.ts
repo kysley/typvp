@@ -28,7 +28,7 @@ const DifficultyColour = {
 
 export const TrialCard = styled.div<IDifficulty>`
   border-radius: 6px;
-  background: ${({theme}) => theme.backgrounds.accent};
+  background: ${({theme}) => theme.backgrounds.secondary};
   color: ${({theme}) => theme.colors.text};
   padding: 1em;
   position: relative;

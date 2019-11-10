@@ -34,7 +34,7 @@ const Tab = styled(NavLink)`
   &.active {
     color: ${({theme}) => theme.colors.text};
     text-decoration: underline;
-    background-color: ${({theme}) => theme.backgrounds.accent};
+    background-color: ${({theme}) => theme.backgrounds.secondary};
   }
 `
 

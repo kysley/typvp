@@ -7,7 +7,7 @@ export const SignupFormContainer = styled.div`
   max-width: 30vw;
   min-width: 30vw;
   align-self: center;
-  background: ${({theme}) => theme.backgrounds.accent};
+  background: ${({theme}) => theme.backgrounds.secondary};
   padding: 3em 3em;
   border-radius: 6px;
   color: ${({theme}) => theme.colors.text};

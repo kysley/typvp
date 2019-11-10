@@ -1,18 +1,18 @@
 import styled, {css} from 'styled-components'
 
-import {colors} from '@/styled/Theme'
-
 const TypingAreaContainer = styled.div`
   display: grid;
   grid-row-gap: 1em;
   justify-self: center;
-  /* background: ${colors.background.tint1}; */
-  background: ${({theme}) => theme.backgrounds.accent};
-  /* border: 1px solid ${({theme}) => theme.border.default}; */
+  background: ${({theme}) => theme.backgrounds.secondary};
   border-radius: 6px;
   padding: 1em;
   z-index: 1;
   width: 100%;
+
+  input {
+    padding: 0.75rem 0.75rem;
+  }
 `
 
 interface ITypingAreaInner {
@@ -27,14 +27,13 @@ const TypingAreaInner = styled.div<ITypingAreaInner>`
   ${p =>
     p.disabled &&
     css`
-      &::after {
+      &::before {
         display: block;
         position: absolute;
         content: '';
         width: 100%;
         height: 100%;
-        background: ${({theme}) => theme.backgrounds.accent};
-        top: 180%;
+        background: ${({theme}) => theme.backgrounds.secondary};
         opacity: 0.5;
       }
     `}
