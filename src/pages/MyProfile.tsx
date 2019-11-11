@@ -16,6 +16,7 @@ import {
   ResultValue,
 } from '@/styled/MyProfile'
 import {MY_RESULTS} from '@/graphql/queries/me'
+import Pagination from '@/components/Pagination'
 
 const MyProfile: FC = observer(() => {
   const {UserStore} = useStore()
@@ -26,6 +27,7 @@ const MyProfile: FC = observer(() => {
     variables: {
       ...pagination,
     },
+    requestPolicy: 'cache-and-network',
   })
 
   if (UserStore.me === undefined && !UserStore.fetchingUser) {
@@ -41,11 +43,11 @@ const MyProfile: FC = observer(() => {
       {UserStore.me && (
         <>
           <AboutArea>
-            <p>
+            <span>
               <ProfileHeader>username</ProfileHeader>
               <ProfileValue>{UserStore.me.username}</ProfileValue>
-            </p>
-            <p>
+            </span>
+            <span>
               <ProfileHeader>last seen</ProfileHeader>
               <ProfileValue>
                 {UserStore.me.lastSeen ? (
@@ -54,13 +56,23 @@ const MyProfile: FC = observer(() => {
                   'n/a'
                 )}
               </ProfileValue>
-            </p>
-            <p>
+            </span>
+            <span>
               <ProfileHeader>last played</ProfileHeader>
               <ProfileValue>{UserStore.me.lastPlayed || 'n/a'}</ProfileValue>
-            </p>
+            </span>
           </AboutArea>
           <ResultsArea>
+            <Pagination
+              totalRecords={UserStore.me.results.length}
+              pageLimit={15}
+              pageNeighbours={1}
+              onPageChanged={data => {
+                setPagination(prev => {
+                  return {...prev, skip: (data.currentPage - 1) * 15}
+                })
+              }}
+            />
             {UserStore.me.results &&
               UserStore.me.results.map((result: any) => (
                 <ResultWrapper key={result.id}>
