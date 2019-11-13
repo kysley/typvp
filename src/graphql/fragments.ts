@@ -22,6 +22,8 @@ export const AccountFragment = gql`
     role
     lastSeen
     lastPlayed
+    testCount
+    createdAt
   }
 `
 

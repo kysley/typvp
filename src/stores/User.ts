@@ -6,11 +6,12 @@ import ME from '@/graphql/queries/me'
 interface IMe {
   username: string
   id: number
-  email: string
   role: string
   lastSeen: number
   lastPlayed: string
   results: any
+  createdAt: Date
+  testCount: number
 }
 
 class UserStore {
