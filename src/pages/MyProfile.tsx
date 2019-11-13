@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react'
 import {observer} from 'mobx-react-lite'
-import {useHistory} from 'react-router'
+import {Redirect} from 'react-router'
 import TimeAgo from 'timeago-react'
 import {useQuery} from 'urql'
 
@@ -20,34 +20,48 @@ import Pagination from '@/components/Pagination'
 
 const MyProfile: FC = observer(() => {
   const {UserStore} = useStore()
-  const history = useHistory()
   const [pagination, setPagination] = useState({first: 15, skip: 0})
   const [result] = useQuery({
     query: MY_RESULTS,
     variables: {
       ...pagination,
     },
-    requestPolicy: 'cache-and-network',
   })
 
-  if (UserStore.me === undefined && !UserStore.fetchingUser) {
-    history.push('/login')
-  }
-
   useEffect(() => {
-    if (result.data) UserStore.me!.results = result.data.myResults
+    if (result.data) {
+      const {
+        data: {
+          myResults: {results, testCount},
+        },
+      } = result
+      if (UserStore.me) {
+        UserStore.me!.results = results
+        if (UserStore.me!.testCount !== testCount) {
+          UserStore.me!.testCount = testCount
+        }
+      }
+    }
   }, [result.data])
+
+  if (UserStore.me === undefined && !UserStore.fetchingUser) {
+    return <Redirect to="/login" />
+  }
 
   return (
     <ProfileGrid>
       {UserStore.me && (
         <>
           <AboutArea>
-            <span>
+            <div>
               <ProfileHeader>username</ProfileHeader>
               <ProfileValue>{UserStore.me.username}</ProfileValue>
-            </span>
-            <span>
+            </div>
+            <div>
+              <ProfileHeader>tests taken</ProfileHeader>
+              <ProfileValue>{UserStore.me.testCount || 'n/a'}</ProfileValue>
+            </div>
+            <div>
               <ProfileHeader>last seen</ProfileHeader>
               <ProfileValue>
                 {UserStore.me.lastSeen ? (
@@ -56,15 +70,21 @@ const MyProfile: FC = observer(() => {
                   'n/a'
                 )}
               </ProfileValue>
-            </span>
-            <span>
+            </div>
+            <div>
               <ProfileHeader>last played</ProfileHeader>
               <ProfileValue>{UserStore.me.lastPlayed || 'n/a'}</ProfileValue>
-            </span>
+            </div>
+            <div>
+              <ProfileHeader>created</ProfileHeader>
+              <ProfileValue>
+                <TimeAgo datetime={UserStore.me.createdAt} />
+              </ProfileValue>
+            </div>
           </AboutArea>
           <ResultsArea>
             <Pagination
-              totalRecords={UserStore.me.results.length}
+              totalRecords={UserStore.me.testCount}
               pageLimit={15}
               pageNeighbours={1}
               onPageChanged={data => {
@@ -73,28 +93,32 @@ const MyProfile: FC = observer(() => {
                 })
               }}
             />
-            {UserStore.me.results &&
-              UserStore.me.results.map((result: any) => (
-                <ResultWrapper key={result.id}>
-                  <p>
-                    {result.type} | <TimeAgo datetime={result.createdAt} />
-                  </p>
-                  <ResultHeader>wpm</ResultHeader>
-                  <ResultValue>{result.wpm}</ResultValue>
-                  <ResultHeader>cpm</ResultHeader>
-                  <ResultValue>{result.cpm}</ResultValue>
-                  <ResultHeader>cpm(raw)</ResultHeader>
-                  <ResultValue>{result.rawCpm}</ResultValue>
-                  <ResultHeader>corr</ResultHeader>
-                  <ResultValue>{result.correct}</ResultValue>
-                  <ResultHeader>incorr</ResultHeader>
-                  <ResultValue>{result.incorrect}</ResultValue>
-                  <ResultHeader>crrns</ResultHeader>
-                  <ResultValue>{result.corrections}</ResultValue>
-                  <ResultHeader>cmpltns</ResultHeader>
-                  <ResultValue>{result.wordIndex}</ResultValue>
-                </ResultWrapper>
-              ))}
+            {!result.fetching && (
+              <>
+                {UserStore.me.results &&
+                  UserStore.me.results.map((result: any) => (
+                    <ResultWrapper key={result.id}>
+                      <p>
+                        {result.type} | <TimeAgo datetime={result.createdAt} />
+                      </p>
+                      <ResultHeader>wpm</ResultHeader>
+                      <ResultValue>{result.wpm}</ResultValue>
+                      <ResultHeader>cpm</ResultHeader>
+                      <ResultValue>{result.cpm}</ResultValue>
+                      <ResultHeader>cpm(raw)</ResultHeader>
+                      <ResultValue>{result.rawCpm}</ResultValue>
+                      <ResultHeader>corr</ResultHeader>
+                      <ResultValue>{result.correct}</ResultValue>
+                      <ResultHeader>incorr</ResultHeader>
+                      <ResultValue>{result.incorrect}</ResultValue>
+                      <ResultHeader>crrns</ResultHeader>
+                      <ResultValue>{result.corrections}</ResultValue>
+                      <ResultHeader>cmpltns</ResultHeader>
+                      <ResultValue>{result.wordIndex}</ResultValue>
+                    </ResultWrapper>
+                  ))}
+              </>
+            )}
           </ResultsArea>
         </>
       )}
