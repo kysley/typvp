@@ -22,7 +22,7 @@ const SingleplayerMeta: FC = observer(() => {
     GameStore.reset()
     setTimeout(() => {
       setSpin(false)
-    }, 800)
+    }, 500)
   }
 
   return (

@@ -10,14 +10,14 @@ const pulse = keyframes`
     }
   `
 interface IRefreshIcon {
-  isSpinning: boolean
+  isSpinning?: boolean
 }
 
 const SVG = styled.svg<IRefreshIcon>`
   height: 1.5em;
   cursor: pointer;
   fill: ${({theme}) => theme.colors.text};
-  transition: all 0.3s ease-out;
+  transition: all 0.2s ease-out;
 
   &:hover {
     transform: rotate(50deg);
@@ -26,7 +26,7 @@ const SVG = styled.svg<IRefreshIcon>`
   ${({isSpinning}) =>
     isSpinning &&
     css`
-      animation: ${pulse} 0.8s ease-in-out infinite;
+      animation: ${pulse} 0.5s ease-in-out infinite;
     `}
 `
 
