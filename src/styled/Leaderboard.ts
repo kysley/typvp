@@ -11,30 +11,46 @@ export const LeaderboardGrid = styled.main`
 
 export const LeaderboardHeader = styled.div`
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
-  font-weight: 900;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  font-weight: 700;
   font-size: 1.25rem;
   border-radius: 6px;
   color: ${({theme}) => theme.colors.accentText};
   background-color: ${({theme}) => theme.backgrounds.primary};
+  text-align: right;
 
-  span:not(:first-of-type) {
-    text-align: right;
+  span:first-of-type {
+    text-align: left;
   }
 `
 
 export const LeaderboardRanking = styled.div`
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   padding: 0.25em 2em;
   border-radius: 6px;
   color: ${({theme}) => theme.colors.text};
+  text-align: right;
+  position: relative;
+  overflow: hidden;
 
-  p:not(:first-of-type) {
-    text-align: right;
+  p:first-of-type {
+    text-align: left;
   }
 
   :nth-child(odd) {
     background-color: ${({theme}) => theme.backgrounds.secondary};
+  }
+
+  :nth-child(2) {
+    background-color: #c9b037;
+  }
+
+  :nth-child(3) {
+    background-color: #d7d7d7;
+  }
+
+  :nth-child(4) {
+    background-color: #ad8a56;
   }
 `

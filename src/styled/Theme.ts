@@ -1,3 +1,5 @@
+import styled from 'styled-components'
+
 const white = '#FFF'
 const altWhite = '#5e6165'
 const black = '#16171A'
@@ -44,10 +46,6 @@ const teals = {
 }
 
 const purples = {
-  // p100: '#F8F7FC',
-  // p200: '#EAE7F8',
-  // p300: '#735DD0',
-  // p400: '#37248F',
   p50: '#EAE6FF',
   p75: '#C0B6F2',
   p100: '#998DD9',
@@ -58,10 +56,6 @@ const purples = {
 }
 
 const blues = {
-  // b100: '#F7F9FD',
-  // b200: '#DDEBF7',
-  // b300: '#1070CA',
-  // b400: '#084B8A',
   b50: '#DEEBFF',
   b75: '#B3D4FF',
   b100: '#4C9AFF',
@@ -72,10 +66,6 @@ const blues = {
 }
 
 const yellows = {
-  // y100: '#FEF8E7',
-  // y200: '#FBE6A2',
-  // y300: '#F7D154',
-  // y400: '#7E6514',
   y50: '#FFFAE6',
   y75: '#FFF0B3',
   y100: '#FFE380',
@@ -86,10 +76,6 @@ const yellows = {
 }
 
 const reds = {
-  // r100: '#FEF6F6',
-  // r200: '#FAE2E2',
-  // r300: '#EC4C47',
-  // r400: '#BF0E08',
   r50: '#FFEBE6',
   r75: '#FFBDAD',
   r100: '#FF8F73',
@@ -100,10 +86,6 @@ const reds = {
 }
 
 const greens = {
-  // g100: '#F1FAF5',
-  // g200: '#D4EEE2',
-  // g300: '#47B881',
-  // g400: '#00783E',
   g50: '#E3FCEF',
   g75: '#ABF5D1',
   g100: '#79F2C0',
@@ -120,13 +102,6 @@ const intent = {
   warning: yellows.y300,
 }
 
-// const brand = {
-//   blue: '#0064ff',
-//   green: '#38cd83',
-//   purple: '#7948ff',
-//   red: '#ff5c56',
-// }
-
 export const colors = {
   white,
   black,
@@ -140,7 +115,6 @@ export const colors = {
   ...yellows,
   ...reds,
   ...greens,
-  // brand,
 }
 
 export const intentMeta = {
@@ -335,12 +309,6 @@ export const secondary = {
 }
 
 const wordVariants = {
-  // match: '#64aa84',    old
-  // incorrect: '#cb466a',old
-  // current: '#5646b2',  old
-  // match: brand.green,
-  // incorrect: brand.red,
-  // current: brand.purple,
   match: colors.g300,
   incorrect: colors.r300,
   current: colors.p300,
@@ -403,3 +371,10 @@ export const light = {
     active: border.muted,
   },
 }
+
+export const PageHeader = styled.h1`
+  font-size: 2.25rem;
+  margin: 0;
+  padding-bottom: 1em;
+  color: ${({theme}) => theme.colors.text};
+`

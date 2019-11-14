@@ -17,6 +17,7 @@ import {
 } from '@/styled/MyProfile'
 import {MY_RESULTS} from '@/graphql/queries/me'
 import Pagination from '@/components/Pagination'
+import {PageHeader} from '@/styled/Theme'
 
 const MyProfile: FC = observer(() => {
   const {UserStore} = useStore()
@@ -49,80 +50,84 @@ const MyProfile: FC = observer(() => {
   }
 
   return (
-    <ProfileGrid>
-      {UserStore.me && (
-        <>
-          <AboutArea>
-            <div>
-              <ProfileHeader>username</ProfileHeader>
-              <ProfileValue>{UserStore.me.username}</ProfileValue>
-            </div>
-            <div>
-              <ProfileHeader>tests taken</ProfileHeader>
-              <ProfileValue>{UserStore.me.testCount || 'n/a'}</ProfileValue>
-            </div>
-            <div>
-              <ProfileHeader>last seen</ProfileHeader>
-              <ProfileValue>
-                {UserStore.me.lastSeen ? (
-                  <TimeAgo datetime={UserStore.me.lastSeen} />
-                ) : (
-                  'n/a'
-                )}
-              </ProfileValue>
-            </div>
-            <div>
-              <ProfileHeader>last played</ProfileHeader>
-              <ProfileValue>{UserStore.me.lastPlayed || 'n/a'}</ProfileValue>
-            </div>
-            <div>
-              <ProfileHeader>created</ProfileHeader>
-              <ProfileValue>
-                <TimeAgo datetime={UserStore.me.createdAt} />
-              </ProfileValue>
-            </div>
-          </AboutArea>
-          <ResultsArea>
-            <Pagination
-              totalRecords={UserStore.me.testCount}
-              pageLimit={15}
-              pageNeighbours={1}
-              onPageChanged={data => {
-                setPagination(prev => {
-                  return {...prev, skip: (data.currentPage - 1) * 15}
-                })
-              }}
-            />
-            {!result.fetching && (
-              <>
-                {UserStore.me.results &&
-                  UserStore.me.results.map((result: any) => (
-                    <ResultWrapper key={result.id}>
-                      <p>
-                        {result.type} | <TimeAgo datetime={result.createdAt} />
-                      </p>
-                      <ResultHeader>wpm</ResultHeader>
-                      <ResultValue>{result.wpm}</ResultValue>
-                      <ResultHeader>cpm</ResultHeader>
-                      <ResultValue>{result.cpm}</ResultValue>
-                      <ResultHeader>cpm(raw)</ResultHeader>
-                      <ResultValue>{result.rawCpm}</ResultValue>
-                      <ResultHeader>corr</ResultHeader>
-                      <ResultValue>{result.correct}</ResultValue>
-                      <ResultHeader>incorr</ResultHeader>
-                      <ResultValue>{result.incorrect}</ResultValue>
-                      <ResultHeader>crrns</ResultHeader>
-                      <ResultValue>{result.corrections}</ResultValue>
-                      <ResultHeader>cmpltns</ResultHeader>
-                      <ResultValue>{result.wordIndex}</ResultValue>
-                    </ResultWrapper>
-                  ))}
-              </>
-            )}
-          </ResultsArea>
-        </>
-      )}
-    </ProfileGrid>
+    <>
+      <PageHeader>My Profile</PageHeader>
+      <ProfileGrid>
+        {UserStore.me && (
+          <>
+            <AboutArea>
+              <div>
+                <ProfileHeader>username</ProfileHeader>
+                <ProfileValue>{UserStore.me.username}</ProfileValue>
+              </div>
+              <div>
+                <ProfileHeader>tests taken</ProfileHeader>
+                <ProfileValue>{UserStore.me.testCount || 'n/a'}</ProfileValue>
+              </div>
+              <div>
+                <ProfileHeader>last seen</ProfileHeader>
+                <ProfileValue>
+                  {UserStore.me.lastSeen ? (
+                    <TimeAgo datetime={UserStore.me.lastSeen} />
+                  ) : (
+                    'n/a'
+                  )}
+                </ProfileValue>
+              </div>
+              <div>
+                <ProfileHeader>last played</ProfileHeader>
+                <ProfileValue>{UserStore.me.lastPlayed || 'n/a'}</ProfileValue>
+              </div>
+              <div>
+                <ProfileHeader>created</ProfileHeader>
+                <ProfileValue>
+                  <TimeAgo datetime={UserStore.me.createdAt} />
+                </ProfileValue>
+              </div>
+            </AboutArea>
+            <ResultsArea>
+              <Pagination
+                totalRecords={UserStore.me.testCount}
+                pageLimit={15}
+                pageNeighbours={1}
+                onPageChanged={data => {
+                  setPagination(prev => {
+                    return {...prev, skip: (data.currentPage - 1) * 15}
+                  })
+                }}
+              />
+              {!result.fetching && (
+                <>
+                  {UserStore.me.results &&
+                    UserStore.me.results.map((result: any) => (
+                      <ResultWrapper key={result.id}>
+                        <p>
+                          {result.type} |{' '}
+                          <TimeAgo datetime={result.createdAt} />
+                        </p>
+                        <ResultHeader>wpm</ResultHeader>
+                        <ResultValue>{result.wpm}</ResultValue>
+                        <ResultHeader>cpm</ResultHeader>
+                        <ResultValue>{result.cpm}</ResultValue>
+                        <ResultHeader>cpm(raw)</ResultHeader>
+                        <ResultValue>{result.rawCpm}</ResultValue>
+                        <ResultHeader>corr</ResultHeader>
+                        <ResultValue>{result.correct}</ResultValue>
+                        <ResultHeader>incorr</ResultHeader>
+                        <ResultValue>{result.incorrect}</ResultValue>
+                        <ResultHeader>crrns</ResultHeader>
+                        <ResultValue>{result.corrections}</ResultValue>
+                        <ResultHeader>cmpltns</ResultHeader>
+                        <ResultValue>{result.wordIndex}</ResultValue>
+                      </ResultWrapper>
+                    ))}
+                </>
+              )}
+            </ResultsArea>
+          </>
+        )}
+      </ProfileGrid>
+    </>
   )
 })
 
