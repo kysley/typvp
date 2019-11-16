@@ -16,11 +16,11 @@ const border = {
 
 const background = {
   light: {
-    primary: white,
-    secondary: '#f9f9f9',
-    hover: '#f2f2f2',
-    active: '#e5e5e5',
-    input: '#efeff1',
+    primary: '#f7f7f8',
+    secondary: '#efeff1',
+    hover: '#e3e3e5',
+    active: '#d9d9d9',
+    input: '#d9d9d9',
   },
   dark: {
     primary: '#1e1f23',
