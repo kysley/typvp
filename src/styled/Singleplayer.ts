@@ -8,7 +8,8 @@ export const SingleplayerContainer = styled.div`
   max-width: 750px;
   display: grid;
   align-self: center;
-  margin-top: 16vh;
+  top: 31vh;
+  position: absolute;
   grid-row-gap: 1em;
 `
 
@@ -17,8 +18,12 @@ export const TrialInfo = styled.div<any>`
   transition: opacity 0.2s ease-in-out;
 `
 
-export const TrialContainer = styled(SingleplayerContainer)`
-  margin-top: 0;
+export const TrialHeader = styled.div`
+  display: flex;
+  align-items: center;
+  h1 {
+    padding: 0 1em 0 0;
+  }
 `
 
 export const MetaContainer = styled.div`

@@ -10,6 +10,7 @@ import {
   TrialDifficulty,
   TrialFold,
 } from '@/styled/Trials'
+import {PageHeader} from '@/styled/Theme'
 
 const Trials = () => {
   const [trials, setTrials] = useState([])
@@ -27,22 +28,25 @@ const Trials = () => {
   }, [result])
 
   return (
-    <TrialCardGrid>
-      {trials.map((t: any) => (
-        <Link to={`trial/${t.id}`} key={t.id}>
-          <TrialCard difficulty={t.difficulty}>
-            <TrialName>{t.name}</TrialName>
-            <TrialDifficulty difficulty={t.difficulty}>
-              {t.difficulty}
-            </TrialDifficulty>
-            <TrialFold>
-              <p>min length: {t.minWordLength}</p>
-              <p>max length: {t.maxWordLength}</p>
-            </TrialFold>
-          </TrialCard>
-        </Link>
-      ))}
-    </TrialCardGrid>
+    <>
+      <PageHeader>Trials</PageHeader>
+      <TrialCardGrid>
+        {trials.map((t: any) => (
+          <Link to={`trial/${t.id}`} key={t.id}>
+            <TrialCard difficulty={t.difficulty}>
+              <TrialName>{t.name}</TrialName>
+              <TrialDifficulty difficulty={t.difficulty}>
+                {t.difficulty}
+              </TrialDifficulty>
+              <TrialFold>
+                <p>min length: {t.minWordLength}</p>
+                <p>max length: {t.maxWordLength}</p>
+              </TrialFold>
+            </TrialCard>
+          </Link>
+        ))}
+      </TrialCardGrid>
+    </>
   )
 }
 

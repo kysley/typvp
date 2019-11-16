@@ -11,13 +11,13 @@ const inputBaseStyles = css`
   font-size: 0.8725rem;
   background-color: ${({theme}) => theme.backgrounds.input};
   color: ${({theme}) => theme.colors.text};
+  transition: all 0.1s ease-out;
 
   &:focus,
   &:active {
-    /* border-color: ${({theme}) => theme.border.active}; */
     border-color: ${colors.b300};
+    background-color: ${({theme}) => theme.backgrounds.primary};
     outline: none;
-    /* box-shadow: rgba(8, 35, 51, 0.05) 0px 6px 10px; */
   }
 
   &[disabled],
@@ -37,8 +37,8 @@ const inputOptionalStyles = css`
 
 const inputDangerStyles = css`
   border-color: ${colors.r500} !important;
-  background: ${colors.r75};
-  color: ${colors.black};
+  background: ${colors.r75} !important;
+  color: ${colors.black} !important;
 
   &::placeholder {
     color: ${colors.r500};

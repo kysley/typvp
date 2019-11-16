@@ -7,11 +7,12 @@ import {useStore} from '@/stores'
 import SingleplayerMeta from '@/components/SingleplayerMeta'
 import TypingArea from '@/components/TypingArea'
 import SingleplayerResults from '@/components/SingleplayerResults'
-import {TrialContainer, TrialInfo} from '@/styled/Singleplayer'
+import {TrialHeader, SingleplayerContainer} from '@/styled/Singleplayer'
 import {TypingState} from '@/types/game'
 import {ADD_RESULT_TO_TRIAL} from '@/graphql/mutations/addResult'
 import {TRIAL} from '@/graphql/queries/trials'
 import Button from '@/styled/Button'
+import {PageHeader} from '@/styled/Theme'
 
 const Trial: FC = observer(() => {
   const {id} = useParams()
@@ -67,31 +68,28 @@ const Trial: FC = observer(() => {
   }, [GameStore.typingState])
 
   return (
-    <TrialContainer>
+    <>
       {trial && (
         <>
-          <TrialInfo
-            isHidden={
-              GameStore.typingState ===
-              (TypingState.InProgress || TypingState.AwaitingLastWord)
-            }
-          >
-            <Button as={Link} to="/trials" appearance="secondary" intent="none">
+          <TrialHeader>
+            <PageHeader>{trial.name}</PageHeader>
+            <Button as={Link} to="/trials" appearance="default" intent="none">
               Back to Trials
             </Button>
-            <h1>{trial.name}</h1>
-            <h2>{trial.difficulty}</h2>
-          </TrialInfo>
-          <SingleplayerMeta />
-          <TypingArea
-            isGameOver={GameStore.typingState === TypingState.Finished}
-          />
-          <SingleplayerResults
-            isVisible={GameStore.typingState === TypingState.Finished}
-          />
+          </TrialHeader>
+
+          <SingleplayerContainer>
+            <SingleplayerMeta />
+            <TypingArea
+              isGameOver={GameStore.typingState === TypingState.Finished}
+            />
+            <SingleplayerResults
+              isVisible={GameStore.typingState === TypingState.Finished}
+            />
+          </SingleplayerContainer>
         </>
       )}
-    </TrialContainer>
+    </>
   )
 })
 
