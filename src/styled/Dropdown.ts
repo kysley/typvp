@@ -46,7 +46,7 @@ export const DropdownWrapper = styled.div<DropdownProps>`
   ${({isOpen, theme}) =>
     isOpen &&
     `
-      background: ${theme.backgrounds.active};
+      background: ${theme.backgrounds.active} !important;
     `}
 `
 
