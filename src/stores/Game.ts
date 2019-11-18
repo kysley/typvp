@@ -2,7 +2,7 @@ import {observable, action, flow} from 'mobx'
 
 import {TypingState} from '@/types/game'
 import {client} from '@/services/Client'
-import {GET_WORD_SET} from '@/graphql/mutations/addResult'
+import {GET_WORD_SET, SEEN} from '@/graphql/mutations/addResult'
 
 let timeout: any = null
 class GameStore {
@@ -182,6 +182,7 @@ class GameStore {
     if (this.typingState === TypingState.NotStarted) {
       this.typingState = TypingState.InProgress
       this.runTimer()
+      client.mutation(SEEN).toPromise()
     }
 
     if (e.target.value !== ' ' && this.typingState !== TypingState.Finished) {

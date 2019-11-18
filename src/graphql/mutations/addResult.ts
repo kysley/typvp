@@ -56,4 +56,10 @@ export const GET_WORD_SET = gql`
   }
 `
 
+export const SEEN = gql`
+  mutation seen {
+    seen
+  }
+`
+
 export default ADD_RESULT
