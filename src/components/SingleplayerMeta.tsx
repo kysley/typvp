@@ -31,8 +31,8 @@ const SingleplayerMeta: FC = observer(() => {
         <MetaTimer style={{width: `${percent * 100}%`}} />
         <span>
           Time Left:{' '}
-          {GameStore.typingState === TypingState.AwaitingLastWord
-            ? 'finish word'
+          {GameStore.typingState === TypingState.Finished
+            ? 'Completed'
             : `${60 - GameStore.time}s`}
         </span>
         <div

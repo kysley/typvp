@@ -147,7 +147,8 @@ class GameStore {
 
   @action
   endTimer = () => {
-    this.typingState = TypingState.AwaitingLastWord
+    this.typingState = TypingState.Finished
+    this.calculateResults()
   }
 
   @action
@@ -199,11 +200,6 @@ class GameStore {
         }
 
         this.typedHistory[this.wordIndex] = this.typedWord
-
-        if (this.typingState === TypingState.AwaitingLastWord) {
-          this.typingState = TypingState.Finished
-          this.calculateResults()
-        }
 
         if (this.typedHistory[this.wordIndex] === this.words[this.wordIndex]) {
           this.correct++

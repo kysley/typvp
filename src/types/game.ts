@@ -1,7 +1,6 @@
 enum TypingState {
   NotStarted,
   InProgress,
-  AwaitingLastWord,
   Finished,
 }
 
