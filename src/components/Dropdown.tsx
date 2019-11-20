@@ -8,28 +8,23 @@ export const Dropdown = ({children, header}: any) => {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const handleClickOutside = (e: any) => {
-    const node = _dropdownNode.current
-    if (node && node.contains(e.target)) {
-      // inside click
-      return
-    }
-    // outside click
+    e.preventDefault()
     setMenuOpen(false)
   }
 
   const handleMenu = () => {
-    if (!menuOpen) setMenuOpen(wasOpen => !wasOpen)
+    setMenuOpen(wasOpen => !wasOpen)
   }
 
   useEffect(() => {
     if (menuOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
+      document.addEventListener('click', handleClickOutside)
     } else {
-      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('click', handleClickOutside)
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('click', handleClickOutside)
     }
   }, [menuOpen])
 
