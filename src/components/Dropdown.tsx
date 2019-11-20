@@ -3,8 +3,6 @@ import React, {useState, useEffect, useRef} from 'react'
 import {DropdownWrapper} from '@/styled/Dropdown'
 
 export const Dropdown = ({children, header}: any) => {
-  const _dropdownNode = useRef<HTMLDivElement>()
-
   const [menuOpen, setMenuOpen] = useState(false)
 
   const handleClickOutside = (e: any) => {
@@ -29,11 +27,7 @@ export const Dropdown = ({children, header}: any) => {
   }, [menuOpen])
 
   return (
-    <DropdownWrapper
-      onClick={handleMenu}
-      ref={_dropdownNode as any}
-      isOpen={menuOpen}
-    >
+    <DropdownWrapper onClick={handleMenu} isOpen={menuOpen}>
       {header}
       {menuOpen && <>{children}</>}
     </DropdownWrapper>
