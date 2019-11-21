@@ -11,24 +11,36 @@ export const ProfileGrid = styled.main`
   margin-bottom: 10em;
   color: ${({theme}) => theme.colors.text};
 
-  > div {
+  > section {
     background: ${({theme}) => theme.backgrounds.secondary};
     padding: 1em;
     border-radius: 6px;
   }
 `
 
-export const AboutArea = styled.div`
+export const AboutArea = styled.section`
   display: grid;
   grid-template-rows: auto;
   grid-row-gap: 2em;
   margin-bottom: auto;
 `
 
-export const ResultsArea = styled.div`
+export const ResultsArea = styled.section`
   display: grid;
   grid-row-gap: 2em;
   margin-bottom: auto;
+`
+
+export const ResultFilter = styled.div`
+  display: grid;
+  > div:first-of-type {
+    display: flex;
+    align-items: center;
+    label {
+      font-weight: 700;
+      margin-right: 1em;
+    }
+  }
 `
 
 export const ResultWrapper = styled.div`
