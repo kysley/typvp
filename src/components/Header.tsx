@@ -19,8 +19,13 @@ import {
   DropdownItem,
   DropdownBorder,
 } from '@/styled/Dropdown'
-import {UserIcon} from '@/components/icons/User'
-import {EnterIcon} from '@/components/icons/Enter'
+import {
+  LoginIcon,
+  UserIcon,
+  AdjustIcon,
+  LogoutIcon,
+  SettingsIcon,
+} from '@/components/icons'
 import {Dropdown} from '@/components/Dropdown'
 
 const Header = observer(() => {
@@ -40,13 +45,18 @@ const Header = observer(() => {
               <DropdownMenu>
                 <DropdownItems>
                   <Link to="/profile">
-                    <DropdownItem intent="none">My Profile</DropdownItem>
+                    <DropdownItem intent="none">
+                      <SettingsIcon />
+                      My Profile
+                    </DropdownItem>
                   </Link>
                   <DropdownItem intent="none" onClick={GlobalStore.toggleTheme}>
+                    <AdjustIcon />
                     {GlobalStore.mode === 'light' ? 'Lights Off' : 'Lights On'}
                   </DropdownItem>
                   <DropdownBorder />
                   <DropdownItem intent="danger" onClick={UserStore.logout}>
+                    <LogoutIcon />
                     Logout
                   </DropdownItem>
                 </DropdownItems>
@@ -79,16 +89,15 @@ const Header = observer(() => {
                           intent="none"
                           onClick={GlobalStore.toggleTheme}
                         >
+                          <AdjustIcon />
                           {GlobalStore.mode === 'light'
                             ? 'Lights Off'
                             : 'Lights On'}
                         </DropdownItem>
                         <DropdownBorder />
                         <DropdownItem intent="none">
-                          <EnterIcon />
-                          <Link style={{marginLeft: '0.5em'}} to="/signup">
-                            Sign Up
-                          </Link>
+                          <LoginIcon />
+                          <Link to="/signup">Sign Up</Link>
                         </DropdownItem>
                       </DropdownItems>
                     </DropdownMenu>
