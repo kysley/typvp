@@ -64,7 +64,7 @@ export const TrialName = styled.h1`
 
 export const TrialDifficulty = styled.span<IDifficulty>`
   display: inline-block;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   border: 1px solid ${({theme}) => theme.border.default};
   border-radius: 3px;
   color: ${({difficulty}) => DifficultyColour[difficulty]};

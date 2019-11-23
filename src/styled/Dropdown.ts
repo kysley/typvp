@@ -54,9 +54,13 @@ export const DropdownItems = styled.ul`
   margin: 0;
   padding: 0;
   overflow: hidden;
-  border-top: none;
-  border-radius: 4px;
-  font-size: 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+
+  :first-of-type,
+  :last-of-type {
+    border-bottom: none;
+  }
 
   a {
     color: inherit;
@@ -71,10 +75,14 @@ export const DropdownItem = styled.li<ItemProps>`
   line-height: normal;
   list-style: none;
   padding: 12px;
-  height: 100%;
+  max-height: 36px;
   cursor: pointer;
   display: flex;
   align-items: center;
+
+  svg {
+    margin-right: 0.5em;
+  }
 
   ${({intent = 'none'}) =>
     intent !== 'none' &&
