@@ -23,9 +23,15 @@ import {Bubble} from '@/components/Bubble'
 
 const MyProfile: FC = observer(() => {
   const {UserStore} = useStore()
-  const [pagination, setPagination] = useState({first: 15, skip: 0})
+  const [pagination, setPagination] = useState({
+    first: 15,
+    skip: 0,
+    date: 'createdAt_DESC',
+    type: '',
+  })
   const [result] = useQuery({
     query: MY_RESULTS,
+    requestPolicy: 'cache-and-network',
     variables: {
       ...pagination,
     },
@@ -81,7 +87,7 @@ const MyProfile: FC = observer(() => {
                 <ProfileValue>{UserStore.me.lastPlayed || 'n/a'}</ProfileValue>
               </div>
               <div>
-                <ProfileHeader>created</ProfileHeader>
+                <ProfileHeader>started</ProfileHeader>
                 <ProfileValue>
                   <TimeAgo datetime={UserStore.me.createdAt} />
                 </ProfileValue>
@@ -99,7 +105,11 @@ const MyProfile: FC = observer(() => {
                       },
                       {name: 'Date Taken (Old First)', value: 'createdAt_ASC'},
                     ]}
-                    callback={opt => console.log(opt)}
+                    callback={opt =>
+                      setPagination(prev => {
+                        return {...prev, date: opt.value}
+                      })
+                    }
                   />
                   <Bubble
                     values={[
@@ -107,7 +117,11 @@ const MyProfile: FC = observer(() => {
                       {name: 'Singleplayer', value: 'SINGLEPLAYER'},
                       {name: 'Trial', value: 'TRIAL'},
                     ]}
-                    callback={opt => console.log(opt)}
+                    callback={opt =>
+                      setPagination(prev => {
+                        return {...prev, type: opt.value}
+                      })
+                    }
                   />
                 </div>
                 <Pagination
