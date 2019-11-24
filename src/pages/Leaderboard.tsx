@@ -14,6 +14,7 @@ const Leaderboard = observer(() => {
   const [leaderboard, setLeaderboard] = useState([])
   const [result] = useQuery({
     query: LEADERBOARD,
+    requestPolicy: 'cache-and-network',
   })
 
   useEffect(() => {
