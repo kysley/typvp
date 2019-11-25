@@ -55,7 +55,7 @@ const Signup: FC = () => {
       <div>{mutation.data && !mutation.error && <p>account created!</p>}</div>
       <div>
         {!mutation.data && mutation.error && (
-          <p>something went wrong while creating your account</p>
+          <p>{mutation.error.graphQLErrors[0].message}</p>
         )}
       </div>
       <SignupForm onSubmit={handleSubmit(onSubmit)}>

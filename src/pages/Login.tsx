@@ -58,7 +58,7 @@ const Login: FC = () => {
       <p>Log In to your typvp account.</p>
       <div>
         {!mutation.data && mutation.error && (
-          <p>something went wrong while logging you in</p>
+          <p>{mutation.error.graphQLErrors[0].message}</p>
         )}
       </div>
       <SignupForm onSubmit={handleSubmit(onSubmit)}>
