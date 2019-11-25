@@ -20,6 +20,7 @@ import {MY_RESULTS} from '@/graphql/queries/me'
 import Pagination from '@/components/Pagination'
 import {PageHeader} from '@/styled/Theme'
 import {Bubble} from '@/components/Bubble'
+import {Banner} from '@/components/Banner'
 
 const MyProfile: FC = observer(() => {
   const {UserStore} = useStore()
@@ -60,9 +61,16 @@ const MyProfile: FC = observer(() => {
   return (
     <>
       <PageHeader>My Profile</PageHeader>
-      <ProfileGrid>
-        {UserStore.me && (
-          <>
+      {UserStore.me && (
+        <>
+          {!UserStore.me.confirmed && (
+            <Banner
+              title="Account Verification Pending"
+              intent="warning"
+              message="We recommend confirming your email address to verify your typvp account."
+            />
+          )}
+          <ProfileGrid>
             <AboutArea>
               <div>
                 <ProfileHeader>username</ProfileHeader>
@@ -163,9 +171,9 @@ const MyProfile: FC = observer(() => {
                 </>
               )}
             </ResultsArea>
-          </>
-        )}
-      </ProfileGrid>
+          </ProfileGrid>
+        </>
+      )}
     </>
   )
 })

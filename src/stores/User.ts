@@ -12,6 +12,7 @@ interface IMe {
   results: any
   createdAt: Date
   testCount: number
+  confirmed: boolean
 }
 
 class UserStore {
