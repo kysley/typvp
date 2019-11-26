@@ -51,21 +51,21 @@ yarn build
 
 ## Deployment
 
-Once a PR/commit is merged to `master` [Netlify](https://netlify.com) will build typvp and deploy it.
+Once a PR/commit is merged to `next` [Netlify](https://netlify.com) will build typvp and deploy it.
 
 ## Built With
 
-* [react](http://www.dropwizard.io/1.0.2/docs/) - Library
-* [styled-components](https://maven.apache.org/) - Styling
-* [mobx](https://rometools.github.io/rome/) - State Managment
+* [react](https://github.com/facebook/react) - Library
+* [styled-components](https://github.com/styled-components/styled-components) - Styling
+* [mobx](https://github.com/mobxjs/mobx) - State Managment
 * [urql](https://github.com/FormidableLabs/urql) - GraphQL Library
-* [yup](https://github.com/jquense/yup) + [formal](https://github.com/kevinwolfcr/formal) - Forms & Validation
+* [yup](https://github.com/jquense/yup) + [react-hook-form](https://github.com/react-hook-form/react-hook-form) - Forms & Validation
 * [framer motion](https://www.framer.com/api/motion/) - Animation
 
 ## Contributing
 
 // todo
-For now just submit a pr..
+Submit an issue highlighting the problem/changes that you want to make (or see made). After triage (or if you want to work on it immediately) submit a PR that is tied to the respective issue :)
 
 ## Versioning
 
