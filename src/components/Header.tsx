@@ -2,7 +2,8 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {observer} from 'mobx-react-lite'
 
-import logo from '@/assets/images/typvp.svg'
+import logoDark from '@/assets/images/typvp-dark.svg'
+import logoLight from '@/assets/images/typvp-light.svg'
 import {
   HeaderWrapper,
   HeaderContainer,
@@ -35,7 +36,10 @@ const Header = observer(() => {
     <HeaderWrapper>
       <HeaderContainer>
         <Link to="/" aria-label="Home">
-          <HeaderLogo src={logo} alt="" />
+          <HeaderLogo
+            src={GlobalStore.mode === 'light' ? logoDark : logoLight}
+            alt="typvp"
+          />
         </Link>
         <LeaderboardTab to="/leaderboard">leaderboard</LeaderboardTab>
         <TrialsTab to="/trials">trials</TrialsTab>
