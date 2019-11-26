@@ -6,6 +6,7 @@ const ME = gql`
   query me {
     me {
       ...AccountResultsFragment
+      confirmed
     }
   }
   ${AccountFragmentWithResults}

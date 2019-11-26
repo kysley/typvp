@@ -8,6 +8,7 @@ const LOGIN = gql`
       token
       account {
         ...AccountFragment
+        confirmed
       }
     }
   }
