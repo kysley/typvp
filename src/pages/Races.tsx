@@ -3,8 +3,6 @@ import React, {useEffect, useState} from 'react'
 import {useStore} from '@/stores'
 import {socket} from '@/helpers/socket'
 
-let timeout: any = null
-
 const Race = () => {
   const {UserStore} = useStore()
   const [id, setId] = useState(
@@ -15,19 +13,28 @@ const Race = () => {
   )
   const [room, setRoom] = useState()
   const [cpm, setCpm] = useState(0)
+  const [sendData, setSendData] = useState(false)
+
+  // Emit local cpm & reset sendData
+  const sendRaceProgress = () => {
+    socket.emit('race_progress', {cpm})
+    setSendData(false)
+  }
 
   useEffect(() => {
     if (!room) {
-      socket.emit('race-matchmake', {id})
+      socket.emit('race_queue', {id})
     }
     socket.on('update', payload => {
       console.log(payload)
       setRoom(payload)
     })
 
-    socket.on('request-race-progress', snapshot => {
+    // Workaround for stale closures
+    // May be unnecessary when cpm is stored in mobx
+    socket.on('race_request-progress', snapshot => {
       setRoom(snapshot)
-      socket.emit('race-progress', {cpm})
+      setSendData(true)
     })
     return () => {
       socket.removeAllListeners()
@@ -36,27 +43,17 @@ const Race = () => {
   }, [])
 
   useEffect(() => {
-    // if (room) {
-    //   if (room.state === 'in-progress') {
-    //     // if (room.acceptUpdates) {
-    //     //   // timeout = setTimeout(() => {
-    //     //   socket.emit('race-progress', {cpm})
-    //     //   // }, 1000)
-    //     // }
-    //   } else if (room.state === 'finished') {
-    //     clearTimeout(timeout)
-    //   }
-    //   if (room.acceptUpdates === false) {
-    //     clearTimeout(timeout)
-    //   }
-    // }
-  }, [room])
+    if (room && sendData) {
+      sendRaceProgress()
+    }
+  }, [sendData])
 
   return (
-    <div>
+    <div style={{color: 'white'}}>
       {room && (
         <div>
           <h1>countdown: {room.countdown}</h1>
+          <h1>remaining: {room.secondsRemaining}</h1>
           {Object.keys(room.players).map(key => (
             <h2 key={key}>{room.players[key]}</h2>
           ))}
