@@ -3,21 +3,20 @@ import React from 'react'
 import UserStore from '@/stores/User'
 import GameStore from '@/stores/Game'
 import GlobalStore from '@/stores/Global'
+import RaceStore from '@/stores/Race'
 
 const RootStore = {
   UserStore,
   GameStore,
   GlobalStore,
+  RaceStore,
 }
 
-type TUser = typeof UserStore
-type TGame = typeof GameStore
-type TGlobal = typeof GlobalStore
-
-interface IRootStore {
-  UserStore: TUser
-  GameStore: TGame
-  GlobalStore: TGlobal
+type IRootStore = {
+  UserStore: typeof UserStore
+  GameStore: typeof GameStore
+  GlobalStore: typeof GlobalStore
+  RaceStore: typeof RaceStore
 }
 
 const StoreContext = React.createContext<IRootStore | null>(null)
