@@ -112,6 +112,20 @@ class GameStore {
     return wpm
   }
 
+  @computed
+  get positions() {
+    const sorted = Object.values(this.room!.players).sort(
+      (a: number, b: number) => b - a,
+    )
+    console.log(sorted)
+    return sorted
+  }
+
+  @computed
+  get fastestPlayer() {
+    return Math.max(...this.positions)
+  }
+
   @action
   reset = () => {
     clearTimeout(timeout)

@@ -5,6 +5,7 @@ import {useStore} from '@/stores'
 import {socket} from '@/helpers/socket'
 import RaceTypingArea from '@/components/Multiplayer/RaceTypingArea'
 import {TRoom} from '@/types/game'
+import RacePosition from '@/components/Multiplayer/RacePosition'
 
 const Race = observer(() => {
   const {UserStore, RaceStore} = useStore()
@@ -20,7 +21,7 @@ const Race = observer(() => {
 
   // Emit local cpm & reset sendData
   const sendRaceProgress = () => {
-    console.log(RaceStore.derivewpm)
+    console.log(`wpm for this second: ${RaceStore.derivewpm}`)
     socket.emit('race_progress', {wpm: RaceStore.derivewpm})
     setSendData(false)
   }
@@ -62,6 +63,7 @@ const Race = observer(() => {
     <div style={{color: 'white'}}>
       {RaceStore.room ? (
         <div>
+          <RacePosition />
           <h1>countdown: {RaceStore.room.countdown}</h1>
           <h1>remaining: {RaceStore.room.secondsRemaining}</h1>
           {Object.keys(RaceStore.room.players).map(key => (
