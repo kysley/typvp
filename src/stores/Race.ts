@@ -114,16 +114,15 @@ class GameStore {
 
   @computed
   get positions() {
-    const sorted = Object.values(this.room!.players).sort(
-      (a: number, b: number) => b - a,
+    const sorted = [...this.room!.players].sort((a: any, b: any) =>
+      a.wpm > b.wpm ? -1 : 1,
     )
-    console.log(sorted)
     return sorted
   }
 
   @computed
   get fastestPlayer() {
-    return Math.max(...this.positions)
+    return Math.max(this.positions[0].wpm)
   }
 
   @action
@@ -147,7 +146,6 @@ class GameStore {
   @action
   loadWordSet = (wordSet: string): void => {
     this.words = wordSet.split('|')
-    console.log(this.words)
   }
 
   @action
