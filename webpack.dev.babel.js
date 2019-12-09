@@ -1,6 +1,7 @@
 import path from 'path'
 import webpack from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 
 export default {
   devtool: 'cheap-module-source-map',
@@ -22,6 +23,9 @@ export default {
     port: 8082,
   },
   plugins: [
+    new ReactRefreshWebpackPlugin({
+      disableRefreshCheck: true,
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
@@ -39,7 +43,6 @@ export default {
     modules: [path.join(__dirname, 'src'), 'node_modules'],
     alias: {
       '@': path.join(__dirname, 'src'),
-      'react-dom': '@hot-loader/react-dom',
     },
   },
   module: {

@@ -1,36 +1,39 @@
-module.exports = {
-  presets: [
-    [
-      '@babel/preset-env',
-      {
-        targets: {
-          browsers: ['>0.25%', 'not ie 11', 'not op_mini all'],
+module.exports = api => {
+  api.cache.using(() => process.env.NODE_ENV)
+  return {
+    presets: [
+      [
+        '@babel/preset-env',
+        {
+          targets: {
+            browsers: ['>0.25%', 'not ie 11', 'not op_mini all'],
+          },
+          useBuiltIns: 'usage',
+          corejs: 3,
         },
-        useBuiltIns: 'usage',
-        corejs: 3,
-      },
+      ],
+      '@babel/preset-react',
+      '@babel/preset-typescript',
     ],
-    '@babel/preset-react',
-    '@babel/preset-typescript',
-  ],
-  plugins: [
-    // Self
-    'babel-plugin-styled-components',
-    'graphql-tag',
-    'react-hot-loader/babel',
-    'transform-inline-environment-variables',
-    '@babel/plugin-transform-runtime',
-    '@babel/plugin-proposal-object-rest-spread',
-    // Stage 2
-    ['@babel/plugin-proposal-decorators', {legacy: true}],
-    '@babel/plugin-proposal-function-sent',
-    '@babel/plugin-proposal-export-namespace-from',
-    '@babel/plugin-proposal-numeric-separator',
-    '@babel/plugin-proposal-throw-expressions',
-    // Stage 3
-    '@babel/plugin-syntax-dynamic-import',
-    '@babel/plugin-syntax-import-meta',
-    ['@babel/plugin-proposal-class-properties', {loose: true}],
-    '@babel/plugin-proposal-json-strings',
-  ],
+    plugins: [
+      // Self
+      !api.env('production') && 'react-refresh/babel',
+      'babel-plugin-styled-components',
+      'graphql-tag',
+      'transform-inline-environment-variables',
+      '@babel/plugin-transform-runtime',
+      '@babel/plugin-proposal-object-rest-spread',
+      // Stage 2
+      ['@babel/plugin-proposal-decorators', {legacy: true}],
+      '@babel/plugin-proposal-function-sent',
+      '@babel/plugin-proposal-export-namespace-from',
+      '@babel/plugin-proposal-numeric-separator',
+      '@babel/plugin-proposal-throw-expressions',
+      // Stage 3
+      '@babel/plugin-syntax-dynamic-import',
+      '@babel/plugin-syntax-import-meta',
+      ['@babel/plugin-proposal-class-properties', {loose: true}],
+      '@babel/plugin-proposal-json-strings',
+    ],
+  }
 }

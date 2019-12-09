@@ -5,15 +5,14 @@ import WebpackChunkHash from 'webpack-chunk-hash'
 import CompressionWebpackPlugin from 'compression-webpack-plugin'
 import {CleanWebpackPlugin} from 'clean-webpack-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
+import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 
 export default {
   mode: 'production',
   entry: {
-    app: [
-      path.join(__dirname, 'src', 'index.tsx'),
-    ],
+    app: [path.join(__dirname, 'src', 'index.tsx')],
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -22,6 +21,9 @@ export default {
     publicPath: '/',
   },
   plugins: [
+    new ReactRefreshWebpackPlugin({
+      disableRefreshCheck: true,
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production'),
@@ -53,15 +55,12 @@ export default {
         minifyURLs: true,
       },
     }),
-    new CopyWebpackPlugin([{ from: 'src/assets/fonts', to: 'assets/fonts' }]),
+    new CopyWebpackPlugin([{from: 'src/assets/fonts', to: 'assets/fonts'}]),
     // new BundleAnalyzerPlugin(),
   ],
   resolve: {
     extensions: ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx'],
-    modules: [
-      path.join(__dirname, 'src'),
-      'node_modules',
-    ],
+    modules: [path.join(__dirname, 'src'), 'node_modules'],
     alias: {
       '@': path.join(__dirname, 'src'),
     },
@@ -77,18 +76,20 @@ export default {
       {
         test: /\.(jpg|jpeg|png|gif)$/i,
         exclude: /node_modules/,
-        use: ['file-loader', {
-          loader: 'image-webpack-loader',
-          options: {
-            optipng: {
-              enabled: true,
-            },
-            pngquant: {
-              quality: '65-90',
-              speed: 4,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              optipng: {
+                enabled: true,
+              },
+              pngquant: {
+                quality: '65-90',
+                speed: 4,
+              },
             },
           },
-        },
         ],
         include: path.join(__dirname, 'src'),
       },
