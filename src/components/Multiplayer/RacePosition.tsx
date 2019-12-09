@@ -3,24 +3,32 @@ import {observer} from 'mobx-react-lite'
 
 import {useStore} from '@/stores'
 
-const RacePosition: FC = observer(() => {
+const colors = ['#FF008C', '#D309E1', '#9C1AFF', '#7700FF']
+
+const RacePosition: FC = observer(({id}: any) => {
   const {RaceStore} = useStore()
+
   return (
     <div>
-      {RaceStore.positions.map((pos: number, idx: number) => {
-        return (
-          <div
+      <ul style={{width: '250px', listStyle: 'none'}}>
+        {RaceStore.room!.players.map((player: any, idx: any) => (
+          <li
             style={{
-              background: 'black',
-              width: `${(pos / RaceStore.fastestPlayer) * 100}%`,
+              height: '32px',
+              background: `${colors[idx]}`,
+              width: `${(player.wpm / RaceStore.fastestPlayer) * 100}%`,
               marginBottom: '1em',
             }}
-            key={`pos-${idx}`}
+            key={player.id}
           >
-            {pos}
-          </div>
-        )
-      })}
+            <span>
+              {' '}
+              {player.wpm}
+              {player.id === id && ' me'}
+            </span>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 })

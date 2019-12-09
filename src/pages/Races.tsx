@@ -6,6 +6,8 @@ import {socket} from '@/helpers/socket'
 import RaceTypingArea from '@/components/Multiplayer/RaceTypingArea'
 import {TRoom} from '@/types/game'
 import RacePosition from '@/components/Multiplayer/RacePosition'
+import RaceMeta from '@/components/Multiplayer/RaceMeta'
+import {SingleplayerContainer} from '@/styled/Singleplayer'
 
 const Race = observer(() => {
   const {UserStore, RaceStore} = useStore()
@@ -15,13 +17,10 @@ const Race = observer(() => {
         .toString(36)
         .substring(2, 15),
   )
-  // const [room, setRoom] = useState()
-  // const [cpm, setCpm] = useState(0)
   const [sendData, setSendData] = useState(false)
 
   // Emit local cpm & reset sendData
   const sendRaceProgress = () => {
-    console.log(`wpm for this second: ${RaceStore.derivewpm}`)
     socket.emit('race_progress', {wpm: RaceStore.derivewpm})
     setSendData(false)
   }
@@ -60,22 +59,19 @@ const Race = observer(() => {
   }, [sendData])
 
   return (
-    <div style={{color: 'white'}}>
+    <>
       {RaceStore.room ? (
-        <div>
-          <RacePosition />
-          <h1>countdown: {RaceStore.room.countdown}</h1>
-          <h1>remaining: {RaceStore.room.secondsRemaining}</h1>
-          {Object.keys(RaceStore.room.players).map(key => (
-            <h2 key={key}>{RaceStore.room!.players[key]}</h2>
-          ))}
-          {RaceStore.room.state}
-          <RaceTypingArea isGameOver={false} />
-        </div>
+        <>
+          <RacePosition id={id} />
+          <SingleplayerContainer>
+            <RaceMeta />
+            <RaceTypingArea canType={RaceStore.room.state === 'in-progress'} />
+          </SingleplayerContainer>
+        </>
       ) : (
         'in queue'
       )}
-    </div>
+    </>
   )
 })
 

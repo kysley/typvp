@@ -4,7 +4,6 @@ import {observer} from 'mobx-react-lite'
 import {useStore} from '@/stores'
 import Word from '@/components/Word'
 import {TypingAreaContainer, TypingAreaInner} from '@/styled/TypingArea'
-import {SkeletonLine} from '@/styled/Skeleton'
 import {Input} from '@/styled/TextInput'
 
 const getWordType = (a: number, b: number) => {
@@ -13,11 +12,11 @@ const getWordType = (a: number, b: number) => {
   return 'awaiting'
 }
 
-interface ITypingArea {
-  isGameOver: boolean
+type TTypingArea = {
+  canType: boolean
 }
 
-const RaceTypingArea: FC<ITypingArea> = observer(props => {
+const RaceTypingArea: FC<TTypingArea> = observer(({canType}) => {
   const wordsRef = useRef<null | HTMLDivElement>(null)
 
   const {RaceStore} = useStore()
@@ -33,10 +32,9 @@ const RaceTypingArea: FC<ITypingArea> = observer(props => {
       <TypingAreaInner
         ref={wordsRef}
         style={{height: '75px', overflow: 'hidden'}}
-        disabled={props.isGameOver}
+        disabled={!canType}
       >
         {RaceStore.words ? (
-          // <SkeletonLine />
           <>
             {RaceStore.words.map((word: string, i: number) => (
               <Word
@@ -53,7 +51,7 @@ const RaceTypingArea: FC<ITypingArea> = observer(props => {
       </TypingAreaInner>
       <Input
         hasWarning={RaceStore.isSpellingIncorrect}
-        disabled={props.isGameOver}
+        disabled={!canType}
         placeholder="Start..."
         value={RaceStore.typedWord}
         onChange={e => RaceStore.onKeyDown(e)}
