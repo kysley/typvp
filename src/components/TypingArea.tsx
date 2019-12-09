@@ -41,8 +41,8 @@ const TypingArea: FC<ITypingArea> = observer(props => {
           <>
             {GameStore.words.map((word: string, i: number) => (
               <Word
+                isMatch={GameStore.typedHistory[i] === GameStore.words[i]}
                 word={word}
-                index={i}
                 key={`${word}-${i}`}
                 variant={getWordType(i, GameStore.wordIndex)}
               />
