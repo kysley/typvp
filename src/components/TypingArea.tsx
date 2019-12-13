@@ -53,11 +53,11 @@ const TypingArea: FC<ITypingArea> = observer(props => {
       <Input
         hasWarning={GameStore.isSpellingIncorrect}
         disabled={props.isGameOver}
-        placeholder="Start..."
         value={GameStore.typedWord}
         onChange={e => GameStore.onKeyDown(e)}
         onKeyDown={e => GameStore.onAction(e)}
         aria-label="Text Input"
+        autoFocus={true}
       />
     </TypingAreaContainer>
   )

@@ -52,11 +52,11 @@ const RaceTypingArea: FC<TTypingArea> = observer(({canType}) => {
       <Input
         hasWarning={RaceStore.isSpellingIncorrect}
         disabled={!canType}
-        placeholder="Start..."
         value={RaceStore.typedWord}
         onChange={e => RaceStore.onKeyDown(e)}
         onKeyDown={e => RaceStore.onAction(e)}
         aria-label="Text Input"
+        autoFocus={true}
       />
     </TypingAreaContainer>
   )
