@@ -1,22 +1,22 @@
 import styled from 'styled-components'
 import {NavLink} from 'react-router-dom'
 
-const HeaderWrapper = styled.header`
+export const HeaderWrapper = styled.header`
   width: 100%;
 `
 
-const HeaderContainer = styled.nav`
+export const HeaderContainer = styled.nav`
   width: 100%;
   display: grid;
   position: relative;
-  grid-template-columns: auto auto auto 1fr auto auto;
+  grid-template-columns: auto auto auto auto 1fr auto auto;
   z-index: 99;
   align-items: center;
   margin-top: 3vh;
   margin-bottom: 7vh;
 `
 
-const Tab = styled(NavLink)`
+export const Tab = styled(NavLink)`
   margin: 0 1em;
   position: relative;
   text-decoration: none;
@@ -38,33 +38,29 @@ const Tab = styled(NavLink)`
   }
 `
 
-const LeaderboardTab = styled(Tab)`
+export const LeaderboardTab = styled(Tab)`
   grid-column: 2;
 `
 
-const TrialsTab = styled(Tab)`
+export const TrialsTab = styled(Tab)`
   grid-column: 3;
 `
 
-const MeTab = styled(Tab)`
+export const MultiplayerTab = styled(Tab)`
+  grid-column: 4;
+`
+
+export const MeTab = styled(Tab)`
   grid-column: 5;
 `
 
-const LoginTab = styled(Tab)`
-  grid-column: -2;
-`
-
-const SigninTab = styled(Tab)`
-  grid-column: -1;
-`
-
-const HeaderLogo = styled('img')`
+export const HeaderLogo = styled.img`
   height: 35px;
 `
 export const HeaderGroup = styled.div`
   display: flex;
   flex-direction: row;
-  grid-column: 5;
+  grid-column: -2;
   align-items: center;
   justify-content: space-between;
   height: 100%;
@@ -74,14 +70,3 @@ export const HeaderGroup = styled.div`
     margin-right: 0.5em;
   }
 `
-
-export {
-  HeaderContainer,
-  HeaderWrapper,
-  LeaderboardTab,
-  TrialsTab,
-  MeTab,
-  LoginTab,
-  SigninTab,
-  HeaderLogo,
-}

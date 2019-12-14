@@ -3,10 +3,8 @@ import {observer} from 'mobx-react-lite'
 
 import {useStore} from '@/stores'
 import {socket} from '@/helpers/socket'
-import RaceTypingArea from '@/components/Multiplayer/RaceTypingArea'
+import {RaceTypingArea, RacePosition, RaceMeta} from '@/components/Race'
 import {TRoom} from '@/types/game'
-import RacePosition from '@/components/Multiplayer/RacePosition'
-import RaceMeta from '@/components/Multiplayer/RaceMeta'
 import {SingleplayerContainer} from '@/styled/Singleplayer'
 
 const Race = observer(() => {
