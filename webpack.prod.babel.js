@@ -7,7 +7,6 @@ import {CleanWebpackPlugin} from 'clean-webpack-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
-import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 
 export default {
   mode: 'production',
@@ -21,9 +20,6 @@ export default {
     publicPath: '/',
   },
   plugins: [
-    new ReactRefreshWebpackPlugin({
-      disableRefreshCheck: true,
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production'),

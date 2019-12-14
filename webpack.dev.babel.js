@@ -23,9 +23,7 @@ export default {
     port: 8082,
   },
   plugins: [
-    new ReactRefreshWebpackPlugin({
-      disableRefreshCheck: true,
-    }),
+    new ReactRefreshWebpackPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
