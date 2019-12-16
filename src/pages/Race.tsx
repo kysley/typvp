@@ -27,6 +27,11 @@ const Race = observer(() => {
     if (!RaceStore.room) {
       socket.emit('race_queue', {id})
     }
+
+    socket.on('race_room-join', (snapshot: TRoom) => {
+      RaceStore.loadRoom(snapshot)
+    })
+
     socket.on('update', (payload: TRoom) => {
       console.log(payload)
       // setRoom(payload)
@@ -60,10 +65,13 @@ const Race = observer(() => {
     <>
       {RaceStore.room ? (
         <>
+          {RaceStore.room.state === 'WAITING' && (
+            <span>waiting for players...</span>
+          )}
           <RacePosition id={id} />
           <SingleplayerContainer>
             <RaceMeta />
-            <RaceTypingArea canType={RaceStore.room.state === 'in-progress'} />
+            <RaceTypingArea canType={RaceStore.room.state === 'IN_PROGRESS'} />
           </SingleplayerContainer>
         </>
       ) : (

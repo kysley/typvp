@@ -27,12 +27,12 @@ const RaceMeta: FC = observer(() => {
         <MetaTimer
           style={{width: `${(RaceStore.room!.secondsRemaining / 60) * 100}%`}}
         />
-        {RaceStore.room!.state === 'starting' ? (
+        {RaceStore.room!.state === 'STARTING' ? (
           <span>Starting In... {RaceStore.room!.countdown}</span>
         ) : (
           <span>
             Time Left:{' '}
-            {RaceStore.room!.state === 'finished'
+            {RaceStore.room!.state === 'FINISHED'
               ? 'Completed'
               : `${RaceStore.room!.secondsRemaining}s`}
           </span>
