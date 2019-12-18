@@ -1,4 +1,5 @@
 import React, {lazy, Suspense} from 'react'
+import {hot} from 'react-hot-loader/root'
 import {Switch, Route} from 'react-router-dom'
 import {ThemeProvider} from 'styled-components'
 import {observer} from 'mobx-react-lite'
@@ -43,4 +44,4 @@ const Routes = observer(() => {
   )
 })
 
-export default Routes
+export default hot(Routes)

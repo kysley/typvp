@@ -17,7 +17,7 @@ module.exports = api => {
     ],
     plugins: [
       // Self
-      !api.env('production') && 'react-refresh/babel',
+      'react-hot-loader/babel',
       'babel-plugin-styled-components',
       'graphql-tag',
       'transform-inline-environment-variables',

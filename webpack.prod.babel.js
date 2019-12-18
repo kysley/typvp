@@ -11,7 +11,7 @@ import CopyWebpackPlugin from 'copy-webpack-plugin'
 export default {
   mode: 'production',
   entry: {
-    app: [path.join(__dirname, 'src', 'index.tsx')],
+    app: ['react-hot-loader/patch', path.join(__dirname, 'src', 'index.tsx')],
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -59,6 +59,7 @@ export default {
     modules: [path.join(__dirname, 'src'), 'node_modules'],
     alias: {
       '@': path.join(__dirname, 'src'),
+      'react-dom': '@hot-loader/react-dom',
     },
   },
   module: {

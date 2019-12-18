@@ -10,6 +10,7 @@
     "test:watch": "jest --coverage --env=jsdom --watch"
   },
   "dependencies": {
+    "@hot-loader/react-dom": "^16.11.0",
     "framer-motion": "^1.7.0",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
@@ -20,6 +21,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-hook-form": "^3.29.1",
+    "react-hot-loader": "^4.12.18",
     "react-router-dom": "^5.1.2",
     "socket.io-client": "^2.3.0",
     "styled-components": "^5.0.0-rc.1",
@@ -45,7 +47,6 @@
     "@babel/preset-react": "^7.7.4",
     "@babel/preset-typescript": "^7.7.4",
     "@babel/register": "^7.7.4",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.1.1",
     "@testing-library/react": "^9.4.0",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
