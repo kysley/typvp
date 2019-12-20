@@ -6,6 +6,7 @@ import {socket} from '@/helpers/socket'
 import {RaceTypingArea, RacePosition, RaceMeta} from '@/components/Race'
 import {TRoom} from '@/types/game'
 import {SingleplayerContainer} from '@/styled/Singleplayer'
+import Button from '@/styled/Button'
 
 const Race = observer(() => {
   const {UserStore, RaceStore} = useStore()
@@ -23,18 +24,17 @@ const Race = observer(() => {
     setSendData(false)
   }
 
+  const queue = () => {
+    socket.emit('race_queue', {id})
+  }
+
   useEffect(() => {
     if (!RaceStore.room) {
       socket.emit('race_queue', {id})
     }
 
-    socket.on('race_room-join', (snapshot: TRoom) => {
-      RaceStore.loadRoom(snapshot)
-    })
-
     socket.on('update', (payload: TRoom) => {
       console.log(payload)
-      // setRoom(payload)
       RaceStore.loadRoom(payload)
     })
 
@@ -65,9 +65,6 @@ const Race = observer(() => {
     <>
       {RaceStore.room ? (
         <>
-          {RaceStore.room.state === 'WAITING' && (
-            <span>waiting for players...</span>
-          )}
           <RacePosition id={id} />
           <SingleplayerContainer>
             <RaceMeta />
@@ -75,7 +72,9 @@ const Race = observer(() => {
           </SingleplayerContainer>
         </>
       ) : (
-        'in queue'
+        <Button appearance="default" intent="none" onClick={queue}>
+          Queue
+        </Button>
       )}
     </>
   )
