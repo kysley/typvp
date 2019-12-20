@@ -45,7 +45,6 @@ const Race = observer(() => {
     // Workaround for stale closures
     // May be unnecessary when cpm is stored in mobx
     socket.on('race_request-progress', (snapshot: TRoom) => {
-      // setRoom(snapshot)
       RaceStore.loadRoom(snapshot)
       setSendData(true)
     })
