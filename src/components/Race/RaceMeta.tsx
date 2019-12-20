@@ -27,16 +27,16 @@ const RaceMeta: FC = observer(() => {
         <MetaTimer
           style={{width: `${(RaceStore.room!.secondsRemaining / 60) * 100}%`}}
         />
-        {RaceStore.room!.state === 'STARTING' ? (
+        {RaceStore.room!.state === 'STARTING' && (
           <span>Starting In... {RaceStore.room!.countdown}</span>
-        ) : (
-          <span>
-            Time Left:{' '}
-            {RaceStore.room!.state === 'FINISHED'
-              ? 'Completed'
-              : `${RaceStore.room!.secondsRemaining}s`}
-          </span>
         )}
+        {RaceStore.room!.state === 'WAITING' && (
+          <span>Waiting for players</span>
+        )}
+        {RaceStore.room!.state === 'IN_PROGRESS' && (
+          <span>Time Left: {RaceStore.room!.secondsRemaining}s</span>
+        )}
+        {RaceStore.room!.state === 'FINISHED' && <span>Race Complete!</span>}
       </MetaContainer>
     </>
   )

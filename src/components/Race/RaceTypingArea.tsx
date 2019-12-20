@@ -5,6 +5,7 @@ import {useStore} from '@/stores'
 import Word from '@/components/Word'
 import {TypingAreaContainer, TypingAreaInner} from '@/styled/TypingArea'
 import {Input} from '@/styled/TextInput'
+import {SkeletonLine} from '@/styled/Skeleton'
 
 const getWordType = (a: number, b: number) => {
   if (a < b) return 'done'
@@ -34,7 +35,7 @@ const RaceTypingArea: FC<TTypingArea> = observer(({canType}) => {
         style={{height: '75px', overflow: 'hidden'}}
         disabled={!canType}
       >
-        {RaceStore.words ? (
+        {RaceStore.words.length ? (
           <>
             {RaceStore.words.map((word: string, i: number) => (
               <Word
@@ -46,7 +47,8 @@ const RaceTypingArea: FC<TTypingArea> = observer(({canType}) => {
             ))}
           </>
         ) : (
-          'awaiting word list from server'
+          // 'awaiting word list from server'
+          <SkeletonLine />
         )}
       </TypingAreaInner>
       <Input
