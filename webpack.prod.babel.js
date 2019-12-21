@@ -20,11 +20,6 @@ export default {
     publicPath: '/',
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production'),
-      },
-    }),
     new CleanWebpackPlugin(),
     new webpack.HashedModuleIdsPlugin(),
     new WebpackChunkHash(),
