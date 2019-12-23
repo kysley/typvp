@@ -69,7 +69,8 @@ const RacePosition: FC = observer(({id}: any) => {
             key={player.id}
           >
             <span>
-              {player.wpm} - {player.id === id ? ' (you)' : ` ${player.name}`}
+              {player.wpm} -
+              {player.id === id ? ` ${player.name} (you)` : ` ${player.name}`}
             </span>
           </PlayerBar>
         ))}
