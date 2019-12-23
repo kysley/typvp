@@ -19,6 +19,7 @@ type TTypingArea = {
 
 const RaceTypingArea: FC<TTypingArea> = observer(({canType}) => {
   const wordsRef = useRef<null | HTMLDivElement>(null)
+  const inputRef = useRef<null | HTMLInputElement>(null)
 
   const {RaceStore} = useStore()
 
@@ -27,6 +28,12 @@ const RaceTypingArea: FC<TTypingArea> = observer(({canType}) => {
       wordsRef.current!.children[RaceStore.wordIndex].scrollIntoView(true)
     }
   }, [RaceStore.wordIndex, RaceStore.words])
+
+  useEffect(() => {
+    if (canType) {
+      inputRef.current!.focus()
+    }
+  }, [canType])
 
   return (
     <TypingAreaContainer>
@@ -52,6 +59,7 @@ const RaceTypingArea: FC<TTypingArea> = observer(({canType}) => {
         )}
       </TypingAreaInner>
       <Input
+        ref={inputRef}
         hasWarning={RaceStore.isSpellingIncorrect}
         disabled={!canType}
         value={RaceStore.typedWord}
