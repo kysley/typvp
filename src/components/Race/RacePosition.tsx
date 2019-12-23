@@ -14,7 +14,25 @@ const PlayerContainer = styled.div`
 `
 
 const PlayerList = styled.ul`
-  ::before {
+  transition: 1.1s all linear;
+  position: relative;
+  padding: 0;
+  list-style: none;
+  z-index: 1;
+`
+
+const PlayerBar = styled.li`
+  height: 32px;
+  margin-bottom: 1em;
+  display: flex;
+  align-items: center;
+  padding-left: 1em;
+  color: ${({theme}) => theme.colors.text};
+  border-radius: 4px;
+  transition: 1.1s all linear;
+  position: relative;
+
+  ::after {
     content: '';
     display: block;
     width: 900px;
@@ -24,23 +42,12 @@ const PlayerList = styled.ul`
     left: 0;
     border-radius: 4px;
     background: ${({theme}) => theme.backgrounds.secondary};
+    z-index: -1;
   }
-  transition: 1.1s all linear;
-  position: relative;
-  padding: 0;
-  list-style: none;
-`
 
-const PlayerBar = styled.li`
-  height: 32px;
-  margin-bottom: 1em;
-  display: flex;
-  align-items: center;
-  padding-left: 1em;
-  color: white;
-  border-radius: 4px;
-  transition: 1.1s all linear;
-  position: relative;
+  span {
+    min-width: 300px;
+  }
 `
 
 const RacePosition: FC = observer(({id}: any) => {
@@ -62,9 +69,7 @@ const RacePosition: FC = observer(({id}: any) => {
             key={player.id}
           >
             <span>
-              {' '}
-              {player.wpm}
-              {player.id === id && ' (you)'}
+              {player.wpm} - {player.id === id ? ' (you)' : ` ${player.name}`}
             </span>
           </PlayerBar>
         ))}
