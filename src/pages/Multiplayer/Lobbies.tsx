@@ -9,6 +9,8 @@ import Button from '@/styled/Button'
 import {TLobby} from '@/types/game'
 import {useStore} from '@/stores'
 import {socket} from '@/helpers/socket'
+import styled from 'styled-components'
+import {UsersIcon, StopwatchIcon, DeviceIcon} from '@/components/icons'
 
 function genGuestIdAndName() {
   const id = Math.random()
@@ -81,27 +83,85 @@ const Lobbies = observer(() => {
   return (
     <>
       <PageHeader>Lobbies</PageHeader>
-      <Button intent="none" appearance="default" onClick={e => quickPlay(e)}>
-        Quick Play
-      </Button>
-      {lobbies.map((lobby: TLobby, idx) => (
-        <div key={lobby.id}>
-          <p>Lobby {(idx += 1)}</p>
-          <p>
-            {5 - lobby.players.length} spots left ({lobby.players.length} / 5)
-          </p>
+      <LobbiesContainer>
+        <div>
           <Button
             intent="none"
-            appearance="default"
-            disabled={lobby.players.length === 5 || lobby.state !== 'WAITING'}
-            onClick={e => joinLobby(e, lobby.id)}
+            appearance="primary"
+            onClick={e => quickPlay(e)}
           >
-            Join Lobby
+            Quick Play
           </Button>
         </div>
-      ))}
+        {lobbies.map((lobby: TLobby, idx) => (
+          <Lobby key={lobby.id}>
+            <h3>Lobby {(idx += 1)}</h3>
+            <div>
+              <UsersIcon />
+              <span>{lobby.players.length} / 5</span>
+            </div>
+            <div>
+              <StopwatchIcon />
+              <span>{lobby.secondsRemaining}</span>
+            </div>
+            <div>
+              <DeviceIcon />
+              <span>{lobby.state}</span>
+            </div>
+            <Button
+              intent="none"
+              appearance="default"
+              disabled={lobby.players.length === 5 || lobby.state !== 'WAITING'}
+              onClick={e => joinLobby(e, lobby.id)}
+            >
+              Join Lobby
+            </Button>
+          </Lobby>
+        ))}
+      </LobbiesContainer>
     </>
   )
 })
 
 export default Lobbies
+
+export const LobbiesContainer = styled.section`
+  display: grid;
+  background: ${({theme}) => theme.backgrounds.secondary};
+  color: ${({theme}) => theme.colors.text};
+  padding: 1em;
+  border-radius: 6px;
+  width: 50%;
+  align-self: center;
+  grid-row-gap: 0.5em;
+  grid-template-rows: 1fr;
+`
+
+export const Lobby = styled.div`
+  display: grid;
+  background: ${({theme}) => theme.backgrounds.primary};
+  border-radius: 4px;
+  padding: 1em;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 100%;
+
+  svg {
+    margin-right: 0.5em;
+  }
+
+  h3 {
+    margin: 0;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    grid-row: 2;
+  }
+
+  button {
+    grid-row: 1 / span 2;
+    height: 100%;
+  }
+`
