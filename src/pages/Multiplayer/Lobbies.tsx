@@ -63,7 +63,7 @@ const Lobbies = observer(() => {
   }, [result])
 
   useEffect(() => {
-    socket.on('update', (payload: TLobby) => {
+    socket.once('update', (payload: TLobby) => {
       console.log(payload)
       RaceStore.loadRoom(payload)
       history.push(`/multiplayer/${payload.id}`, {id})

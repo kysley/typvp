@@ -29,10 +29,8 @@ const Race = observer(() => {
     id: string | number
     name: string
     done: boolean
-  }>(location.state.id && location.state.id)
+  }>(location.state && location.state.id)
   const [sendData, setSendData] = useState(false)
-
-  console.log(location.state.id)
 
   // Emit local cpm & reset sendData
   const sendRaceProgress = () => {
@@ -41,7 +39,7 @@ const Race = observer(() => {
   }
 
   useEffect(() => {
-    if (!UserStore.fetchingUser && !id) {
+    if (!UserStore.fetchingUser) {
       if (UserStore.me) {
         console.log('hit1')
         setId({
@@ -49,7 +47,7 @@ const Race = observer(() => {
           name: UserStore.me.username,
           done: true,
         })
-      } else if (!UserStore.me) {
+      } else if (!UserStore.me && !id) {
         console.log('hit2')
         const {id, name, done} = genGuestIdAndName()
         setId({id, name, done})
@@ -74,7 +72,7 @@ const Race = observer(() => {
       setSendData(true)
     })
     return () => {
-      socket.removeAllListeners()
+      socket.emit('race_leave')
       RaceStore.reset()
     }
   }, [])
