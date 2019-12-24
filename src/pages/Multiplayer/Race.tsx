@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import {observer} from 'mobx-react-lite'
+import {useParams} from 'react-router-dom'
 
 import {useStore} from '@/stores'
 import {socket} from '@/helpers/socket'
 import {RaceTypingArea, RacePosition, RaceMeta} from '@/components/Race'
-import {TRoom} from '@/types/game'
+import {TLobby} from '@/types/game'
 import {SingleplayerContainer} from '@/styled/Singleplayer'
-import Button from '@/styled/Button'
 
-function getGuestIdAndName() {
+function genGuestIdAndName() {
   const id = Math.random()
     .toString(36)
     .substring(2, 15)
@@ -21,8 +21,13 @@ function getGuestIdAndName() {
 }
 
 const Race = observer(() => {
+  const {id: lobbyId} = useParams()
   const {UserStore, RaceStore} = useStore()
-  const [id, setId] = useState()
+  const [id, setId] = useState<{
+    id: string | number
+    name: string
+    done: boolean
+  }>()
   const [sendData, setSendData] = useState(false)
 
   // Emit local cpm & reset sendData
@@ -31,36 +36,25 @@ const Race = observer(() => {
     setSendData(false)
   }
 
-  const queue = () => {
-    socket.emit('race_queue', {id: id.id, name: id.name})
-  }
-
   useEffect(() => {
     if (!UserStore.fetchingUser) {
-      if (UserStore.me && !RaceStore.room && !id) {
+      if (UserStore.me) {
         console.log('hit1')
         setId({
           id: UserStore.me.id,
           name: UserStore.me.username,
+          done: true,
         })
-        socket.emit('race_queue', {
-          id: UserStore.me.id,
-          name: UserStore.me.username,
-        })
-      } else if (!UserStore.me && !RaceStore.room) {
+      } else if (!UserStore.me) {
         console.log('hit2')
-        const {id, name} = getGuestIdAndName()
-        setId({id, name})
-        socket.emit('race_queue', {
-          id,
-          name,
-        })
+        const {id, name} = genGuestIdAndName()
+        setId({id, name, done: true})
       }
     }
   }, [UserStore.fetchingUser, UserStore.me])
 
   useEffect(() => {
-    socket.on('update', (payload: TRoom) => {
+    socket.on('update', (payload: TLobby) => {
       console.log(payload)
       RaceStore.loadRoom(payload)
     })
@@ -71,25 +65,31 @@ const Race = observer(() => {
 
     // Workaround for stale closures
     // May be unnecessary when cpm is stored in mobx
-    socket.on('race_request-progress', (snapshot: TRoom) => {
+    socket.on('race_request-progress', (snapshot: TLobby) => {
       RaceStore.loadRoom(snapshot)
       setSendData(true)
     })
     return () => {
       socket.removeAllListeners()
-      socket.close()
+      RaceStore.reset()
     }
   }, [])
+
+  useEffect(() => {
+    if (id && lobbyId && !RaceStore.room && id.done) {
+      socket.emit('race_join-lobby', {id: id.id, name: id.name, lobbyId})
+    }
+  }, [id])
 
   useEffect(() => {
     if (RaceStore.room && sendData) {
       sendRaceProgress()
     }
   }, [sendData])
-
+  console.log(id)
   return (
     <>
-      {RaceStore.room ? (
+      {RaceStore.room && id ? (
         <>
           <RacePosition id={id.id} />
           <SingleplayerContainer>
@@ -98,9 +98,7 @@ const Race = observer(() => {
           </SingleplayerContainer>
         </>
       ) : (
-        <Button appearance="default" intent="none" onClick={queue}>
-          Queue
-        </Button>
+        'waiting...?'
       )}
     </>
   )

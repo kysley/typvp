@@ -4,13 +4,22 @@ enum TypingState {
   Finished,
 }
 
-export type TRoom = {
+export enum LobbyState {
+  'WAITING' = 'WAITING',
+  'IN_PROGRESS' = 'IN_PROGRESS',
+  'FINISHED' = 'FINISHED',
+  'STARTING' = 'STARTING',
+}
+
+export type TLobby = {
+  default?: boolean
   countdown: number
   secondsRemaining: number
   acceptUpdates: boolean
   name: string
-  state: string
-  players: any
+  state: LobbyState
+  players: any[]
+  id: string
 }
 
 export {TypingState}

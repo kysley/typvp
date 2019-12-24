@@ -1,11 +1,10 @@
 import {observable, action, computed} from 'mobx'
 
-import {TypingState, TRoom} from '@/types/game'
+import {TypingState, TLobby} from '@/types/game'
 import {client} from '@/services/Client'
 import {SEEN} from '@/graphql/mutations/addResult'
 
-let timeout: any = null
-class GameStore {
+class RaceStore {
   @observable
   typedHistory: string[] = new Array(250).fill(null)
 
@@ -48,7 +47,7 @@ class GameStore {
   isSpellingIncorrect: boolean = false
 
   @observable
-  room: TRoom | null = null
+  room: TLobby | null = null
 
   @action
   calculateResults = (): any => {
@@ -127,7 +126,6 @@ class GameStore {
 
   @action
   reset = () => {
-    clearTimeout(timeout)
     this.typedHistory = new Array(250).fill(null)
     this.typedWord = ''
     this.wordIndex = 0
@@ -141,6 +139,7 @@ class GameStore {
     this.correct = 0
     this.incorrectIndex = []
     this.isSpellingIncorrect = false
+    this.room = null
   }
 
   @action
@@ -149,7 +148,7 @@ class GameStore {
   }
 
   @action
-  loadRoom = (room: TRoom): void => {
+  loadRoom = (room: TLobby): void => {
     this.room = room
   }
 
@@ -208,4 +207,4 @@ class GameStore {
   }
 }
 
-export default new GameStore()
+export default new RaceStore()
