@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {useQuery} from 'urql'
 import {observer} from 'mobx-react-lite'
 import {useHistory} from 'react-router-dom'
+import styled from 'styled-components'
 
 import {LOBBIES} from '@/graphql/queries/race'
 import {PageHeader} from '@/styled/Theme'
@@ -9,7 +10,6 @@ import Button from '@/styled/Button'
 import {TLobby} from '@/types/game'
 import {useStore} from '@/stores'
 import {socket} from '@/helpers/socket'
-import styled from 'styled-components'
 import {UsersIcon, StopwatchIcon, DeviceIcon} from '@/components/icons'
 
 function genGuestIdAndName() {
@@ -21,6 +21,7 @@ function genGuestIdAndName() {
   return {
     id,
     name,
+    done: true,
   }
 }
 
@@ -33,9 +34,11 @@ const Lobbies = observer(() => {
     requestPolicy: 'network-only',
     pollInterval: 5000,
   })
-  const [id, setId] = useState<{id: string | number; name: string}>(
-    genGuestIdAndName(),
-  )
+  const [id, setId] = useState<{
+    id: string | number
+    name: string
+    done: boolean
+  }>(genGuestIdAndName())
 
   useEffect(() => {
     if (!UserStore.fetchingUser) {
@@ -44,11 +47,8 @@ const Lobbies = observer(() => {
         setId({
           id: UserStore.me.id,
           name: UserStore.me.username,
+          done: true,
         })
-      } else if (!UserStore.me && !RaceStore.room) {
-        console.log('hit2')
-        const {id, name} = genGuestIdAndName()
-        setId({id, name})
       }
     }
   }, [UserStore.fetchingUser, UserStore.me])

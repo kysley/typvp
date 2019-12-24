@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {observer} from 'mobx-react-lite'
-import {useParams} from 'react-router-dom'
+import {useParams, useLocation} from 'react-router-dom'
 
 import {useStore} from '@/stores'
 import {socket} from '@/helpers/socket'
@@ -17,18 +17,22 @@ function genGuestIdAndName() {
   return {
     id,
     name,
+    done: true,
   }
 }
 
 const Race = observer(() => {
   const {id: lobbyId} = useParams()
+  const location = useLocation()
   const {UserStore, RaceStore} = useStore()
   const [id, setId] = useState<{
     id: string | number
     name: string
     done: boolean
-  }>()
+  }>(location.state.id && location.state.id)
   const [sendData, setSendData] = useState(false)
+
+  console.log(location.state.id)
 
   // Emit local cpm & reset sendData
   const sendRaceProgress = () => {
@@ -37,7 +41,7 @@ const Race = observer(() => {
   }
 
   useEffect(() => {
-    if (!UserStore.fetchingUser) {
+    if (!UserStore.fetchingUser && !id) {
       if (UserStore.me) {
         console.log('hit1')
         setId({
@@ -47,8 +51,8 @@ const Race = observer(() => {
         })
       } else if (!UserStore.me) {
         console.log('hit2')
-        const {id, name} = genGuestIdAndName()
-        setId({id, name, done: true})
+        const {id, name, done} = genGuestIdAndName()
+        setId({id, name, done})
       }
     }
   }, [UserStore.fetchingUser, UserStore.me])
@@ -86,7 +90,7 @@ const Race = observer(() => {
       sendRaceProgress()
     }
   }, [sendData])
-  console.log(id)
+
   return (
     <>
       {RaceStore.room && id ? (
