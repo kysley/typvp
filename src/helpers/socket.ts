@@ -5,4 +5,6 @@ const socketUrl =
     ? 'https://api.typvp.xyz'
     : 'http://localhost:8086'
 
-export const socket = io(socketUrl)
+export const socket = io(socketUrl, {
+  transports: ['websocket'],
+})
