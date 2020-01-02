@@ -1,5 +1,5 @@
 import React, {FC, useEffect} from 'react'
-import useForm from 'react-hook-form'
+import {useForm} from 'react-hook-form'
 import {useMutation} from 'urql'
 import {useHistory} from 'react-router-dom'
 
@@ -120,7 +120,7 @@ const Signup: FC = () => {
         <Button
           intent="none"
           appearance="primary"
-          disabled={!formState.isValid && !formState.isSubmitting}
+          disabled={!formState.dirty && !formState.isSubmitting}
           type="submit"
         >
           Sign Up

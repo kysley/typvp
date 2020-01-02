@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from 'react'
 import {useHistory} from 'react-router-dom'
-import useForm from 'react-hook-form'
+import {useForm} from 'react-hook-form'
 import {useMutation} from 'urql'
 
 import {loginSchema} from '@/helpers/validation'
@@ -16,11 +16,12 @@ interface ILoginSchema {
 }
 
 export function containsError(errors: any, formState: any, name: string) {
-  if (formState.touched.includes(name)) {
-    if (!!errors[name]) {
-      return true
-    }
-  }
+  console.log(formState)
+  // if (formState.touched.includes(name)) {
+  //   if (!!errors[name]) {
+  //     return true
+  //   }
+  // }
   return false
 }
 
@@ -93,7 +94,7 @@ const Login: FC = () => {
         <Button
           intent="none"
           appearance="primary"
-          disabled={!formState.isValid}
+          disabled={!formState.dirty}
           type="submit"
         >
           Log In
