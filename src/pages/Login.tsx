@@ -54,7 +54,7 @@ const Login: FC = () => {
 
   return (
     <SignupFormContainer>
-      <h1>Welcome back!</h1>
+      <h1>Hey Speed Typer</h1>
       <p>Log In to your typvp account.</p>
       <div>
         {!mutation.data && mutation.error && (

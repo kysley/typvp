@@ -50,8 +50,14 @@ const Signup: FC = () => {
 
   return (
     <SignupFormContainer>
-      <h1>Get Started</h1>
+      <h1>Ready, Set, Type!</h1>
       <p>Create your typvp account to track your results & more!</p>
+      <p>
+        <span style={{textDecoration: 'underline', fontWeight: 700}}>
+          Note:{' '}
+        </span>
+        this is a beta release!
+      </p>
       <div>{mutation.data && !mutation.error && <p>account created!</p>}</div>
       <div>
         {!mutation.data && mutation.error && (
