@@ -73,6 +73,7 @@ const Signup: FC = () => {
             ref={register}
             type="text"
             autoComplete="off"
+            autoFocus={true}
           />
           {containsError(errors, formState, 'username') && (
             <FormErrorMsg>{errors.username!.message}</FormErrorMsg>

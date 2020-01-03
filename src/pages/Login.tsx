@@ -17,11 +17,11 @@ interface ILoginSchema {
 
 export function containsError(errors: any, formState: any, name: string) {
   console.log(formState)
-  // if (formState.touched.includes(name)) {
-  //   if (!!errors[name]) {
-  //     return true
-  //   }
-  // }
+  if (formState.touched[name]) {
+    if (!!errors[name]) {
+      return true
+    }
+  }
   return false
 }
 
@@ -72,6 +72,7 @@ const Login: FC = () => {
             ref={register}
             type="text"
             autoComplete="off"
+            autoFocus={true}
           />
           {containsError(errors, formState, 'username') && (
             <FormErrorMsg>{errors.username!.message}</FormErrorMsg>
