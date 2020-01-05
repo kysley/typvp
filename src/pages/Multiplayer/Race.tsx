@@ -17,7 +17,6 @@ function genGuestIdAndName() {
   return {
     id,
     name,
-    done: true,
   }
 }
 
@@ -28,9 +27,9 @@ const Race = observer(() => {
   const [id, setId] = useState<{
     id: string | number
     name: string
-    done: boolean
   }>(location.state && location.state.id)
   const [sendData, setSendData] = useState(false)
+  const [idComplete, setIdComplete] = useState(false)
 
   // Emit local cpm & reset sendData
   const sendRaceProgress = () => {
@@ -45,13 +44,13 @@ const Race = observer(() => {
         setId({
           id: UserStore.me.id,
           name: UserStore.me.username,
-          done: true,
         })
-      } else if (!UserStore.me && !id) {
+      } else if (!UserStore.me) {
         console.log('hit2')
-        const {id, name, done} = genGuestIdAndName()
-        setId({id, name, done})
+        const {id, name} = genGuestIdAndName()
+        setId({id, name})
       }
+      setIdComplete(true)
     }
   }, [UserStore.fetchingUser, UserStore.me])
 
@@ -78,10 +77,10 @@ const Race = observer(() => {
   }, [])
 
   useEffect(() => {
-    if (id && lobbyId && !RaceStore.room && id.done) {
+    if (idComplete && lobbyId) {
       socket.emit('race_join-lobby', {id: id.id, name: id.name, lobbyId})
     }
-  }, [id])
+  }, [idComplete])
 
   useEffect(() => {
     if (RaceStore.room && sendData) {
@@ -93,7 +92,7 @@ const Race = observer(() => {
     <>
       {RaceStore.room && id ? (
         <>
-          <RacePosition id={id.id} />
+          <RacePosition playerId={id.id} />
           <SingleplayerContainer>
             <RaceMeta />
             <RaceTypingArea canType={RaceStore.room.state === 'IN_PROGRESS'} />

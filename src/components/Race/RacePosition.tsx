@@ -50,7 +50,7 @@ const PlayerBar = styled.li`
   }
 `
 
-const RacePosition: FC = observer(({id}: any) => {
+const RacePosition: FC<{playerId: string | number}> = observer(({playerId}) => {
   const {RaceStore} = useStore()
 
   return (
@@ -70,7 +70,9 @@ const RacePosition: FC = observer(({id}: any) => {
           >
             <span>
               {player.wpm} -
-              {player.id === id ? ` ${player.name} (you)` : ` ${player.name}`}
+              {player.id === playerId
+                ? ` ${player.name} (you)`
+                : ` ${player.name}`}
             </span>
           </PlayerBar>
         ))}

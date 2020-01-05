@@ -21,7 +21,6 @@ function genGuestIdAndName() {
   return {
     id,
     name,
-    done: true,
   }
 }
 
@@ -37,7 +36,6 @@ const Lobbies = observer(() => {
   const [id, setId] = useState<{
     id: string | number
     name: string
-    done: boolean
   }>(genGuestIdAndName())
 
   useEffect(() => {
@@ -47,7 +45,6 @@ const Lobbies = observer(() => {
         setId({
           id: UserStore.me.id,
           name: UserStore.me.username,
-          done: true,
         })
       }
     }
@@ -72,7 +69,7 @@ const Lobbies = observer(() => {
 
   const joinLobby = (e: any, lobbyId: string) => {
     e.preventDefault()
-    socket.emit('race_join-lobby', {id: id.id, name: id.name, lobbyId})
+    history.push(`/multiplayer/${lobbyId}`, {id})
   }
 
   const quickPlay = (e: any) => {
@@ -89,6 +86,7 @@ const Lobbies = observer(() => {
             intent="none"
             appearance="primary"
             onClick={e => quickPlay(e)}
+            disabled
           >
             Quick Play
           </Button>
