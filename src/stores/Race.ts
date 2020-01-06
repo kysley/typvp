@@ -125,7 +125,7 @@ class RaceStore {
   }
 
   @action
-  reset = () => {
+  empty = () => {
     this.typedHistory = new Array(250).fill(null)
     this.typedWord = ''
     this.wordIndex = 0

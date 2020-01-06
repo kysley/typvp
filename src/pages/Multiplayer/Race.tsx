@@ -72,7 +72,7 @@ const Race = observer(() => {
     })
     return () => {
       socket.emit('race_leave')
-      RaceStore.reset()
+      RaceStore.empty()
     }
   }, [])
 
