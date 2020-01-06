@@ -40,13 +40,13 @@ const Race = observer(() => {
   useEffect(() => {
     if (!UserStore.fetchingUser) {
       if (UserStore.me) {
-        console.log('hit1')
+        console.debug('[Race] Found logged in user')
         setId({
           id: UserStore.me.id,
           name: UserStore.me.username,
         })
       } else if (!UserStore.me) {
-        console.log('hit2')
+        console.log('[Race] Generating a guest user')
         const {id, name} = genGuestIdAndName()
         setId({id, name})
       }
@@ -56,7 +56,7 @@ const Race = observer(() => {
 
   useEffect(() => {
     socket.on('update', (payload: TLobby) => {
-      console.log(payload)
+      console.log(`[Race] Incoming update: ${payload}`)
       RaceStore.loadRoom(payload)
     })
 
