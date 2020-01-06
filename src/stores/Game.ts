@@ -1,9 +1,9 @@
+import {RefObject} from 'react'
 import {observable, action, flow} from 'mobx'
 
 import {TypingState} from '@/types/game'
 import {client} from '@/services/Client'
 import {GET_WORD_SET, SEEN} from '@/graphql/mutations/addResult'
-import {RefObject} from 'react'
 
 let timeout: any = null
 class GameStore {
