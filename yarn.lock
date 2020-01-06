@@ -8621,6 +8621,11 @@ react-router@5.1.2:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
+react-shortcuts-hook@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-shortcuts-hook/-/react-shortcuts-hook-1.0.2.tgz#54aed14825758bbaa54d626124b58c07a97042d1"
+  integrity sha512-HLRhrw3h2TYntdG7R5wSWO98pziQILPFo8FoybqTgxzsoWEcbC9T/OoYwmjZjpeN6R9PGuHXEzZxu1j8DzAFVA==
+
 react-wonka@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-wonka/-/react-wonka-1.0.3.tgz#2d997403be347489e1161cb58d502ac683499847"
