@@ -14,7 +14,7 @@ import ADD_RESULT from '@/graphql/mutations/addResult'
 const Singleplayer: FC = observer(() => {
   const {GameStore, UserStore} = useStore()
   const [mutation, execMutation] = useMutation(ADD_RESULT)
-  useShortcuts(['alt', 'r'], () => {
+  useShortcuts(['enter'], () => {
     GameStore.reset()
   })
 
