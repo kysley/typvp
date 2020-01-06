@@ -17,8 +17,9 @@ const SingleWord = styled.span<SingleWordProps>`
       ? isMatch
         ? theme.colors.match
         : theme.colors.incorrect
-      : theme.colors.current};
-  color: ${({variant, theme}) => variant === 'current' && theme.colors.text};
+      : theme.colors.text};
+  background: ${({variant, theme}) =>
+    variant === 'current' && theme.colors.current};
 `
 
 export default SingleWord
