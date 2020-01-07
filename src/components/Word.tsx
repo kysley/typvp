@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC, memo} from 'react'
 
 import SingleWord from '@/styled/Word'
 
@@ -8,7 +8,7 @@ type WordProps = {
   isMatch: boolean
 }
 
-const Word = ({variant, word, isMatch}: WordProps) => {
+const Word: FC<WordProps> = ({variant, word, isMatch}) => {
   return (
     <SingleWord isMatch={isMatch} variant={variant}>
       {word}
@@ -16,4 +16,4 @@ const Word = ({variant, word, isMatch}: WordProps) => {
   )
 }
 
-export default Word
+export default memo(Word)
