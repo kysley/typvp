@@ -84,3 +84,17 @@ export const TrialFold = styled.div`
     margin: 0;
   }
 `
+
+export const TrialMeta = styled.div<{isVisible: boolean}>`
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: -5vh;
+  color: ${({theme}) => theme.colors.text};
+  transition: opacity 0.3s ease-in-out;
+  opacity: ${({isVisible}) => (isVisible ? 1 : 0)};
+
+  > * {
+    margin-right: 1em;
+  }
+`
