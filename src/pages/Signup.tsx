@@ -1,5 +1,5 @@
 import React, {FC, useEffect} from 'react'
-import useForm from 'react-hook-form'
+import {useForm} from 'react-hook-form'
 import {useMutation} from 'urql'
 import {useHistory} from 'react-router-dom'
 
@@ -50,8 +50,14 @@ const Signup: FC = () => {
 
   return (
     <SignupFormContainer>
-      <h1>Get Started</h1>
+      <h1>Ready, Set, Type!</h1>
       <p>Create your typvp account to track your results & more!</p>
+      <p>
+        <span style={{textDecoration: 'underline', fontWeight: 700}}>
+          Note:{' '}
+        </span>
+        this is a beta release!
+      </p>
       <div>{mutation.data && !mutation.error && <p>account created!</p>}</div>
       <div>
         {!mutation.data && mutation.error && (
@@ -67,6 +73,7 @@ const Signup: FC = () => {
             ref={register}
             type="text"
             autoComplete="off"
+            autoFocus={true}
           />
           {containsError(errors, formState, 'username') && (
             <FormErrorMsg>{errors.username!.message}</FormErrorMsg>
@@ -114,7 +121,7 @@ const Signup: FC = () => {
         <Button
           intent="none"
           appearance="primary"
-          disabled={!formState.isValid && !formState.isSubmitting}
+          disabled={!formState.dirty && !formState.isSubmitting}
           type="submit"
         >
           Sign Up

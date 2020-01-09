@@ -4,8 +4,8 @@ import {observer} from 'mobx-react-lite'
 import {useStore} from '@/stores'
 import Word from '@/components/Word'
 import {TypingAreaContainer, TypingAreaInner} from '@/styled/TypingArea'
-import {SkeletonLine} from '@/styled/Skeleton'
 import {Input} from '@/styled/TextInput'
+import {SkeletonLine} from '@/styled/Skeleton'
 
 const getWordType = (a: number, b: number) => {
   if (a < b) return 'done'
@@ -13,57 +13,58 @@ const getWordType = (a: number, b: number) => {
   return 'awaiting'
 }
 
-interface ITypingArea {
-  isGameOver: boolean
+type TTypingArea = {
+  canType: boolean
 }
 
-const TypingArea: FC<ITypingArea> = observer(props => {
+const RaceTypingArea: FC<TTypingArea> = observer(({canType}) => {
   const wordsRef = useRef<null | HTMLDivElement>(null)
   const inputRef = useRef<null | HTMLInputElement>(null)
 
-  const {GameStore} = useStore()
+  const {RaceStore} = useStore()
 
   useEffect(() => {
-    if (wordsRef.current !== null && GameStore.words.length > 0) {
-      wordsRef.current!.children[GameStore.wordIndex].scrollIntoView(true)
+    if (wordsRef.current !== null && RaceStore.words.length > 0) {
+      wordsRef.current!.children[RaceStore.wordIndex].scrollIntoView(true)
     }
-  }, [GameStore.wordIndex, GameStore.words])
+  }, [RaceStore.wordIndex, RaceStore.words])
 
   useEffect(() => {
-    if (inputRef.current !== null) {
-      GameStore.inputRef = inputRef
+    if (canType) {
+      inputRef.current!.focus()
     }
-  }, [inputRef])
+  }, [canType])
 
   return (
     <TypingAreaContainer>
       <TypingAreaInner
         ref={wordsRef}
         style={{height: '75px', overflow: 'hidden'}}
-        disabled={props.isGameOver}
+        disabled={!canType}
       >
-        {GameStore.fetchingWords ? (
-          <SkeletonLine />
-        ) : (
+        {RaceStore.words.length ? (
           <>
-            {GameStore.words.map((word: string, i: number) => (
+            {RaceStore.words.map((word: string, i: number) => (
               <Word
-                isMatch={GameStore.typedHistory[i] === GameStore.words[i]}
+                isMatch={RaceStore.typedHistory[i] === RaceStore.words[i]}
                 word={word}
                 key={`${word}-${i}`}
-                variant={getWordType(i, GameStore.wordIndex)}
+                variant={getWordType(i, RaceStore.wordIndex)}
               />
             ))}
           </>
+        ) : (
+          // 'awaiting word list from server'
+          <SkeletonLine />
         )}
       </TypingAreaInner>
       <Input
         ref={inputRef}
-        hasWarning={GameStore.isSpellingIncorrect}
-        disabled={props.isGameOver}
-        value={GameStore.typedWord}
-        onChange={e => GameStore.onKeyDown(e)}
-        onKeyDown={e => GameStore.onAction(e)}
+        hasWarning={RaceStore.isSpellingIncorrect}
+        disabled={!canType}
+        value={RaceStore.typedWord}
+        onChange={e => RaceStore.onKeyDown(e)}
+        onKeyDown={e => RaceStore.onAction(e)}
         aria-label="Text Input"
         autoFocus={true}
       />
@@ -71,4 +72,4 @@ const TypingArea: FC<ITypingArea> = observer(props => {
   )
 })
 
-export default TypingArea
+export default RaceTypingArea

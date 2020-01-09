@@ -311,7 +311,7 @@ export const secondary = {
 const wordVariants = {
   match: colors.g300,
   incorrect: colors.r300,
-  current: colors.p300,
+  current: colors.p75,
 }
 
 interface Dic {
@@ -338,7 +338,7 @@ export const dark = {
   colors: {
     text: colors.white,
     accentText: altBlack,
-    current: wordVariants.current,
+    current: background.dark.input,
     incorrect: wordVariants.incorrect,
     match: wordVariants.match,
     primary: colors.b300,
@@ -361,7 +361,7 @@ export const light = {
   colors: {
     text: colors.black,
     accentText: altWhite,
-    current: wordVariants.current,
+    current: background.light.input,
     incorrect: wordVariants.incorrect,
     match: wordVariants.match,
     primary: colors.b300,

@@ -11,6 +11,7 @@ import {
   LeaderboardTab,
   TrialsTab,
   HeaderGroup,
+  MultiplayerTab,
 } from '@/styled/Header'
 import {useStore} from '@/stores'
 import Button from '@/styled/Button'
@@ -43,6 +44,7 @@ const Header = observer(() => {
         </Link>
         <LeaderboardTab to="/leaderboard">leaderboard</LeaderboardTab>
         <TrialsTab to="/trials">trials</TrialsTab>
+        <MultiplayerTab to="/multiplayer">multiplayer</MultiplayerTab>
         <HeaderGroup>
           {UserStore.me ? (
             <Dropdown header={UserStore.me.username}>

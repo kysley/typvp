@@ -2,17 +2,18 @@ import React, {FC, useEffect, useState} from 'react'
 import {observer} from 'mobx-react-lite'
 import {useMutation, useQuery} from 'urql'
 import {Link, useParams} from 'react-router-dom'
+import {useShortcuts} from 'react-shortcuts-hook'
 
 import {useStore} from '@/stores'
 import SingleplayerMeta from '@/components/SingleplayerMeta'
 import TypingArea from '@/components/TypingArea'
 import SingleplayerResults from '@/components/SingleplayerResults'
-import {TrialHeader, SingleplayerContainer} from '@/styled/Singleplayer'
+import {SingleplayerContainer} from '@/styled/Singleplayer'
 import {TypingState} from '@/types/game'
 import {ADD_RESULT_TO_TRIAL} from '@/graphql/mutations/addResult'
 import {TRIAL} from '@/graphql/queries/trials'
 import Button from '@/styled/Button'
-import {PageHeader} from '@/styled/Theme'
+import {TrialDifficulty, TrialMeta} from '@/styled/Trials'
 
 const Trial: FC = observer(() => {
   const {id} = useParams()
@@ -24,6 +25,9 @@ const Trial: FC = observer(() => {
     variables: {
       trialId: id,
     },
+  })
+  useShortcuts(['enter'], () => {
+    GameStore.reset()
   })
 
   useEffect(() => {
@@ -70,24 +74,26 @@ const Trial: FC = observer(() => {
   return (
     <>
       {trial && (
-        <>
-          <TrialHeader>
-            <PageHeader>{trial.name}</PageHeader>
+        <SingleplayerContainer>
+          <TrialMeta
+            isVisible={GameStore.typingState !== TypingState.InProgress}
+          >
             <Button as={Link} to="/trials" appearance="default" intent="none">
               Back to Trials
             </Button>
-          </TrialHeader>
-
-          <SingleplayerContainer>
-            <SingleplayerMeta />
-            <TypingArea
-              isGameOver={GameStore.typingState === TypingState.Finished}
-            />
-            <SingleplayerResults
-              isVisible={GameStore.typingState === TypingState.Finished}
-            />
-          </SingleplayerContainer>
-        </>
+            <span>{trial.name}</span>
+            <TrialDifficulty difficulty={trial.difficulty}>
+              {trial.difficulty}
+            </TrialDifficulty>
+          </TrialMeta>
+          <SingleplayerMeta />
+          <TypingArea
+            isGameOver={GameStore.typingState === TypingState.Finished}
+          />
+          <SingleplayerResults
+            isVisible={GameStore.typingState === TypingState.Finished}
+          />
+        </SingleplayerContainer>
       )}
     </>
   )

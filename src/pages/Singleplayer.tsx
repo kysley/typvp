@@ -1,6 +1,7 @@
 import React, {FC, useEffect} from 'react'
 import {observer} from 'mobx-react-lite'
 import {useMutation} from 'urql'
+import {useShortcuts} from 'react-shortcuts-hook'
 
 import {useStore} from '@/stores'
 import SingleplayerMeta from '@/components/SingleplayerMeta'
@@ -13,6 +14,9 @@ import ADD_RESULT from '@/graphql/mutations/addResult'
 const Singleplayer: FC = observer(() => {
   const {GameStore, UserStore} = useStore()
   const [mutation, execMutation] = useMutation(ADD_RESULT)
+  useShortcuts(['enter'], () => {
+    GameStore.reset()
+  })
 
   useEffect(() => {
     GameStore.mode = 'Singleplayer'

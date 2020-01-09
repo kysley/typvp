@@ -1,12 +1,10 @@
-import {RefObject} from 'react'
-import {observable, action, flow} from 'mobx'
+import {observable, action, computed} from 'mobx'
 
-import {TypingState} from '@/types/game'
+import {TypingState, TLobby} from '@/types/game'
 import {client} from '@/services/Client'
-import {GET_WORD_SET, SEEN} from '@/graphql/mutations/addResult'
+import {SEEN} from '@/graphql/mutations/addResult'
 
-let timeout: any = null
-class GameStore {
+class RaceStore {
   @observable
   typedHistory: string[] = new Array(250).fill(null)
 
@@ -49,12 +47,7 @@ class GameStore {
   isSpellingIncorrect: boolean = false
 
   @observable
-  mode?: 'Singleplayer' | 'Trial'
-
-  @observable
-  fetchingWords: boolean = false
-
-  inputRef: RefObject<HTMLInputElement> | null = null
+  room: TLobby | null = null
 
   @action
   calculateResults = (): any => {
@@ -88,31 +81,51 @@ class GameStore {
     this.wpm = Math.floor(this.cpm / 5)
   }
 
-  @action
-  reset = () => {
-    clearTimeout(timeout)
-    this.typedHistory = new Array(250).fill(null)
-    this.typedWord = ''
-    this.wordIndex = 0
-    this.time = 0
-    this.typingState = TypingState.NotStarted
-    this.cpm = 0
-    this.rawCpm = 0
-    this.wpm = 0
-    if (this.mode !== 'Trial') {
-      this.generateWords()
-    }
-    this.corrections = 0
-    this.incorrect = 0
-    this.correct = 0
-    this.incorrectIndex = []
-    this.isSpellingIncorrect = false
-    this.inputRef!.current!.focus()
+  @computed
+  get derivewpm() {
+    const characters = this.typedHistory
+      .map(word => (word !== null ? word.length : -1)) // 1
+      .reduce((a, b) => a + b + 2, -250) // 2
+
+    // Raw CPM => Doesn't include mistakes
+    // const rawCpm = Math.floor(
+    //   (characters / (60 - this.room!.secondsRemaining)) * 60,
+    // )
+
+    // Corrected CPM = > Subtract mistakes character length from all characters
+    let adjustCpmBy = 0
+    this.incorrectIndex.forEach(index => {
+      if (this.typedHistory[index] !== null) {
+        adjustCpmBy += this.typedHistory[index].length + 1
+      }
+    })
+
+    const goodCharacters = characters - adjustCpmBy
+
+    const cpm = Math.floor(
+      (goodCharacters / (60 - this.room!.secondsRemaining)) * 60,
+    )
+
+    const wpm = Math.floor(cpm / 5)
+
+    return wpm
+  }
+
+  @computed
+  get positions() {
+    const sorted = [...this.room!.players].sort((a: any, b: any) =>
+      a.wpm > b.wpm ? -1 : 1,
+    )
+    return sorted
+  }
+
+  @computed
+  get fastestPlayer() {
+    return Math.max(this.positions[0].wpm)
   }
 
   @action
   empty = () => {
-    clearTimeout(timeout)
     this.typedHistory = new Array(250).fill(null)
     this.typedWord = ''
     this.wordIndex = 0
@@ -121,29 +134,13 @@ class GameStore {
     this.cpm = 0
     this.rawCpm = 0
     this.wpm = 0
-    this.words = []
     this.corrections = 0
     this.incorrect = 0
     this.correct = 0
     this.incorrectIndex = []
     this.isSpellingIncorrect = false
-    this.mode = undefined
-    this.inputRef = null
+    this.room = null
   }
-
-  generateWords = flow(function*(
-    this: GameStore,
-  ): Generator<Promise<any>, void, any> {
-    if (!this.fetchingWords) {
-      console.log('not busy, generating words')
-      this.fetchingWords = true
-      const {
-        data: {getWordSet},
-      } = yield client.mutation(GET_WORD_SET).toPromise()
-      this.loadWordSet(getWordSet)
-      this.fetchingWords = false
-    }
-  })
 
   @action
   loadWordSet = (wordSet: string): void => {
@@ -151,22 +148,8 @@ class GameStore {
   }
 
   @action
-  endTimer = () => {
-    this.typingState = TypingState.Finished
-    this.calculateResults()
-  }
-
-  @action
-  runTimer = (): void => {
-    timeout = setTimeout(() => {
-      const {time} = this
-      if (time < 60) {
-        this.time++
-        this.runTimer()
-      } else {
-        this.endTimer()
-      }
-    }, 1000)
+  loadRoom = (room: TLobby): void => {
+    this.room = room
   }
 
   @action
@@ -186,7 +169,6 @@ class GameStore {
   onKeyDown = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (this.typingState === TypingState.NotStarted) {
       this.typingState = TypingState.InProgress
-      this.runTimer()
       client.mutation(SEEN).toPromise()
     }
 
@@ -225,4 +207,4 @@ class GameStore {
   }
 }
 
-export default new GameStore()
+export default new RaceStore()

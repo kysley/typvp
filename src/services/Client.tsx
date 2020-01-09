@@ -1,8 +1,13 @@
 import React from 'react'
 import {Provider, createClient} from 'urql'
 
+const clientUrl =
+  process.env.NODE_ENV === 'production'
+    ? 'https://api.typvp.xyz/graphql'
+    : 'http://localhost:8081/graphql'
+
 export const client = createClient({
-  url: 'https://api.typvp.xyz/graphql',
+  url: clientUrl,
   fetchOptions: () => {
     const token = localStorage.getItem('token')
     if (!token) {

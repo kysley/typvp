@@ -20,7 +20,7 @@ class UserStore {
   me: IMe | undefined = undefined
 
   @observable
-  fetchingUser: boolean = true
+  fetchingUser: boolean = false
 
   @action
   login = (token: string, account: IMe): void => {
