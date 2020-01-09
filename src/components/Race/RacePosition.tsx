@@ -11,26 +11,49 @@ const PlayerContainer = styled.div`
   align-self: center;
   max-width: 900px;
   width: 900px;
+  position: absolute;
+  top: calc(31vh + 245px);
+  height: 176px;
+
+  @media screen and (min-height: 930px) {
+    top: 11vh;
+  }
 `
 
 const PlayerList = styled.ul`
   transition: 1.1s all linear;
   position: relative;
   padding: 0;
+  margin: 0;
   list-style: none;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-height: 930px) {
+    flex-direction: column-reverse;
+  }
 `
 
 const PlayerBar = styled.li`
   height: 32px;
-  margin-bottom: 1em;
   display: flex;
   align-items: center;
   padding-left: 1em;
   color: ${({theme}) => theme.colors.text};
   border-radius: 4px;
-  transition: 1.1s all linear;
+  transition: 1.1s width linear;
   position: relative;
+
+  :not(:first-of-type) {
+    margin-bottom: 1em;
+  }
+
+  @media screen and (min-height: 930px) {
+    :not(:last-of-type) {
+      margin-bottom: 1em;
+    }
+  }
 
   ::after {
     content: '';
