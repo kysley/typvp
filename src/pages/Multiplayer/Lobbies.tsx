@@ -93,7 +93,7 @@ const Lobbies = observer(() => {
             <h3>Lobby {(idx += 1)}</h3>
             <div>
               <UsersIcon />
-              <span>{lobby.players.length} / 5</span>
+              <span>{lobby.players.length} / 4</span>
             </div>
             <div>
               <StopwatchIcon />
