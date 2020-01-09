@@ -60,9 +60,7 @@ const Lobbies = observer(() => {
   }, [result])
 
   useEffect(() => {
-    socket.once('update', (payload: TLobby) => {
-      console.log(payload)
-      RaceStore.loadRoom(payload)
+    socket.once('queue_result', (payload: any) => {
       history.push(`/multiplayer/${payload.id}`, {id})
     })
   }, [])
@@ -86,7 +84,6 @@ const Lobbies = observer(() => {
             intent="none"
             appearance="primary"
             onClick={e => quickPlay(e)}
-            disabled
           >
             Quick Play
           </Button>
