@@ -89,7 +89,7 @@ export const TrialMeta = styled.div<{isVisible: boolean}>`
   display: flex;
   align-items: center;
   position: absolute;
-  top: -5vh;
+  top: -55px;
   color: ${({theme}) => theme.colors.text};
   transition: opacity 0.3s ease-in-out;
   opacity: ${({isVisible}) => (isVisible ? 1 : 0)};
