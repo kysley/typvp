@@ -4,7 +4,12 @@ import {useParams, useLocation} from 'react-router-dom'
 
 import {useStore} from '@/stores'
 import {socket} from '@/helpers/socket'
-import {RaceTypingArea, RacePosition, RaceMeta} from '@/components/Race'
+import {
+  RaceTypingArea,
+  RacePosition,
+  RaceMeta,
+  RaceResult,
+} from '@/components/Race'
 import {TLobby} from '@/types/game'
 import {SingleplayerContainer} from '@/styled/Singleplayer'
 
@@ -95,6 +100,11 @@ const Race = observer(() => {
           <RacePosition playerId={id.id} />
           <SingleplayerContainer>
             <RaceMeta />
+            <RaceResult
+              raceOver={RaceStore.room.state === 'FINISHED'}
+              playerId={id.id}
+              positions={RaceStore.positions}
+            />
             <RaceTypingArea canType={RaceStore.room.state === 'IN_PROGRESS'} />
           </SingleplayerContainer>
         </>
