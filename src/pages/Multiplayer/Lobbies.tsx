@@ -12,7 +12,7 @@ import {useStore} from '@/stores'
 import {socket} from '@/helpers/socket'
 import {UsersIcon, StopwatchIcon, DeviceIcon} from '@/components/icons'
 
-function genGuestIdAndName() {
+export function genGuestIdAndName() {
   const id = Math.random()
     .toString(36)
     .substring(2, 15)
@@ -36,6 +36,7 @@ const Lobbies = observer(() => {
   const [id, setId] = useState<{
     id: string | number
     name: string
+    color?: string
   }>(genGuestIdAndName())
 
   useEffect(() => {
@@ -45,6 +46,7 @@ const Lobbies = observer(() => {
         setId({
           id: UserStore.me.id,
           name: UserStore.me.username,
+          color: UserStore.me.color,
         })
       }
     }
@@ -72,7 +74,7 @@ const Lobbies = observer(() => {
 
   const quickPlay = (e: any) => {
     e.preventDefault()
-    socket.emit('race_queue', {id: id.id, name: id.name})
+    socket.emit('race_queue', {id: id.id, name: id.name, color: id.color})
   }
 
   return (
