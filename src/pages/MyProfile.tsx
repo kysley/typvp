@@ -24,6 +24,12 @@ import {Banner} from '@/components/Banner'
 import InlineEditable from '@/components/InlineEditable'
 import {UPDATE_COLOR} from '@/graphql/mutations'
 
+function normalizeHexCode(hexCode: string) {
+  if (!hexCode.startsWith('#')) hexCode = `#${hexCode}`
+  if (hexCode.length === 1) return ''
+  return hexCode
+}
+
 const MyProfile: FC = observer(() => {
   const {UserStore} = useStore()
   const [pagination, setPagination] = useState({
@@ -58,6 +64,16 @@ const MyProfile: FC = observer(() => {
     }
   }, [result.data])
 
+  const handleColorUpdate = async (colorCallback: string) => {
+    const {
+      data: {updateAccountColor: account},
+    } = await execMutation({
+      color: normalizeHexCode(colorCallback),
+    })
+    console.log(account)
+    UserStore.me = account as any
+  }
+
   if (UserStore.me === undefined && !UserStore.fetchingUser) {
     return <Redirect to="/login" />
   }
@@ -75,7 +91,7 @@ const MyProfile: FC = observer(() => {
             />
           )}
           <ProfileGrid>
-            <AboutArea>
+            <AboutArea color={UserStore.me.color}>
               <div>
                 <ProfileHeader>username</ProfileHeader>
                 <ProfileValue>{UserStore.me.username}</ProfileValue>
@@ -105,10 +121,15 @@ const MyProfile: FC = observer(() => {
                 </ProfileValue>
               </div>
               <div>
-                <ProfileHeader>color</ProfileHeader>
+                <ProfileHeader>
+                  color{' '}
+                  <InlineEditable
+                    currentValue={UserStore.me.color || ''}
+                    onConfirm={handleColorUpdate}
+                  />
+                </ProfileHeader>
                 <ProfileValue>
-                  <ProfileValue>{UserStore.me.color || 'Not Set'}</ProfileValue>
-                  <InlineEditable currentValue={UserStore.me.color || ''} />
+                  {UserStore.me.color ? UserStore.me.color : 'Not Set'}
                 </ProfileValue>
               </div>
             </AboutArea>

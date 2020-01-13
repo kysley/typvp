@@ -18,11 +18,20 @@ export const ProfileGrid = styled.main`
   }
 `
 
+export const ProfileValue = styled.span`
+  font-size: 1.2rem;
+  font-weight: 600;
+`
+
 export const AboutArea = styled.section`
   display: grid;
   grid-template-rows: auto;
   grid-row-gap: 2em;
   margin-bottom: auto;
+
+  ${ProfileValue} {
+    color: ${({color}) => color && color};
+  }
 `
 
 export const ResultsArea = styled.section`
@@ -75,11 +84,6 @@ export const ProfileHeader = styled.h1`
   font-size: 0.9rem;
   font-weight: 400;
   margin: 0;
-`
-
-export const ProfileValue = styled.span`
-  font-size: 1.2rem;
-  font-weight: 600;
 `
 
 export const ResultHeader = styled(ProfileHeader)`
