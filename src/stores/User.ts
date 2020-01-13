@@ -3,7 +3,7 @@ import {observable, action, flow} from 'mobx'
 import {client} from '@/services/Client'
 import ME from '@/graphql/queries/me'
 
-interface IMe {
+type Account = {
   username: string
   id: number
   role: string
@@ -13,17 +13,18 @@ interface IMe {
   createdAt: Date
   testCount: number
   confirmed: boolean
+  color?: string
 }
 
 class UserStore {
   @observable
-  me: IMe | undefined = undefined
+  me: Account | undefined = undefined
 
   @observable
   fetchingUser: boolean = false
 
   @action
-  login = (token: string, account: IMe): void => {
+  login = (token: string, account: Account): void => {
     this.me = account
     localStorage.setItem('token', token)
   }
