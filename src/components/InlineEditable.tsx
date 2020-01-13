@@ -28,6 +28,7 @@ const InlineEditable: FC<InlineEditableProps> = ({
   currentValue = '',
 }) => {
   const [isEditing, setIsEditing] = useState(false)
+  const [value, setValue] = useState(currentValue)
 
   const composedHandleCancel = () => {
     setIsEditing(false)
@@ -36,19 +37,22 @@ const InlineEditable: FC<InlineEditableProps> = ({
 
   const composedHandleConfirm = () => {
     setIsEditing(false)
-    onConfirm()
+    onConfirm(value)
   }
 
   return (
     <>
       {!isEditing ? (
-        <Button
-          intent="none"
-          appearance="link"
+        <span
+          style={{
+            textDecoration: 'underline',
+            cursor: 'pointer',
+            marginLeft: '0.5em',
+          }}
           onClick={() => setIsEditing(true)}
         >
-          Edit Hex Code
-        </Button>
+          Edit
+        </span>
       ) : (
         <>
           <IEContainer>
@@ -58,9 +62,14 @@ const InlineEditable: FC<InlineEditableProps> = ({
               autoComplete="off"
               autoFocus={true}
               placeholder={currentValue}
-              onClick={composedHandleConfirm}
+              value={value}
+              onChange={e => setValue(e.target.value)}
             />
-            <Button intent="none" appearance="primary">
+            <Button
+              intent="none"
+              appearance="primary"
+              onClick={composedHandleConfirm}
+            >
               Save
             </Button>
             <Button
