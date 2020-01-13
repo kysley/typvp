@@ -36,9 +36,7 @@ export const SEEN = gql`
 export const UPDATE_COLOR = gql`
   mutation updateAccountColor($color: String!) {
     updateAccountColor(color: $color) {
-      account {
-        ...AccountFragment
-      }
+      ...AccountFragment
     }
   }
   ${AccountFragment}
