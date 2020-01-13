@@ -5,7 +5,6 @@ const TRIALS = gql`
     trials {
       name
       id
-      wordSet
       difficulty
       minWordLength
       maxWordLength
