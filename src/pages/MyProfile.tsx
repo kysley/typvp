@@ -21,6 +21,7 @@ import Pagination from '@/components/Pagination'
 import {PageHeader} from '@/styled/Theme'
 import {Bubble} from '@/components/Bubble'
 import {Banner} from '@/components/Banner'
+import InlineEditable from '@/components/InlineEditable'
 
 const MyProfile: FC = observer(() => {
   const {UserStore} = useStore()
@@ -98,6 +99,13 @@ const MyProfile: FC = observer(() => {
                 <ProfileHeader>started</ProfileHeader>
                 <ProfileValue>
                   <TimeAgo datetime={UserStore.me.createdAt} />
+                </ProfileValue>
+              </div>
+              <div>
+                <ProfileHeader>color</ProfileHeader>
+                <ProfileValue>
+                  <ProfileValue>{UserStore.me.color || 'Not Set'}</ProfileValue>
+                  <InlineEditable currentValue={UserStore.me.color || ''} />
                 </ProfileValue>
               </div>
             </AboutArea>
