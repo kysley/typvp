@@ -52,13 +52,13 @@ const MyProfile: FC = observer(() => {
     if (result.data) {
       const {
         data: {
-          myResults: {results, testCount},
+          myResults: {results, allTestCount},
         },
       } = result
       if (UserStore.me) {
         UserStore.me!.results = results
-        if (UserStore.me!.testCount !== testCount) {
-          UserStore.me!.testCount = testCount
+        if (UserStore.me!.testCount !== allTestCount) {
+          UserStore.me!.testCount = allTestCount
         }
       }
     }
@@ -71,7 +71,7 @@ const MyProfile: FC = observer(() => {
       color: normalizeHexCode(colorCallback),
     })
     console.log(account)
-    UserStore.me = account as any
+    UserStore.me = {...UserStore.me, ...account} as any
   }
 
   if (UserStore.me === undefined && !UserStore.fetchingUser) {
@@ -165,7 +165,10 @@ const MyProfile: FC = observer(() => {
                   />
                 </div>
                 <Pagination
-                  totalRecords={UserStore.me.testCount}
+                  totalRecords={
+                    (result.data && result.data.myResults.filteredTestCount) ||
+                    UserStore.me.testCount
+                  }
                   pageLimit={15}
                   pageNeighbours={1}
                   onPageChanged={data => {

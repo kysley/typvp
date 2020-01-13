@@ -15,7 +15,8 @@ const ME = gql`
 export const MY_RESULTS = gql`
   query myResults($first: Int!, $skip: Int!, $date: String, $type: String) {
     myResults(filter: {first: $first, skip: $skip, date: $date, type: $type}) {
-      testCount
+      allTestCount
+      filteredTestCount
       results {
         ...ResultFragment
       }
