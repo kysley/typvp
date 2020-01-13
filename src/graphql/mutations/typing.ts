@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-const ADD_RESULT = gql`
+export const ADD_RESULT = gql`
   mutation addNewResult(
     $cpm: Int!
     $rawCpm: Int!
@@ -55,11 +55,3 @@ export const GET_WORD_SET = gql`
     getWordSet
   }
 `
-
-export const SEEN = gql`
-  mutation seen {
-    seen
-  }
-`
-
-export default ADD_RESULT

@@ -8,7 +8,7 @@ import {Input, Label} from '@/styled/TextInput'
 import {SignupForm, SignupFormContainer, FormErrorMsg} from '@/styled/Forms'
 import Button from '@/styled/Button'
 import {useStore} from '@/stores'
-import LOGIN from '@/graphql/mutations/login'
+import {LOGIN} from '@/graphql/mutations'
 
 interface ILoginSchema {
   username: string

@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react'
 import {observer} from 'mobx-react-lite'
 import {Redirect} from 'react-router'
 import TimeAgo from 'timeago-react'
-import {useQuery} from 'urql'
+import {useQuery, useMutation} from 'urql'
 
 import {useStore} from '@/stores'
 import {
@@ -22,6 +22,7 @@ import {PageHeader} from '@/styled/Theme'
 import {Bubble} from '@/components/Bubble'
 import {Banner} from '@/components/Banner'
 import InlineEditable from '@/components/InlineEditable'
+import {UPDATE_COLOR} from '@/graphql/mutations'
 
 const MyProfile: FC = observer(() => {
   const {UserStore} = useStore()
@@ -38,6 +39,8 @@ const MyProfile: FC = observer(() => {
       ...pagination,
     },
   })
+
+  const [mutation, execMutation] = useMutation(UPDATE_COLOR)
 
   useEffect(() => {
     if (result.data) {
