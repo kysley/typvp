@@ -14,7 +14,7 @@ const colorCountdownMap: any = {
   0: '',
 }
 
-const RaceMeta: FC = observer(() => {
+const RaceMeta: FC<{color?: string}> = observer(({color}) => {
   const {RaceStore} = useStore()
 
   return (
@@ -25,7 +25,10 @@ const RaceMeta: FC = observer(() => {
         }}
       >
         <MetaTimer
-          style={{width: `${(RaceStore.room!.secondsRemaining / 60) * 100}%`}}
+          style={{
+            width: `${(RaceStore.room!.secondsRemaining / 60) * 100}%`,
+            background: color,
+          }}
         />
         {RaceStore.room!.state === 'STARTING' && (
           <span>Starting In... {RaceStore.room!.countdown}</span>

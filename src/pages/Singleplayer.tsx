@@ -51,7 +51,7 @@ const Singleplayer: FC = observer(() => {
 
   return (
     <SingleplayerContainer>
-      <SingleplayerMeta />
+      <SingleplayerMeta color={UserStore.me && UserStore.me.color} />
       <TypingArea isGameOver={GameStore.typingState === TypingState.Finished} />
       <SingleplayerResults
         isVisible={GameStore.typingState === TypingState.Finished}

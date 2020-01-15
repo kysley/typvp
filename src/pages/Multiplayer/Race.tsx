@@ -90,7 +90,7 @@ const Race = observer(() => {
         <>
           <RacePosition playerId={id.id} />
           <SingleplayerContainer>
-            <RaceMeta />
+            <RaceMeta color={UserStore.me && UserStore.me.color} />
             <RaceTypingArea canType={RaceStore.room.state === 'IN_PROGRESS'} />
           </SingleplayerContainer>
         </>
