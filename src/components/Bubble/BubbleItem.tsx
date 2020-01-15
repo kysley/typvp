@@ -12,14 +12,7 @@ export const BubbleItemWrapper = styled.li<any>`
   font-size: 0.85rem;
   justify-content: space-between;
   max-height: 36px;
-
-  :first-of-type {
-    border-radius: 6px 6px 0 0;
-  }
-
-  :last-of-type {
-    border-radius: 0 0 6px 6px;
-  }
+  border-radius: 4px;
 
   &:hover {
     background: ${({theme}) => theme.backgrounds.hover};
