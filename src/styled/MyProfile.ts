@@ -6,10 +6,14 @@ export const ProfileGrid = styled.main`
   grid-row-gap: 0.5em;
   grid-column-gap: 4rem;
   align-self: center;
-  width: 80%;
+  width: 100%;
   position: relative;
   margin-bottom: 10em;
   color: ${({theme}) => theme.colors.text};
+
+  @media screen and (min-width: 1330px) {
+    width: 80%;
+  }
 
   > section {
     background: ${({theme}) => theme.backgrounds.secondary};
