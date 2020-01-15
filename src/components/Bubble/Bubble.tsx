@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import {BubbleItem} from '@/components/Bubble/BubbleItem'
 
-interface IBubble {
+type BubbleProps = {
   values: {name: string; value: string}[]
   defaultValue?: string
   callback: (...args: any[]) => any
@@ -47,7 +47,7 @@ const BubbleItems = styled.ul`
   color: ${({theme}) => theme.colors.text};
 `
 
-export const Bubble: FC<IBubble> = ({values, defaultValue, callback}) => {
+export const Bubble: FC<BubbleProps> = ({values, defaultValue, callback}) => {
   const [selected, setSelected] = useState(defaultValue || values[0].name)
   const [open, setOpen] = useState(false)
 

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import {intentMeta} from '@/styled/Theme'
 
-const BannerWrapper = styled.div`
+const BannerWrapper = styled.div<{intent: string}>`
   width: 100%;
   padding: 1em;
   background-color: ${({theme}) => theme.backgrounds.secondary};
@@ -39,14 +39,14 @@ const BannerMessage = styled.p`
   margin-bottom: 0;
 `
 
-interface IBanner {
+type BannerProps = {
   title: string
   message?: string
   closeable?: boolean
   intent?: 'none' | 'success' | 'warning' | 'danger'
 }
 
-export const Banner: FC<IBanner> = ({
+export const Banner: FC<BannerProps> = ({
   title,
   message,
   closeable = false,
