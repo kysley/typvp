@@ -55,3 +55,9 @@ export const GET_WORD_SET = gql`
     getWordSet
   }
 `
+
+export const SAVE_WORD_SET = gql`
+  mutation saveWordSet($wordSet: String!) {
+    saveWordSet(wordSet: $wordSet)
+  }
+`
