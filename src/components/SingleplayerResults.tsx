@@ -2,6 +2,7 @@ import React from 'react'
 import {observer} from 'mobx-react-lite'
 import {Link} from 'react-router-dom'
 import {AnimatePresence} from 'framer-motion'
+import {useMutation} from 'urql'
 
 import {useStore} from '@/stores'
 import {
@@ -10,6 +11,8 @@ import {
   ResultsNumber,
   ResultsStatus,
 } from '@/styled/Singleplayer'
+import Button from '@/styled/Button'
+import {SaveIcon} from '@/components/icons'
 
 interface ISingleplayerResults {
   isVisible: boolean
@@ -18,6 +21,7 @@ interface ISingleplayerResults {
 const SingleplayerResults: React.FC<ISingleplayerResults> = observer(
   ({isVisible}) => {
     const {GameStore, UserStore} = useStore()
+
     return (
       <AnimatePresence>
         {isVisible && (
@@ -27,6 +31,11 @@ const SingleplayerResults: React.FC<ISingleplayerResults> = observer(
             transition={{duration: 0.425}}
             exit={{opacity: 0}}
           >
+            <div style={{gridColumn: '1 / span 3'}}>
+              <Button intent="none" appearance="default">
+                <SaveIcon /> <span>Save as Trial</span>
+              </Button>
+            </div>
             <div>
               <ResultsHeader>cpm (raw)</ResultsHeader>
               <ResultsNumber>{GameStore.rawCpm}</ResultsNumber>
@@ -59,7 +68,7 @@ const SingleplayerResults: React.FC<ISingleplayerResults> = observer(
                   <Link to="/signup">Signup</Link> or{' '}
                   <Link to="/login">Login</Link> to save your results!
                 </>
-              )}{' '}
+              )}
             </ResultsStatus>
           </ResultsContainer>
         )}
