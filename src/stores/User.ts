@@ -1,7 +1,7 @@
 import {observable, action, flow} from 'mobx'
 
 import {client} from '@/services/Client'
-import ME from '@/graphql/queries/me'
+import {ME} from '@/graphql/queries'
 
 type Account = {
   username: string

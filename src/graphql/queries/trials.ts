@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-const TRIALS = gql`
+export const TRIALS = gql`
   query trials {
     trials {
       name
@@ -24,5 +24,3 @@ export const TRIAL = gql`
     }
   }
 `
-
-export default TRIALS

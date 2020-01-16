@@ -16,7 +16,7 @@ import {
   ResultValue,
   ResultFilter,
 } from '@/styled/MyProfile'
-import {MY_RESULTS} from '@/graphql/queries/me'
+import {MY_RESULTS} from '@/graphql/queries'
 import Pagination from '@/components/Pagination'
 import {PageHeader} from '@/styled/Theme'
 import {Bubble} from '@/components/Bubble'

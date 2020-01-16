@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import {AccountFragmentWithResults, ResultFragment} from '@/graphql/fragments'
 
-const ME = gql`
+export const ME = gql`
   query me {
     me {
       ...AccountResultsFragment
@@ -25,4 +25,15 @@ export const MY_RESULTS = gql`
   ${ResultFragment}
 `
 
-export default ME
+export const MY_TRIALS = gql`
+  query myTrials {
+    myTrials {
+      name
+      id
+      wordSet
+      difficulty
+      minWordLength
+      maxWordLength
+    }
+  }
+`
