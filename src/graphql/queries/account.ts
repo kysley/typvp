@@ -30,10 +30,11 @@ export const MY_TRIALS = gql`
     myTrials {
       name
       id
-      wordSet
       difficulty
       minWordLength
       maxWordLength
+      custom
+      private
     }
   }
 `

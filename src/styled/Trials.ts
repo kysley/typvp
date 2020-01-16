@@ -4,8 +4,8 @@ import {colors} from '@/styled/Theme'
 
 export const TrialCardGrid = styled.div`
   display: grid;
-  /* grid-template-columns: 1fr 1fr 1fr; */
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: 1fr 1fr 1fr;
+  /* grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); */
   grid-gap: 2em;
   width: 80%;
   align-self: center;
@@ -96,5 +96,33 @@ export const TrialMeta = styled.div<{isVisible: boolean}>`
 
   > * {
     margin-right: 1em;
+  }
+`
+
+export const TrialSplitter = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin: 2em 0;
+  color: ${({theme}) => theme.colors.text};
+
+  ::before {
+    width: 42%;
+    align-self: center;
+    height: 1px;
+    display: block;
+    content: '';
+    background: ${({theme}) => theme.border.default};
+    position: absolute;
+    left: 0;
+  }
+  ::after {
+    width: 42%;
+    align-self: center;
+    height: 1px;
+    display: block;
+    content: '';
+    background: ${({theme}) => theme.border.default};
+    position: absolute;
+    right: 0;
   }
 `

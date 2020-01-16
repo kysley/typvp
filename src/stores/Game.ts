@@ -1,5 +1,5 @@
 import {RefObject} from 'react'
-import {observable, action, flow} from 'mobx'
+import {observable, action, flow, computed} from 'mobx'
 
 import {TypingState} from '@/types/game'
 import {client} from '@/services/Client'
@@ -55,6 +55,11 @@ class GameStore {
   fetchingWords: boolean = false
 
   inputRef: RefObject<HTMLInputElement> | null = null
+
+  @computed
+  get exportedWordSet() {
+    return this.words.join('|')
+  }
 
   @action
   calculateResults = (): any => {

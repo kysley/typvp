@@ -1,53 +1,103 @@
 import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import {useQuery} from 'urql'
+import {observer} from 'mobx-react-lite'
 
-import TRIALS from '@/graphql/queries/trials'
 import {
   TrialCard,
   TrialCardGrid,
   TrialName,
   TrialDifficulty,
   TrialFold,
+  TrialSplitter,
 } from '@/styled/Trials'
 import {PageHeader} from '@/styled/Theme'
+import {TRIALS, MY_TRIALS} from '@/graphql/queries'
+import {SkeletonLine} from '@/styled/Skeleton'
+import {useStore} from '@/stores'
 
-const Trials = () => {
-  const [trials, setTrials] = useState([])
-  const [result] = useQuery({
+const Trials = observer(() => {
+  const {UserStore} = useStore()
+  const [ready, setReady] = useState(false)
+
+  const [trialsResult] = useQuery({
     query: TRIALS,
   })
 
+  const [myTrialsResult] = useQuery({
+    query: MY_TRIALS,
+    pause: !ready,
+  })
+
   useEffect(() => {
-    if (result.data && !result.error) {
-      const {
-        data: {trials},
-      } = result
-      setTrials(trials)
+    if (UserStore.me) {
+      setReady(true)
     }
-  }, [result])
+  }, [UserStore.me])
 
   return (
     <>
       <PageHeader>Trials</PageHeader>
       <TrialCardGrid>
-        {trials.map((t: any) => (
-          <Link to={`trial/${t.id}`} key={t.id}>
-            <TrialCard difficulty={t.difficulty}>
-              <TrialName>{t.name}</TrialName>
-              <TrialDifficulty difficulty={t.difficulty}>
-                {t.difficulty}
-              </TrialDifficulty>
-              <TrialFold>
-                <p>min length: {t.minWordLength}</p>
-                <p>max length: {t.maxWordLength}</p>
-              </TrialFold>
-            </TrialCard>
-          </Link>
-        ))}
+        {trialsResult.fetching ? (
+          <>
+            {['1', '2', '3', '4'].map((item: string) => (
+              <SkeletonLine key={item} style={{height: '140px'}} />
+            ))}
+          </>
+        ) : (
+          <>
+            {trialsResult.data.trials.map((t: any) => (
+              <Link to={`trial/${t.id}`} key={t.id}>
+                <TrialCard difficulty={t.difficulty}>
+                  <TrialName>{t.name}</TrialName>
+                  <TrialDifficulty difficulty={t.difficulty}>
+                    {t.difficulty}
+                  </TrialDifficulty>
+                  <TrialFold>
+                    <p>min length: {t.minWordLength}</p>
+                    <p>max length: {t.maxWordLength}</p>
+                  </TrialFold>
+                </TrialCard>
+              </Link>
+            ))}
+          </>
+        )}
       </TrialCardGrid>
+      {UserStore.me && (
+        <>
+          <TrialSplitter>Your Trials</TrialSplitter>
+          <TrialCardGrid>
+            {myTrialsResult.fetching ? (
+              <>
+                {['1', '2', '3'].map((item: string) => (
+                  <SkeletonLine key={item} style={{height: '140px'}} />
+                ))}
+              </>
+            ) : (
+              <>
+                {myTrialsResult.data &&
+                  myTrialsResult.data.myTrials.map((t: any) => (
+                    <Link to={`trial/${t.id}`} key={t.id}>
+                      <TrialCard difficulty={t.difficulty}>
+                        <TrialName>{t.name}</TrialName>
+                        <TrialDifficulty difficulty={t.difficulty}>
+                          {t.difficulty}
+                        </TrialDifficulty>
+                        <TrialFold>
+                          <p>min length: {t.minWordLength}</p>
+                          <p>max length: {t.maxWordLength}</p>
+                        </TrialFold>
+                      </TrialCard>
+                    </Link>
+                  ))}
+              </>
+            )}
+          </TrialCardGrid>
+        </>
+      )}
     </>
   )
-}
+})
 
 export default Trials

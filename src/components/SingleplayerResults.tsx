@@ -13,14 +13,22 @@ import {
 } from '@/styled/Singleplayer'
 import Button from '@/styled/Button'
 import {SaveIcon} from '@/components/icons'
+import {SAVE_WORD_SET} from '@/graphql/mutations'
 
-interface ISingleplayerResults {
+type SingleplayerResultsProps = {
   isVisible: boolean
 }
 
-const SingleplayerResults: React.FC<ISingleplayerResults> = observer(
+const SingleplayerResults: React.FC<SingleplayerResultsProps> = observer(
   ({isVisible}) => {
     const {GameStore, UserStore} = useStore()
+    const [mutation, execMutation] = useMutation(SAVE_WORD_SET)
+
+    const saveWordSet = () => {
+      execMutation({
+        wordSet: GameStore.exportedWordSet,
+      })
+    }
 
     return (
       <AnimatePresence>
@@ -31,11 +39,21 @@ const SingleplayerResults: React.FC<ISingleplayerResults> = observer(
             transition={{duration: 0.425}}
             exit={{opacity: 0}}
           >
-            <div style={{gridColumn: '1 / span 3'}}>
-              <Button intent="none" appearance="default">
-                <SaveIcon /> <span>Save as Trial</span>
-              </Button>
-            </div>
+            {UserStore.me && (
+              <div style={{gridColumn: '1 / span 3'}}>
+                <Button
+                  intent="none"
+                  appearance="default"
+                  onClick={saveWordSet}
+                  disabled={mutation.data.saveWordSet}
+                >
+                  <SaveIcon />
+                  <span>
+                    {mutation.data.saveWordSet ? 'Saved!' : 'Save as Trial'}
+                  </span>
+                </Button>
+              </div>
+            )}
             <div>
               <ResultsHeader>cpm (raw)</ResultsHeader>
               <ResultsNumber>{GameStore.rawCpm}</ResultsNumber>
