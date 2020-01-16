@@ -27,7 +27,7 @@
     "socket.io-client": "^2.3.0",
     "styled-components": "^5.0.0-rc.1",
     "timeago-react": "^3.0.0",
-    "urql": "^1.7.0",
+    "urql": "^1.8.2",
     "yup": "^0.28.0"
   },
   "devDependencies": {
