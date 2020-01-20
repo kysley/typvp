@@ -22,6 +22,15 @@ const IEContainer = styled.div`
   }
 `
 
+const IEButton = styled.button`
+  text-decoration: underline;
+  color: ${({theme}) => theme.colors.text};
+  background: 0;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+`
+
 const InlineEditable: FC<InlineEditableProps> = ({
   onCancel = () => {},
   onConfirm = () => {},
@@ -30,12 +39,14 @@ const InlineEditable: FC<InlineEditableProps> = ({
   const [isEditing, setIsEditing] = useState(false)
   const [value, setValue] = useState(currentValue)
 
-  const composedHandleCancel = () => {
+  const composedHandleCancel = (e: any) => {
+    e.preventDefault()
     setIsEditing(false)
     onCancel()
   }
 
-  const composedHandleConfirm = () => {
+  const composedHandleConfirm = (e: any) => {
+    e.preventDefault()
     setIsEditing(false)
     onConfirm(value)
   }
@@ -43,16 +54,18 @@ const InlineEditable: FC<InlineEditableProps> = ({
   return (
     <>
       {!isEditing ? (
-        <span
-          style={{
-            textDecoration: 'underline',
-            cursor: 'pointer',
-            marginLeft: '0.5em',
-          }}
-          onClick={() => setIsEditing(true)}
-        >
-          Edit
-        </span>
+        <>
+          <span>{currentValue}</span>
+          <IEButton
+            onClick={e => {
+              e.preventDefault()
+              e.stopPropagation()
+              setIsEditing(true)
+            }}
+          >
+            Edit
+          </IEButton>
+        </>
       ) : (
         <>
           <IEContainer>
@@ -64,18 +77,19 @@ const InlineEditable: FC<InlineEditableProps> = ({
               placeholder={currentValue}
               value={value}
               onChange={e => setValue(e.target.value)}
+              onClick={e => e.preventDefault()}
             />
             <Button
               intent="none"
               appearance="primary"
-              onClick={composedHandleConfirm}
+              onClick={e => composedHandleConfirm(e)}
             >
               Save
             </Button>
             <Button
               intent="danger"
               appearance="link"
-              onClick={composedHandleCancel}
+              onClick={e => composedHandleCancel(e)}
             >
               Cancel
             </Button>
