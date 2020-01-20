@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import {useQuery} from 'urql'
 import {observer} from 'mobx-react-lite'
+import {useModal} from 'react-modal-hook'
 
 import {
   TrialCard,
@@ -10,15 +11,30 @@ import {
   TrialDifficulty,
   TrialFold,
   TrialSplitter,
+  TrialActions,
 } from '@/styled/Trials'
 import {PageHeader} from '@/styled/Theme'
 import {TRIALS, MY_TRIALS} from '@/graphql/queries'
 import {SkeletonLine} from '@/styled/Skeleton'
 import {useStore} from '@/stores'
+import InlineEditable from '@/components/InlineEditable'
+import {TrashIcon} from '@/components/icons'
+import Popover from '@/components/Popover'
 
 const Trials = observer(() => {
   const {UserStore} = useStore()
   const [ready, setReady] = useState(false)
+  const [showModal, closeModal] = useModal(() => (
+    <Popover
+      action="Delete"
+      title="Delete Trial?"
+      desc="Are you sure you want to delete this Trial?"
+      onClose={closeModal}
+      onConfirm={() => {
+        console.log('yay')
+      }}
+    />
+  ))
 
   const [trialsResult] = useQuery({
     query: TRIALS,
@@ -34,6 +50,11 @@ const Trials = observer(() => {
       setReady(true)
     }
   }, [UserStore.me])
+
+  const cb = e => {
+    e.preventDefault()
+    console.log('asd')
+  }
 
   return (
     <>
@@ -80,7 +101,23 @@ const Trials = observer(() => {
                   myTrialsResult.data.myTrials.map((t: any) => (
                     <Link to={`trial/${t.id}`} key={t.id}>
                       <TrialCard difficulty={t.difficulty}>
-                        <TrialName>{t.name}</TrialName>
+                        <TrialActions>
+                          <div
+                            onClick={e => {
+                              showModal()
+                              e.preventDefault()
+                            }}
+                          >
+                            <TrashIcon />
+                          </div>
+                        </TrialActions>
+                        {/* <TrialName>{t.name}</TrialName> */}
+                        <TrialName>
+                          <InlineEditable
+                            currentValue={t.name}
+                            onConfirm={cb}
+                          />
+                        </TrialName>
                         <TrialDifficulty difficulty={t.difficulty}>
                           {t.difficulty}
                         </TrialDifficulty>

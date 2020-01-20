@@ -26,32 +26,28 @@ const DifficultyColour = {
   HARD: colors.r300,
 }
 
+export const TrialActions = styled.div`
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  opacity: 0;
+  transition: all 0.1s ease-in-out;
+`
+
 export const TrialCard = styled.div<IDifficulty>`
   border-radius: 6px;
   background: ${({theme}) => theme.backgrounds.secondary};
   color: ${({theme}) => theme.colors.text};
   padding: 1em;
   position: relative;
-  overflow: hidden;
   transition: transform 0.1s ease-in-out;
-
-  &:before {
-    display: block;
-    position: absolute;
-    content: '';
-    width: 100%;
-    top: 0;
-    left: 0;
-    background: transparent;
-    height: 0px;
-    transition: all 0.1s ease-in-out;
-    background: ${({difficulty}) => DifficultyColour[difficulty]};
-  }
+  border: 2px solid transparent;
 
   :hover {
     transform: translateY(-3px);
-    &:before {
-      height: 2px;
+    border: 2px solid ${({difficulty}) => DifficultyColour[difficulty]};
+    ${TrialActions} {
+      opacity: 1;
     }
   }
 `
