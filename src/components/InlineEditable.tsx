@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import Button from '@/styled/Button'
 import {Input} from '@/styled/TextInput'
+import {EditIcon} from '@/components/icons'
 
 type InlineEditableProps = {
   onCancel?: (...args: any[]) => any
@@ -23,12 +24,12 @@ const IEContainer = styled.div`
 `
 
 const IEButton = styled.button`
-  text-decoration: underline;
   color: ${({theme}) => theme.colors.text};
   background: 0;
   outline: 0;
   border: 0;
   cursor: pointer;
+  display: flex;
 `
 
 const InlineEditable: FC<InlineEditableProps> = ({
@@ -54,47 +55,45 @@ const InlineEditable: FC<InlineEditableProps> = ({
   return (
     <>
       {!isEditing ? (
-        <>
+        <div
+          style={{display: 'flex', cursor: 'auto'}}
+          onClick={e => {
+            e.preventDefault()
+            setIsEditing(true)
+          }}
+        >
           <span>{currentValue}</span>
-          <IEButton
-            onClick={e => {
-              e.preventDefault()
-              e.stopPropagation()
-              setIsEditing(true)
-            }}
-          >
-            Edit
+          <IEButton>
+            <EditIcon />
           </IEButton>
-        </>
+        </div>
       ) : (
-        <>
-          <IEContainer>
-            <Input
-              name="color"
-              type="text"
-              autoComplete="off"
-              autoFocus={true}
-              placeholder={currentValue}
-              value={value}
-              onChange={e => setValue(e.target.value)}
-              onClick={e => e.preventDefault()}
-            />
-            <Button
-              intent="none"
-              appearance="primary"
-              onClick={e => composedHandleConfirm(e)}
-            >
-              Save
-            </Button>
-            <Button
-              intent="danger"
-              appearance="link"
-              onClick={e => composedHandleCancel(e)}
-            >
-              Cancel
-            </Button>
-          </IEContainer>
-        </>
+        <IEContainer>
+          <Input
+            name="color"
+            type="text"
+            autoComplete="off"
+            autoFocus={true}
+            placeholder={currentValue}
+            value={value}
+            onChange={e => setValue(e.target.value)}
+            onClick={e => e.preventDefault()}
+          />
+          <Button
+            intent="danger"
+            appearance="link"
+            onClick={e => composedHandleCancel(e)}
+          >
+            Cancel
+          </Button>
+          <Button
+            intent="none"
+            appearance="primary"
+            onClick={e => composedHandleConfirm(e)}
+          >
+            Save
+          </Button>
+        </IEContainer>
       )}
     </>
   )
