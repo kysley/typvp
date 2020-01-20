@@ -11,6 +11,7 @@ export {StopwatchIcon} from './Stopwatch'
 export {UsersIcon} from './Users'
 export {DeviceIcon} from './Device'
 export {SaveIcon} from './Save'
+export {TrashIcon} from './Trash'
 
 export const SVGDefault = styled.svg`
   height: 1.5em;
