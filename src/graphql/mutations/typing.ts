@@ -61,3 +61,27 @@ export const SAVE_WORD_SET = gql`
     saveWordSet(wordSet: $wordSet)
   }
 `
+
+export const UPDATE_TRIAL_INFO = gql`
+  mutation updateTrialInfo(
+    $trialId: ID!
+    $name: String
+    $wordSet: String
+    $private: Boolean
+  ) {
+    updateTrialInfo(
+      trialId: $trialId
+      name: $name
+      wordSet: $wordSet
+      private: $private
+    ) {
+      id
+    }
+  }
+`
+
+export const DELETE_TRIAL = gql`
+  mutation deleteTrial($trialId: ID!) {
+    deleteTrial(trialId: $trialId)
+  }
+`
