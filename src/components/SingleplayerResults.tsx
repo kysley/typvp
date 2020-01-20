@@ -45,12 +45,10 @@ const SingleplayerResults: React.FC<SingleplayerResultsProps> = observer(
                   intent="none"
                   appearance="default"
                   onClick={saveWordSet}
-                  disabled={mutation.data.saveWordSet}
+                  disabled={mutation.data || false}
                 >
                   <SaveIcon />
-                  <span>
-                    {mutation.data.saveWordSet ? 'Saved!' : 'Save as Trial'}
-                  </span>
+                  <span>{mutation.data ? 'Saved!' : 'Save as Trial'}</span>
                 </Button>
               </div>
             )}
