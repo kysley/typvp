@@ -54,17 +54,17 @@ const Trials = observer(() => {
       {UserStore.me && (
         <>
           <TrialSplitter>Your Trials</TrialSplitter>
-          <TrialCardGrid>
-            {myTrialsResult.fetching ? (
-              <>
-                {['1', '2', '3'].map((item: string) => (
-                  <SkeletonLine key={item} style={{height: '140px'}} />
-                ))}
-              </>
-            ) : (
-              <>
-                {myTrialsResult.data &&
-                  myTrialsResult.data.myTrials.map((t: any) => (
+          {myTrialsResult.fetching ? (
+            <TrialCardGrid>
+              {['1', '2', '3'].map((item: string) => (
+                <SkeletonLine key={item} style={{height: '140px'}} />
+              ))}
+            </TrialCardGrid>
+          ) : (
+            <>
+              {myTrialsResult.data && myTrialsResult.data.myTrials.length ? (
+                <TrialCardGrid>
+                  {myTrialsResult.data.myTrials.map((t: any) => (
                     <OwnedTrialCard
                       key={t.id}
                       trial={t}
@@ -72,9 +72,14 @@ const Trials = observer(() => {
                       deleteTrial={execDeleteTrial}
                     />
                   ))}
-              </>
-            )}
-          </TrialCardGrid>
+                </TrialCardGrid>
+              ) : (
+                <span>
+                  It doesn't look like you have any Personal Trials saved yet.
+                </span>
+              )}
+            </>
+          )}
         </>
       )}
     </>
