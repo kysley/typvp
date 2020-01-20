@@ -123,13 +123,17 @@ const MyProfile: FC = observer(() => {
               <div>
                 <ProfileHeader>
                   color{' '}
+                  {/* <InlineEditable
+                    currentValue={UserStore.me.color || ''}
+                    onConfirm={handleColorUpdate}
+                  /> */}
+                </ProfileHeader>
+                <ProfileValue>
+                  {/* {UserStore.me.color ? UserStore.me.color : 'Not Set'} */}
                   <InlineEditable
                     currentValue={UserStore.me.color || ''}
                     onConfirm={handleColorUpdate}
                   />
-                </ProfileHeader>
-                <ProfileValue>
-                  {UserStore.me.color ? UserStore.me.color : 'Not Set'}
                 </ProfileValue>
               </div>
             </AboutArea>
