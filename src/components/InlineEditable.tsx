@@ -56,7 +56,7 @@ const InlineEditable: FC<InlineEditableProps> = ({
     <>
       {!isEditing ? (
         <div
-          style={{display: 'flex', cursor: 'auto'}}
+          style={{display: 'inline-flex', cursor: 'auto'}}
           onClick={e => {
             e.preventDefault()
             setIsEditing(true)
