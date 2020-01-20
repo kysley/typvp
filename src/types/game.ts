@@ -1,4 +1,4 @@
-enum TypingState {
+export enum TypingState {
   NotStarted,
   InProgress,
   Finished,
@@ -22,4 +22,11 @@ export type TLobby = {
   id: string
 }
 
-export {TypingState}
+export type TTrial = {
+  name: string
+  id: string
+  wordSet: string
+  difficulty: string
+  minWordLength: number
+  maxWordLength: number
+}
