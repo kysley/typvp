@@ -82,6 +82,8 @@ export const UPDATE_TRIAL_INFO = gql`
 
 export const DELETE_TRIAL = gql`
   mutation deleteTrial($trialId: ID!) {
-    deleteTrial(trialId: $trialId)
+    deleteTrial(trialId: $trialId) {
+      id
+    }
   }
 `
