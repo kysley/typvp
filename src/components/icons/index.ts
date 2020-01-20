@@ -12,6 +12,7 @@ export {UsersIcon} from './Users'
 export {DeviceIcon} from './Device'
 export {SaveIcon} from './Save'
 export {TrashIcon} from './Trash'
+export {EditIcon} from './Edit'
 
 export const SVGDefault = styled.svg`
   height: 1.5em;
