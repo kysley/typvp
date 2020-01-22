@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import {AccountFragmentWithResults, ResultFragment} from '@/graphql/fragments'
 
-const ME = gql`
+export const ME = gql`
   query me {
     me {
       ...AccountResultsFragment
@@ -15,7 +15,8 @@ const ME = gql`
 export const MY_RESULTS = gql`
   query myResults($first: Int!, $skip: Int!, $date: String, $type: String) {
     myResults(filter: {first: $first, skip: $skip, date: $date, type: $type}) {
-      testCount
+      allTestCount
+      filteredTestCount
       results {
         ...ResultFragment
       }
@@ -24,4 +25,16 @@ export const MY_RESULTS = gql`
   ${ResultFragment}
 `
 
-export default ME
+export const MY_TRIALS = gql`
+  query myTrials {
+    myTrials {
+      name
+      id
+      difficulty
+      minWordLength
+      maxWordLength
+      custom
+      private
+    }
+  }
+`

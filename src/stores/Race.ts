@@ -2,7 +2,7 @@ import {observable, action, computed} from 'mobx'
 
 import {TypingState, TLobby} from '@/types/game'
 import {client} from '@/services/Client'
-import {SEEN} from '@/graphql/mutations/addResult'
+import {SEEN} from '@/graphql/mutations'
 
 class RaceStore {
   @observable

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import {bundle} from '@/styled/Theme'
 
-interface ButtonProps {
+type ButtonProps = {
   intent: 'none' | 'success' | 'warning' | 'danger'
   appearance: 'default' | 'primary' | 'secondary' | 'link'
   to?: string
@@ -36,6 +36,10 @@ const Button = styled.button<ButtonProps>`
   &:disabled {
     opacity: 0.4;
     cursor: not-allowed;
+  }
+
+  svg {
+    fill: ${({theme, intent}) => `${bundle.default[intent].text[theme.name]}`}
   }
 
   ${({intent, appearance}) =>

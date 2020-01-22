@@ -1,9 +1,9 @@
 import {RefObject} from 'react'
-import {observable, action, flow} from 'mobx'
+import {observable, action, flow, computed} from 'mobx'
 
 import {TypingState} from '@/types/game'
 import {client} from '@/services/Client'
-import {GET_WORD_SET, SEEN} from '@/graphql/mutations/addResult'
+import {GET_WORD_SET, SEEN} from '@/graphql/mutations'
 
 let timeout: any = null
 class GameStore {
@@ -55,6 +55,11 @@ class GameStore {
   fetchingWords: boolean = false
 
   inputRef: RefObject<HTMLInputElement> | null = null
+
+  @computed
+  get exportedWordSet() {
+    return this.words.join('|')
+  }
 
   @action
   calculateResults = (): any => {

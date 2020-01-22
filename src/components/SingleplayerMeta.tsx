@@ -6,7 +6,7 @@ import {TypingState} from '@/types/game'
 import {MetaContainer, MetaTimer} from '@/styled/Singleplayer'
 import {RefreshIcon} from '@/components/icons/Refresh'
 
-const SingleplayerMeta: FC = observer(() => {
+const SingleplayerMeta: FC<{color?: string}> = observer(({color}) => {
   const [percent, setPercent] = useState<number>(100)
   const [spin, setSpin] = useState(false)
 
@@ -28,7 +28,7 @@ const SingleplayerMeta: FC = observer(() => {
   return (
     <>
       <MetaContainer>
-        <MetaTimer style={{width: `${percent * 100}%`}} />
+        <MetaTimer style={{width: `${percent * 100}%`, background: color}} />
         <span>
           Time Left:{' '}
           {GameStore.typingState === TypingState.Finished

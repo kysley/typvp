@@ -24,6 +24,7 @@ export const AccountFragment = gql`
     lastPlayed
     testCount
     createdAt
+    color
   }
 `
 

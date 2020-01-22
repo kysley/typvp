@@ -86,7 +86,7 @@ const RacePosition: FC<{playerId: string | number}> = observer(({playerId}) => {
         {RaceStore.room!.players.map((player: any, idx: any) => (
           <PlayerBar
             style={{
-              background: `${colors[idx]}`,
+              background: `${player.color || colors[idx]}`,
               width: `${(player.wpm / RaceStore.fastestPlayer) * 100}%`,
             }}
             key={player.id}
