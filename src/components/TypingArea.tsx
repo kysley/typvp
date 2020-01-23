@@ -19,6 +19,7 @@ interface ITypingArea {
 
 const TypingArea: FC<ITypingArea> = observer(props => {
   const wordsRef = useRef<null | HTMLDivElement>(null)
+  const inputRef = useRef<null | HTMLInputElement>(null)
 
   const {GameStore} = useStore()
 
@@ -27,6 +28,12 @@ const TypingArea: FC<ITypingArea> = observer(props => {
       wordsRef.current!.children[GameStore.wordIndex].scrollIntoView(true)
     }
   }, [GameStore.wordIndex, GameStore.words])
+
+  useEffect(() => {
+    if (inputRef.current !== null) {
+      GameStore.inputRef = inputRef
+    }
+  }, [inputRef])
 
   return (
     <TypingAreaContainer>
@@ -41,8 +48,8 @@ const TypingArea: FC<ITypingArea> = observer(props => {
           <>
             {GameStore.words.map((word: string, i: number) => (
               <Word
+                isMatch={GameStore.typedHistory[i] === GameStore.words[i]}
                 word={word}
-                index={i}
                 key={`${word}-${i}`}
                 variant={getWordType(i, GameStore.wordIndex)}
               />
@@ -51,13 +58,14 @@ const TypingArea: FC<ITypingArea> = observer(props => {
         )}
       </TypingAreaInner>
       <Input
+        ref={inputRef}
         hasWarning={GameStore.isSpellingIncorrect}
         disabled={props.isGameOver}
-        placeholder="Start..."
         value={GameStore.typedWord}
         onChange={e => GameStore.onKeyDown(e)}
         onKeyDown={e => GameStore.onAction(e)}
         aria-label="Text Input"
+        autoFocus={true}
       />
     </TypingAreaContainer>
   )

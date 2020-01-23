@@ -5,7 +5,7 @@ import {colors} from '@/styled/Theme'
 
 export const SingleplayerContainer = styled.div`
   width: 90%;
-  max-width: 750px;
+  max-width: 900px;
   display: grid;
   align-self: center;
   top: 31vh;

@@ -1,8 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, FC} from 'react'
 
 import {DropdownWrapper} from '@/styled/Dropdown'
 
-export const Dropdown = ({children, header}: any) => {
+export const Dropdown: FC<{header: string | React.ReactNode}> = ({
+  children,
+  header,
+}) => {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const handleClickOutside = (e: any) => {

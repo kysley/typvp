@@ -1,26 +1,19 @@
-import React from 'react'
-import {observer} from 'mobx-react-lite'
+import React, {FC, memo} from 'react'
 
-import {useStore} from '@/stores'
 import SingleWord from '@/styled/Word'
 
-interface WordProps {
-  index: number
+type WordProps = {
   variant: 'current' | 'done' | 'awaiting'
   word: string
+  isMatch: boolean
 }
 
-const Word = observer(({variant, index, word}: WordProps) => {
-  const {GameStore} = useStore()
-
+const Word: FC<WordProps> = ({variant, word, isMatch}) => {
   return (
-    <SingleWord
-      isMatch={GameStore.typedHistory[index] === GameStore.words[index]}
-      variant={variant}
-    >
+    <SingleWord isMatch={isMatch} variant={variant}>
       {word}
     </SingleWord>
   )
-})
+}
 
-export default Word
+export default memo(Word)

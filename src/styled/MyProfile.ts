@@ -6,10 +6,14 @@ export const ProfileGrid = styled.main`
   grid-row-gap: 0.5em;
   grid-column-gap: 4rem;
   align-self: center;
-  width: 80%;
+  width: 100%;
   position: relative;
   margin-bottom: 10em;
   color: ${({theme}) => theme.colors.text};
+
+  @media screen and (min-width: 1330px) {
+    width: 80%;
+  }
 
   > section {
     background: ${({theme}) => theme.backgrounds.secondary};
@@ -18,11 +22,20 @@ export const ProfileGrid = styled.main`
   }
 `
 
+export const ProfileValue = styled.span`
+  font-size: 1.2rem;
+  font-weight: 600;
+`
+
 export const AboutArea = styled.section`
   display: grid;
   grid-template-rows: auto;
   grid-row-gap: 2em;
   margin-bottom: auto;
+
+  ${ProfileValue} {
+    color: ${({color}) => color && color};
+  }
 `
 
 export const ResultsArea = styled.section`
@@ -75,11 +88,6 @@ export const ProfileHeader = styled.h1`
   font-size: 0.9rem;
   font-weight: 400;
   margin: 0;
-`
-
-export const ProfileValue = styled.span`
-  font-size: 1.2rem;
-  font-weight: 600;
 `
 
 export const ResultHeader = styled(ProfileHeader)`

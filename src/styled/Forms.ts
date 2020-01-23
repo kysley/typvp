@@ -7,14 +7,14 @@ export const SignupFormContainer = styled.div`
   max-width: 30vw;
   min-width: 30vw;
   align-self: center;
-  background: ${({theme}) => theme.backgrounds.secondary};
+  /* background: ${({theme}) => theme.backgrounds.secondary}; */
   padding: 3em 3em;
   border-radius: 6px;
   color: ${({theme}) => theme.colors.text};
 
   h1 {
-    margin: 0 0 0.5em 0;
-    font-size: 2.65rem;
+    margin: 0 0 0 0;
+    font-size: 2.5rem;
     font-weight: 700;
   }
 `

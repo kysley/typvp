@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-const ADD_RESULT = gql`
+export const ADD_RESULT = gql`
   mutation addNewResult(
     $cpm: Int!
     $rawCpm: Int!
@@ -56,10 +56,34 @@ export const GET_WORD_SET = gql`
   }
 `
 
-export const SEEN = gql`
-  mutation seen {
-    seen
+export const SAVE_WORD_SET = gql`
+  mutation saveWordSet($wordSet: String!) {
+    saveWordSet(wordSet: $wordSet)
   }
 `
 
-export default ADD_RESULT
+export const UPDATE_TRIAL_INFO = gql`
+  mutation updateTrialInfo(
+    $trialId: ID!
+    $name: String
+    $wordSet: String
+    $private: Boolean
+  ) {
+    updateTrialInfo(
+      trialId: $trialId
+      name: $name
+      wordSet: $wordSet
+      private: $private
+    ) {
+      id
+    }
+  }
+`
+
+export const DELETE_TRIAL = gql`
+  mutation deleteTrial($trialId: ID!) {
+    deleteTrial(trialId: $trialId) {
+      id
+    }
+  }
+`

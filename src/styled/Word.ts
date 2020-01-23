@@ -6,7 +6,7 @@ interface SingleWordProps {
 }
 
 const SingleWord = styled.span<SingleWordProps>`
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin-bottom: 4px;
   padding: 4px 5px;
   border-radius: 5px;
@@ -18,7 +18,8 @@ const SingleWord = styled.span<SingleWordProps>`
         ? theme.colors.match
         : theme.colors.incorrect
       : theme.colors.text};
-  color: ${({variant, theme}) => variant === 'current' && theme.colors.current};
+  background: ${({variant, theme}) =>
+    variant === 'current' && theme.colors.current};
 `
 
 export default SingleWord

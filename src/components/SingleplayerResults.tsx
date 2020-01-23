@@ -2,6 +2,7 @@ import React from 'react'
 import {observer} from 'mobx-react-lite'
 import {Link} from 'react-router-dom'
 import {AnimatePresence} from 'framer-motion'
+import {useMutation} from 'urql'
 
 import {useStore} from '@/stores'
 import {
@@ -10,14 +11,25 @@ import {
   ResultsNumber,
   ResultsStatus,
 } from '@/styled/Singleplayer'
+import Button from '@/styled/Button'
+import {SaveIcon} from '@/components/icons'
+import {SAVE_WORD_SET} from '@/graphql/mutations'
 
-interface ISingleplayerResults {
+type SingleplayerResultsProps = {
   isVisible: boolean
 }
 
-const SingleplayerResults: React.FC<ISingleplayerResults> = observer(
+const SingleplayerResults: React.FC<SingleplayerResultsProps> = observer(
   ({isVisible}) => {
     const {GameStore, UserStore} = useStore()
+    const [mutation, execMutation] = useMutation(SAVE_WORD_SET)
+
+    const saveWordSet = () => {
+      execMutation({
+        wordSet: GameStore.exportedWordSet,
+      })
+    }
+
     return (
       <AnimatePresence>
         {isVisible && (
@@ -27,6 +39,19 @@ const SingleplayerResults: React.FC<ISingleplayerResults> = observer(
             transition={{duration: 0.425}}
             exit={{opacity: 0}}
           >
+            {UserStore.me && (
+              <div style={{gridColumn: '1 / span 3'}}>
+                <Button
+                  intent="none"
+                  appearance="default"
+                  onClick={saveWordSet}
+                  disabled={mutation.data || false}
+                >
+                  <SaveIcon />
+                  <span>{mutation.data ? 'Saved!' : 'Save as Trial'}</span>
+                </Button>
+              </div>
+            )}
             <div>
               <ResultsHeader>cpm (raw)</ResultsHeader>
               <ResultsNumber>{GameStore.rawCpm}</ResultsNumber>
@@ -59,7 +84,7 @@ const SingleplayerResults: React.FC<ISingleplayerResults> = observer(
                   <Link to="/signup">Signup</Link> or{' '}
                   <Link to="/login">Login</Link> to save your results!
                 </>
-              )}{' '}
+              )}
             </ResultsStatus>
           </ResultsContainer>
         )}

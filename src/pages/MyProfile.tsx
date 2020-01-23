@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react'
 import {observer} from 'mobx-react-lite'
 import {Redirect} from 'react-router'
 import TimeAgo from 'timeago-react'
-import {useQuery} from 'urql'
+import {useQuery, useMutation} from 'urql'
 
 import {useStore} from '@/stores'
 import {
@@ -16,11 +16,19 @@ import {
   ResultValue,
   ResultFilter,
 } from '@/styled/MyProfile'
-import {MY_RESULTS} from '@/graphql/queries/me'
+import {MY_RESULTS} from '@/graphql/queries'
 import Pagination from '@/components/Pagination'
 import {PageHeader} from '@/styled/Theme'
 import {Bubble} from '@/components/Bubble'
 import {Banner} from '@/components/Banner'
+import InlineEditable from '@/components/InlineEditable'
+import {UPDATE_COLOR} from '@/graphql/mutations'
+
+function normalizeHexCode(hexCode: string) {
+  if (!hexCode.startsWith('#')) hexCode = `#${hexCode}`
+  if (hexCode.length === 1) return ''
+  return hexCode
+}
 
 const MyProfile: FC = observer(() => {
   const {UserStore} = useStore()
@@ -38,21 +46,33 @@ const MyProfile: FC = observer(() => {
     },
   })
 
+  const [mutation, execMutation] = useMutation(UPDATE_COLOR)
+
   useEffect(() => {
     if (result.data) {
       const {
         data: {
-          myResults: {results, testCount},
+          myResults: {results, allTestCount},
         },
       } = result
       if (UserStore.me) {
         UserStore.me!.results = results
-        if (UserStore.me!.testCount !== testCount) {
-          UserStore.me!.testCount = testCount
+        if (UserStore.me!.testCount !== allTestCount) {
+          UserStore.me!.testCount = allTestCount
         }
       }
     }
   }, [result.data])
+
+  const handleColorUpdate = async (colorCallback: string) => {
+    const {
+      data: {updateAccountColor: account},
+    } = await execMutation({
+      color: normalizeHexCode(colorCallback),
+    })
+    console.log(account)
+    UserStore.me = {...UserStore.me, ...account} as any
+  }
 
   if (UserStore.me === undefined && !UserStore.fetchingUser) {
     return <Redirect to="/login" />
@@ -71,7 +91,7 @@ const MyProfile: FC = observer(() => {
             />
           )}
           <ProfileGrid>
-            <AboutArea>
+            <AboutArea color={UserStore.me.color}>
               <div>
                 <ProfileHeader>username</ProfileHeader>
                 <ProfileValue>{UserStore.me.username}</ProfileValue>
@@ -98,6 +118,22 @@ const MyProfile: FC = observer(() => {
                 <ProfileHeader>started</ProfileHeader>
                 <ProfileValue>
                   <TimeAgo datetime={UserStore.me.createdAt} />
+                </ProfileValue>
+              </div>
+              <div>
+                <ProfileHeader>
+                  color{' '}
+                  {/* <InlineEditable
+                    currentValue={UserStore.me.color || ''}
+                    onConfirm={handleColorUpdate}
+                  /> */}
+                </ProfileHeader>
+                <ProfileValue>
+                  {/* {UserStore.me.color ? UserStore.me.color : 'Not Set'} */}
+                  <InlineEditable
+                    currentValue={UserStore.me.color || ''}
+                    onConfirm={handleColorUpdate}
+                  />
                 </ProfileValue>
               </div>
             </AboutArea>
@@ -133,7 +169,10 @@ const MyProfile: FC = observer(() => {
                   />
                 </div>
                 <Pagination
-                  totalRecords={UserStore.me.testCount}
+                  totalRecords={
+                    (result.data && result.data.myResults.filteredTestCount) ||
+                    UserStore.me.testCount
+                  }
                   pageLimit={15}
                   pageNeighbours={1}
                   onPageChanged={data => {
