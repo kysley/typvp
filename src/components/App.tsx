@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     max-height: 100vh;
     overflow-x: hidden;
+    line-height: 1.3;
   }
 `
 
