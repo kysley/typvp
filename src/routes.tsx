@@ -3,11 +3,11 @@ import {hot} from 'react-hot-loader/root'
 import {Switch, Route} from 'react-router-dom'
 import {ThemeProvider} from 'styled-components'
 import {observer} from 'mobx-react-lite'
+import {ModalProvider} from 'react-modal-hook'
 
 import {AppContainer, AppWrapper} from '@/styled/Containers'
 import Header from '@/components/Header'
 import {useStore} from '@/stores'
-import {ModalProvider} from 'react-modal-hook'
 
 const Signup = lazy(() => import('@/pages/Signup'))
 const Login = lazy(() => import('@/pages/Login'))
@@ -19,6 +19,9 @@ const Trial = lazy(() => import('@/pages/Trial'))
 const MyProfile = lazy(() => import('@/pages/MyProfile'))
 const Race = lazy(() => import('@/pages/Multiplayer/Race'))
 const Lobbies = lazy(() => import('@/pages/Multiplayer/Lobbies'))
+const ProLanding = lazy(() => import('@/pages/Pro/Landing'))
+const ThankYou = lazy(() => import('@/pages/Pro/ThankYou'))
+const Payment = lazy(() => import('@/pages/Pro/Payment'))
 
 const Routes = observer(() => {
   const {GlobalStore} = useStore()
@@ -39,6 +42,9 @@ const Routes = observer(() => {
                 <Route exact path="/profile" component={MyProfile} />
                 <Route exact path="/multiplayer" component={Lobbies} />
                 <Route exact path="/multiplayer/:id" component={Race} />
+                <Route exact path="/pro" component={ProLanding} />
+                <Route exact path="/thankyou" component={ThankYou} />
+                <Route exact path="/payment" component={Payment} />
                 <Route component={NoMatch} />
               </Switch>
             </Suspense>
