@@ -24,7 +24,7 @@ export const Tab = styled(NavLink)`
   display: grid;
   align-items: center;
   justify-items: center;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 0.9rem;
   padding: 0.75em;
   border-radius: 6px;

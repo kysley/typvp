@@ -24,7 +24,7 @@ export const ProfileGrid = styled.main`
 
 export const ProfileValue = styled.span`
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 700;
 `
 
 export const AboutArea = styled.section`
