@@ -27,6 +27,7 @@ import {
   AdjustIcon,
   LogoutIcon,
   SettingsIcon,
+  GemIcon,
 } from '@/components/icons'
 import {Dropdown} from '@/components/Dropdown'
 
@@ -53,17 +54,27 @@ const Header = observer(() => {
                   <Link to="/profile">
                     <DropdownItem intent="none">
                       <SettingsIcon />
-                      My Profile
+                      <span>My Profile</span>
+                    </DropdownItem>
+                  </Link>
+                  <Link to="/pro">
+                    <DropdownItem intent="none">
+                      <GemIcon />
+                      <span>typvp Pro</span>
                     </DropdownItem>
                   </Link>
                   <DropdownItem intent="none" onClick={GlobalStore.toggleTheme}>
                     <AdjustIcon />
-                    {GlobalStore.mode === 'light' ? 'Lights Off' : 'Lights On'}
+                    <span>
+                      {GlobalStore.mode === 'light'
+                        ? 'Lights Off'
+                        : 'Lights On'}
+                    </span>
                   </DropdownItem>
                   <DropdownBorder />
                   <DropdownItem intent="danger" onClick={UserStore.logout}>
                     <LogoutIcon />
-                    Logout
+                    <span>Logout</span>
                   </DropdownItem>
                 </DropdownItems>
               </DropdownMenu>
@@ -96,15 +107,19 @@ const Header = observer(() => {
                           onClick={GlobalStore.toggleTheme}
                         >
                           <AdjustIcon />
-                          {GlobalStore.mode === 'light'
-                            ? 'Lights Off'
-                            : 'Lights On'}
+                          <span>
+                            {GlobalStore.mode === 'light'
+                              ? 'Lights Off'
+                              : 'Lights On'}
+                          </span>
                         </DropdownItem>
                         <DropdownBorder />
-                        <DropdownItem intent="none">
-                          <LoginIcon />
-                          <Link to="/signup">Sign Up</Link>
-                        </DropdownItem>
+                        <Link to="/signup">
+                          <DropdownItem intent="none">
+                            <LoginIcon />
+                            <span>Sign Up</span>
+                          </DropdownItem>
+                        </Link>
                       </DropdownItems>
                     </DropdownMenu>
                   </Dropdown>
