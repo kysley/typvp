@@ -1,5 +1,8 @@
 import React, {FC, useEffect, useState} from 'react'
 import {AnimatePresence, motion} from 'framer-motion'
+import styled from 'styled-components'
+
+import Button from '@/styled/Button'
 
 type RaceResultProps = {
   raceOver: boolean
@@ -14,9 +17,27 @@ const positionToString: any = {
   4: 'Fourth',
 }
 
-// function findMyPosition(element, playerId) {
-//   return element.id === playerId
-// }
+const ResultContainer = styled(motion.div)`
+  display: flex;
+  align-self: center;
+  margin-top: 7vh;
+  background: #efeff1;
+  min-height: 25rem;
+  min-width: 40rem;
+  padding: 2em;
+  border-radius: 6px;
+  flex-direction: column;
+
+  button {
+    margin-top: auto;
+    height: 45px;
+    font-size: 0.95rem;
+  }
+`
+
+const ResultHeader = styled.h1`
+  text-align: center;
+`
 
 const RaceResult: FC<RaceResultProps> = ({raceOver, playerId, positions}) => {
   const [position, setPosition] = useState()
@@ -24,19 +45,35 @@ const RaceResult: FC<RaceResultProps> = ({raceOver, playerId, positions}) => {
     const pos = positions.findIndex(player => player.id === playerId) + 1
     setPosition(positionToString[pos])
   }, [raceOver])
-  // const myPosition = positions.findIndex(player => player.id === playerId) + 1
-  console.log(position)
+  console.log(positions)
   return (
     <AnimatePresence>
       {raceOver && (
-        <motion.div
+        <ResultContainer
           animate={{opacity: [0, 1]}}
-          initial
-          transition={{duration: 0.425}}
-          exit={{opacity: 0}}
+          transition={{delay: 1.5}}
+          exit={{opacity: 0, transition: {delay: 1.5}}}
         >
-          {position}
-        </motion.div>
+          <ResultHeader>
+            Congratulations! <br />
+            You placed {position}!
+          </ResultHeader>
+          <ol>
+            {positions.map((player: any, idx) => (
+              <li
+                style={{
+                  color: player.color && player.color,
+                  fontSize: `1.${6 - idx}rem`,
+                }}
+              >
+                {player.name}
+              </li>
+            ))}
+          </ol>
+          <Button appearance="primary" intent="none">
+            Back to Lobbies
+          </Button>
+        </ResultContainer>
       )}
     </AnimatePresence>
   )
