@@ -117,6 +117,7 @@ const Race = observer(() => {
           // raceOver={RaceStore.room.state === 'FINISHED'}
           raceOver
           playerId={id.id}
+          playerColor={id.color}
           positions={RaceStore.positions}
         />
       )}
