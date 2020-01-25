@@ -19,6 +19,9 @@
         "src/*"
       ],
     },
+    "types": [
+      "stripe-v3"
+    ],
     "typeRoots": [
       "src/types/*",
     ],

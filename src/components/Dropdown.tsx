@@ -31,7 +31,7 @@ export const Dropdown: FC<{header: string | React.ReactNode}> = ({
 
   return (
     <DropdownWrapper onClick={handleMenu} isOpen={menuOpen}>
-      {header}
+      <span>{header}</span>
       {menuOpen && <>{children}</>}
     </DropdownWrapper>
   )

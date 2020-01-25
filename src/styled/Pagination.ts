@@ -8,7 +8,7 @@ interface IPageButton {
 
 export const PageButton = styled.p<IPageButton>`
   display: inline-flex;
-  font-weight: 300;
+  font-weight: 400;
   padding: 0.5em;
   margin: 0.35em;
   border-radius: 4px;
