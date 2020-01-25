@@ -1,10 +1,16 @@
 import React, {useEffect, useState} from 'react'
 import {observer} from 'mobx-react-lite'
 import {useParams, useLocation} from 'react-router-dom'
+import {AnimatePresence, motion} from 'framer-motion'
 
 import {useStore} from '@/stores'
 import {socket} from '@/helpers/socket'
-import {RaceTypingArea, RacePosition, RaceMeta} from '@/components/Race'
+import {
+  RaceTypingArea,
+  RacePosition,
+  RaceMeta,
+  RaceResult,
+} from '@/components/Race'
 import {TLobby} from '@/types/game'
 import {SingleplayerContainer} from '@/styled/Singleplayer'
 import {genGuestIdAndName} from '@/pages/Multiplayer/Lobbies'
@@ -86,16 +92,34 @@ const Race = observer(() => {
 
   return (
     <>
-      {RaceStore.room && id ? (
-        <>
-          <RacePosition playerId={id.id} />
-          <SingleplayerContainer>
-            <RaceMeta color={UserStore.me && UserStore.me.color} />
-            <RaceTypingArea canType={RaceStore.room.state === 'IN_PROGRESS'} />
-          </SingleplayerContainer>
-        </>
-      ) : (
-        'waiting...?'
+      <AnimatePresence>
+        {RaceStore.room && id && RaceStore.room.state === 'FINISHED' ? (
+          <motion.div
+            style={{display: 'flex', justifyContent: 'center'}}
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0, transition: {delay: 1}}}
+          >
+            <RacePosition playerId={id.id} />
+            <SingleplayerContainer>
+              <RaceMeta />
+              <RaceTypingArea
+                canType={RaceStore.room.state === 'IN_PROGRESS'}
+              />
+            </SingleplayerContainer>
+          </motion.div>
+        ) : (
+          'looks like the room is busy'
+        )}
+      </AnimatePresence>
+      {RaceStore.room && (
+        <RaceResult
+          // raceOver={RaceStore.room.state === 'FINISHED'}
+          raceOver
+          playerId={id.id}
+          playerColor={id.color}
+          positions={RaceStore.positions}
+        />
       )}
     </>
   )
