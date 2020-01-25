@@ -9,7 +9,7 @@ import TypingArea from '@/components/TypingArea'
 import SingleplayerResults from '@/components/SingleplayerResults'
 import {SingleplayerContainer} from '@/styled/Singleplayer'
 import {TypingState} from '@/types/game'
-import ADD_RESULT from '@/graphql/mutations/addResult'
+import {ADD_RESULT} from '@/graphql/mutations'
 
 const Singleplayer: FC = observer(() => {
   const {GameStore, UserStore} = useStore()
@@ -51,7 +51,7 @@ const Singleplayer: FC = observer(() => {
 
   return (
     <SingleplayerContainer>
-      <SingleplayerMeta />
+      <SingleplayerMeta color={UserStore.me && UserStore.me.color} />
       <TypingArea isGameOver={GameStore.typingState === TypingState.Finished} />
       <SingleplayerResults
         isVisible={GameStore.typingState === TypingState.Finished}

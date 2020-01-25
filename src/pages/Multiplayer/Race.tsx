@@ -13,18 +13,7 @@ import {
 } from '@/components/Race'
 import {TLobby} from '@/types/game'
 import {SingleplayerContainer} from '@/styled/Singleplayer'
-
-function genGuestIdAndName() {
-  const id = Math.random()
-    .toString(36)
-    .substring(2, 15)
-  const name = `Guest_${id.substring(0, 3)}`
-
-  return {
-    id,
-    name,
-  }
-}
+import {genGuestIdAndName} from '@/pages/Multiplayer/Lobbies'
 
 const Race = observer(() => {
   const {id: lobbyId} = useParams()
@@ -33,6 +22,7 @@ const Race = observer(() => {
   const [id, setId] = useState<{
     id: string | number
     name: string
+    color?: string
   }>(location.state && location.state.id)
   const [sendData, setSendData] = useState(false)
   const [idComplete, setIdComplete] = useState(false)
@@ -50,6 +40,7 @@ const Race = observer(() => {
         setId({
           id: UserStore.me.id,
           name: UserStore.me.username,
+          color: UserStore.me.color,
         })
       } else if (!UserStore.me) {
         console.log('[Race] Generating a guest user')
@@ -84,7 +75,12 @@ const Race = observer(() => {
 
   useEffect(() => {
     if (idComplete && lobbyId) {
-      socket.emit('race_join-lobby', {id: id.id, name: id.name, lobbyId})
+      socket.emit('race_join-lobby', {
+        id: id.id,
+        name: id.name,
+        lobbyId,
+        color: id.color,
+      })
     }
   }, [idComplete])
 

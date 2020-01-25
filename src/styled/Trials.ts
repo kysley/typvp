@@ -4,8 +4,8 @@ import {colors} from '@/styled/Theme'
 
 export const TrialCardGrid = styled.div`
   display: grid;
-  /* grid-template-columns: 1fr 1fr 1fr; */
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: 1fr 1fr 1fr;
+  /* grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); */
   grid-gap: 2em;
   width: 80%;
   align-self: center;
@@ -26,32 +26,28 @@ const DifficultyColour = {
   HARD: colors.r300,
 }
 
+export const TrialActions = styled.div`
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  opacity: 0;
+  transition: all 0.1s ease-in-out;
+`
+
 export const TrialCard = styled.div<IDifficulty>`
   border-radius: 6px;
   background: ${({theme}) => theme.backgrounds.secondary};
   color: ${({theme}) => theme.colors.text};
   padding: 1em;
   position: relative;
-  overflow: hidden;
   transition: transform 0.1s ease-in-out;
-
-  &:before {
-    display: block;
-    position: absolute;
-    content: '';
-    width: 100%;
-    top: 0;
-    left: 0;
-    background: transparent;
-    height: 0px;
-    transition: all 0.1s ease-in-out;
-    background: ${({difficulty}) => DifficultyColour[difficulty]};
-  }
+  border: 2px solid transparent;
 
   :hover {
     transform: translateY(-3px);
-    &:before {
-      height: 2px;
+    border: 2px solid ${({difficulty}) => DifficultyColour[difficulty]};
+    ${TrialActions} {
+      opacity: 1;
     }
   }
 `
@@ -96,5 +92,33 @@ export const TrialMeta = styled.div<{isVisible: boolean}>`
 
   > * {
     margin-right: 1em;
+  }
+`
+
+export const TrialSplitter = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin: 2em 0;
+  color: ${({theme}) => theme.colors.text};
+
+  ::before {
+    width: 42%;
+    align-self: center;
+    height: 1px;
+    display: block;
+    content: '';
+    background: ${({theme}) => theme.border.default};
+    position: absolute;
+    left: 0;
+  }
+  ::after {
+    width: 42%;
+    align-self: center;
+    height: 1px;
+    display: block;
+    content: '';
+    background: ${({theme}) => theme.border.default};
+    position: absolute;
+    right: 0;
   }
 `

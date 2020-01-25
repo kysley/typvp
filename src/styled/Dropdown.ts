@@ -2,11 +2,11 @@ import styled from 'styled-components'
 
 import {bundle} from '@/styled/Theme'
 
-interface ItemProps {
+type ItemProps = {
   intent: 'none' | 'success' | 'warning' | 'danger'
 }
 
-interface DropdownProps {
+type DropdownProps = {
   isOpen: boolean
 }
 
@@ -54,13 +54,8 @@ export const DropdownItems = styled.ul`
   margin: 0;
   padding: 0;
   overflow: hidden;
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: 0.85rem;
-
-  :first-of-type,
-  :last-of-type {
-    border-bottom: none;
-  }
 
   a {
     color: inherit;
@@ -79,6 +74,7 @@ export const DropdownItem = styled.li<ItemProps>`
   cursor: pointer;
   display: flex;
   align-items: center;
+  border-radius: 4px;
 
   svg {
     margin-right: 0.5em;

@@ -8,7 +8,7 @@ import {Input, Label} from '@/styled/TextInput'
 import {SignupForm, SignupFormContainer, FormErrorMsg} from '@/styled/Forms'
 import Button from '@/styled/Button'
 import {useStore} from '@/stores'
-import SIGNUP from '@/graphql/mutations/signup'
+import {SIGNUP} from '@/graphql/mutations'
 import {containsError} from '@/pages/Login'
 
 interface ISignupSchema {
