@@ -11,14 +11,14 @@ import {colors} from '@/styled/Theme'
 type RaceResultProps = {
   raceOver: boolean
   playerId: string | number
-  playerColor: string
+  playerColor: string | undefined
   positions: any[]
 }
 
 const positionToObj: any = {
   1: {
     name: 'First',
-    tag: 'Winner, Winner!',
+    tag: 'Winner Winner!',
   },
   2: {
     name: 'Second',
@@ -92,12 +92,13 @@ const RaceResult: FC<RaceResultProps> = ({
     <AnimatePresence>
       {raceOver && (
         <ResultContainer
-          animate={{opacity: [0, 1]}}
-          transition={{delay: 1.5}}
+          initial={{scale: 0}}
+          animate={{scale: 1}}
+          transition={{delay: 1.25}}
           exit={{opacity: 0, transition: {delay: 1.5}}}
         >
           <ResultHeader>
-            {position.tag} <br />
+            <i>{position.tag}</i> <br />
             You placed {position.name}!
           </ResultHeader>
           <ol>
@@ -109,6 +110,7 @@ const RaceResult: FC<RaceResultProps> = ({
                   }}
                 >
                   {player.name}
+                  {player.id === playerId && ' (you)'}
                 </span>
               </li>
             ))}
