@@ -94,8 +94,8 @@ const RaceResult: FC<RaceResultProps> = ({
         <ResultContainer
           initial={{scale: 0}}
           animate={{scale: 1}}
-          transition={{delay: 1.25}}
-          exit={{opacity: 0, transition: {delay: 1.5}}}
+          transition={{delay: 2}}
+          exit={{opacity: 0}}
         >
           <ResultHeader>
             <i>{position.tag}</i> <br />

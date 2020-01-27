@@ -98,7 +98,7 @@ const Race = observer(() => {
             style={{display: 'flex', justifyContent: 'center'}}
             initial={{opacity: 0}}
             animate={{opacity: 1}}
-            exit={{opacity: 0, transition: {delay: 2}}}
+            exit={{opacity: 0, transition: {delay: 1.75}}}
           >
             <RacePosition playerId={id.id} />
             <SingleplayerContainer>
