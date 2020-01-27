@@ -94,10 +94,6 @@ const Race = observer(() => {
     <>
       <AnimatePresence>
         {RaceStore.room && id && RaceStore.room.state !== 'FINISHED' ? (
-          //{RaceStore.room &&
-          //id &&
-          //(RaceStore.room.secondsRemaining > 57 ||
-          // RaceStore.room.state !== 'IN_PROGRESS') ? (
           <motion.div
             style={{display: 'flex', justifyContent: 'center'}}
             initial={{opacity: 0}}
@@ -119,7 +115,6 @@ const Race = observer(() => {
       {RaceStore.room && (
         <RaceResult
           raceOver={RaceStore.room.state === 'FINISHED'}
-          // raceOver={RaceStore.room.secondsRemaining < 57}
           playerId={id.id}
           playerColor={id.color}
           positions={RaceStore.positions}
