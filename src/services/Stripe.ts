@@ -4,21 +4,21 @@ const stripe = s('pk_test_S66sTiE5N1br0pZ7tfBNbTjZ00t0VjkMmC')
 
 const productLookup = {
   pro_one_time: 'sku_Gb8BIdoHZAoVMT',
-  pro_recurring: 'plan_Gb812oitY2Pc4w',
+  pro_recurring: 'plan_GbPJP7DsmNZcC1',
 }
 
 const successUrl =
   process.env.NODE_ENV === 'production'
-    ? 'https://typvp.xyz/thankyou'
-    : 'http://localhost:8082/thankyou'
+    ? 'https://typvp.xyz/thankyou?session_id={CHECKOUT_SESSION_ID}'
+    : 'http://localhost:8082/thankyou?session_id={CHECKOUT_SESSION_ID}'
 const cancelUrl =
   process.env.NODE_ENV === 'production'
     ? 'https://typvp.xyz/payment'
     : 'http://localhost:8082/payment'
 
 export function redirectToCheckout(product: keyof typeof productLookup): void {
-  const key = product.startsWith('sku_') ? 'sku' : 'plan'
   const lookup = productLookup[product]
+  const key = lookup.startsWith('sku_') ? 'sku' : 'plan'
 
   const items = [
     {
