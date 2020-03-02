@@ -51,6 +51,11 @@ export const MetaTimer = styled.div`
   transition: all 1.1s linear;
 `
 
+export const ResultsNumber = styled.span`
+  font-weight: 900;
+  font-size: 1.5rem;
+`
+
 export const ResultsContainer = styled(motion.div)`
   display: relative;
   padding: 1em;
@@ -61,6 +66,10 @@ export const ResultsContainer = styled(motion.div)`
   grid-template-columns: 1fr 1fr 1fr;
   grid-row-gap: 1em;
   z-index: 0;
+
+  ${ResultsNumber} {
+    color: ${({color}) => (color ? color : `${colors.p300}`)};
+  }
 `
 
 export const ResultsHeader = styled.h3`
@@ -68,12 +77,6 @@ export const ResultsHeader = styled.h3`
   font-size: 0.85rem;
   text-transform: uppercase;
   margin: 0;
-`
-
-export const ResultsNumber = styled.span`
-  font-weight: 900;
-  font-size: 1.5rem;
-  color: ${colors.p300};
 `
 
 export const ResultsStatus = styled.span`

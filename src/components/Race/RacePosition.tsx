@@ -10,7 +10,7 @@ const PlayerContainer = styled.div`
   display: flex;
   align-self: center;
   max-width: 900px;
-  width: 900px;
+  width: 90%;
   position: absolute;
   top: calc(31vh + 245px);
   height: 176px;
@@ -45,20 +45,21 @@ const PlayerBar = styled.li`
   transition: 1.1s width linear;
   position: relative;
 
-  :not(:first-of-type) {
-    margin-bottom: 1em;
-  }
-
   @media screen and (min-height: 930px) {
     :not(:last-of-type) {
-      margin-bottom: 1em;
+      margin-top: 1em;
     }
+  }
+
+  :not(:first-of-type) {
+    margin-top: 1em;
   }
 
   ::after {
     content: '';
     display: block;
-    width: 900px;
+    width: 85.499vw;
+    max-width: 900px;
     position: absolute;
     height: 32px;
     top: 0;

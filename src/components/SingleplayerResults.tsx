@@ -34,6 +34,7 @@ const SingleplayerResults: React.FC<SingleplayerResultsProps> = observer(
       <AnimatePresence>
         {isVisible && (
           <ResultsContainer
+            color={UserStore.me && UserStore.me.color}
             animate={{opacity: [0, 1]}}
             initial
             transition={{duration: 0.425}}
