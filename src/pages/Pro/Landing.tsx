@@ -33,10 +33,26 @@ const PurchaseWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 1em;
+
   span {
     margin-right: 1em;
   }
 `
+
+const PricingFAQ = styled.div`
+  max-width: 40rem;
+  h3 {
+    font-size: 1.7rem;
+  }
+`
+
+const PricingQ = styled.h4`
+  font-size: 1.3rem;
+  margin-bottom: 0.65em;
+`
+
+const PricingA = styled.p``
 
 const ProInfoWrapper = styled.section`
   background: ${({theme}) => theme.backgrounds.secondary};
@@ -53,7 +69,7 @@ const ProInfoHeader = styled.h3`
   font-weight: 400;
   text-align: center;
   margin-top: 0;
-  margin-bottom: 3em;
+  margin-bottom: 2.2em;
 `
 
 const ProInfoGrid = styled.div`
@@ -71,11 +87,10 @@ const ProInfoGrid = styled.div`
 const Landing = () => (
   <LandingWrapper>
     <Header>
-      Start Free. <br />
-      Then get more.
+      typvp <i style={{color: '#998DD9'}}>Pro</i>
     </Header>
     <Secondary>
-      Enhance your typvp experience with <u>premium</u> features, <br /> without
+      Enhance your typvp experience with premium features, <br /> <u>without</u>{' '}
       the premium pricetag.
     </Secondary>
     <PurchaseWrapper>
@@ -104,7 +119,7 @@ const Landing = () => (
         <div>
           <GemIcon />
           <span>Rep the Badge</span>
-          <p>Display your support with a special badge.</p>
+          <p>Your name will carry a special badge.</p>
         </div>
         <div>
           <GemIcon />
@@ -114,7 +129,7 @@ const Landing = () => (
         <div>
           <GemIcon />
           <span>Save a Word Set</span>
-          <p>Have a good run? Save the set of words to type later!</p>
+          <p>Have a good run? Save the set of words to type again later.</p>
         </div>
         <div>
           <GemIcon />
@@ -124,8 +139,49 @@ const Landing = () => (
             length, everything.
           </p>
         </div>
+        <div>
+          <GemIcon />
+          <span>Custom Trials</span>
+          <p>
+            Create & publish your own Trials. Custom word set, difficulty,
+            length, everything.
+          </p>
+        </div>
+        <div>
+          <GemIcon />
+          <span>More to come!</span>
+          <p>Lot's of exciting features are in the works.</p>
+        </div>
       </ProInfoGrid>
     </ProInfoWrapper>
+    <PricingFAQ>
+      <h3>FAQ</h3>
+      <PricingQ>Q: Why are there multiple pricing options?</PricingQ>
+      <PricingA>
+        A: We offer a One Time or Subscription based pricing model to help
+        accommodate users who want to upgrade but may not want to recieve a
+        monthly payment.
+      </PricingA>
+      <PricingQ>Q: What happens if I opt for a One Time payment?</PricingQ>
+      <PricingA>
+        If you choose a One Time payment, you will recieve Pro benefits
+        permanently.
+      </PricingA>
+      <PricingQ>Q: What happens if I opt for a Recurring payment?</PricingQ>
+      <PricingA>
+        A: If you choose a Subscription based payment, you will only have Pro
+        benefits for the duration of your Subscription.
+      </PricingA>
+      <PricingQ>Q: Is my Payment information saved?</PricingQ>
+      <PricingA>
+        A: All payment processing is handled by Stripe. No information about you
+        is saved by typvp.
+      </PricingA>
+      <PricingQ>Q: How fast can I expect my Account to become Pro?</PricingQ>
+      <PricingA>
+        A: As soon as the payment is processed by Stripe. Typically 'instantly'.
+      </PricingA>
+    </PricingFAQ>
   </LandingWrapper>
 )
 

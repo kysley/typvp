@@ -13,7 +13,6 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Inter', sans-serif;
     letter-spacing: auto;
-    line-height: normal;
     font-weight: 400;
     margin: 0;
     padding: 0;
@@ -22,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     max-height: 100vh;
     overflow-x: hidden;
-    line-height: 1.3;
+    line-height: 1.5;
   }
 `
 
