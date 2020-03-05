@@ -40,25 +40,29 @@ const MyProfile: FC = observer(() => {
   })
   const [result] = useQuery({
     query: MY_RESULTS,
-    requestPolicy: 'cache-and-network',
+    requestPolicy: 'cache-first',
     variables: {
       ...pagination,
     },
   })
 
-  const [mutation, execMutation] = useMutation(UPDATE_COLOR)
+  const [, execMutation] = useMutation(UPDATE_COLOR)
 
   useEffect(() => {
     if (result.data) {
       const {
         data: {
-          myResults: {results, allTestCount},
+          me: {filterResults},
         },
       } = result
+      // console.log(me)
       if (UserStore.me) {
-        UserStore.me!.results = results
-        if (UserStore.me!.testCount !== allTestCount) {
-          UserStore.me!.testCount = allTestCount
+        // UserStore.me!.results = results
+        if (
+          pagination.type === '' &&
+          filterResults.length > (UserStore.me!.testCount || 0)
+        ) {
+          UserStore.me!.testCount = filterResults.length
         }
       }
     }
@@ -121,17 +125,10 @@ const MyProfile: FC = observer(() => {
                 </ProfileValue>
               </div>
               <div>
-                <ProfileHeader>
-                  color{' '}
-                  {/* <InlineEditable
-                    currentValue={UserStore.me.color || ''}
-                    onConfirm={handleColorUpdate}
-                  /> */}
-                </ProfileHeader>
+                <ProfileHeader>color</ProfileHeader>
                 <ProfileValue>
-                  {/* {UserStore.me.color ? UserStore.me.color : 'Not Set'} */}
                   <InlineEditable
-                    currentValue={UserStore.me.color || ''}
+                    currentValue={UserStore.me.color || 'Not Set'}
                     onConfirm={handleColorUpdate}
                   />
                 </ProfileValue>
@@ -140,7 +137,7 @@ const MyProfile: FC = observer(() => {
             <ResultsArea>
               <ResultFilter>
                 <div>
-                  <label>Sort by</label>
+                  <label>Sort by:</label>
                   <Bubble
                     values={[
                       {
@@ -155,6 +152,7 @@ const MyProfile: FC = observer(() => {
                       })
                     }
                   />
+                  <label>Filter by:</label>
                   <Bubble
                     values={[
                       {name: 'All', value: ''},
@@ -170,7 +168,7 @@ const MyProfile: FC = observer(() => {
                 </div>
                 <Pagination
                   totalRecords={
-                    (result.data && result.data.myResults.filteredTestCount) ||
+                    (result.data && result.data.me.testCountByType) ||
                     UserStore.me.testCount
                   }
                   pageLimit={15}
@@ -184,8 +182,8 @@ const MyProfile: FC = observer(() => {
               </ResultFilter>
               {!result.fetching && (
                 <>
-                  {UserStore.me.results &&
-                    UserStore.me.results.map((result: any) => (
+                  {result.data.me.filterResults &&
+                    result.data.me.filterResults.map((result: any) => (
                       <ResultWrapper key={result.id}>
                         <p>
                           {result.type} |{' '}

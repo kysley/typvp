@@ -7,18 +7,19 @@ type Account = {
   username: string
   id: number
   role: string
-  lastSeen: number
-  lastPlayed: string
+  lastSeen?: number
+  lastPlayed?: string
   results: any
   createdAt: Date
-  testCount: number
+  testCount?: number
   confirmed: boolean
   color?: string
+  email: string
 }
 
 class UserStore {
   @observable
-  me: Account | undefined = undefined
+  me?: Account = undefined
 
   @observable
   fetchingUser: boolean = false
