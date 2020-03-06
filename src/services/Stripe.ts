@@ -1,3 +1,5 @@
+import UserStore from '@/stores/User'
+
 const s = window.Stripe
 
 const stripe = s('pk_test_S66sTiE5N1br0pZ7tfBNbTjZ00t0VjkMmC')
@@ -27,9 +29,17 @@ export function redirectToCheckout(product: keyof typeof productLookup): void {
     },
   ]
 
+  if (!UserStore.me) {
+    // redirect to login
+    // pass state through the router to say that we need
+    // to call redirectToCheckout again
+    return
+  }
+
   stripe.redirectToCheckout({
     items,
     successUrl,
     cancelUrl,
+    customerEmail: UserStore.me.confirmed ? UserStore.me.email : undefined,
   })
 }
