@@ -12,7 +12,6 @@ import {OwnedTrialCard, PublicTrialCard} from '@/components/Trials'
 
 const Trials = observer(() => {
   const {UserStore} = useStore()
-  const [ready, setReady] = useState(false)
 
   const [trialsResult] = useQuery({
     query: TRIALS,
@@ -20,18 +19,12 @@ const Trials = observer(() => {
 
   const [myTrialsResult] = useQuery({
     query: MY_TRIALS,
-    pause: !ready,
+    pause: !!UserStore.me,
     requestPolicy: 'cache-and-network',
   })
 
-  const [mutation, execUpdateTrial] = useMutation(UPDATE_TRIAL_INFO)
-  const [mutation2, execDeleteTrial] = useMutation(DELETE_TRIAL)
-
-  useEffect(() => {
-    if (UserStore.me) {
-      setReady(true)
-    }
-  }, [UserStore.me])
+  const [execUpdateTrial] = useMutation(UPDATE_TRIAL_INFO)
+  const [execDeleteTrial] = useMutation(DELETE_TRIAL)
 
   return (
     <>
