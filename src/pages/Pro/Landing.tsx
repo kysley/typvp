@@ -3,7 +3,13 @@ import styled from 'styled-components'
 
 import Button from '@/styled/Button'
 import {redirectToCheckout} from '@/services/Stripe'
-import {GemIcon} from '@/components/icons'
+import {
+  GemIcon,
+  DazzleIcon,
+  BookmarkIcon,
+  ScrollIcon,
+  FlagIcon,
+} from '@/components/icons'
 
 const LandingWrapper = styled.article`
   margin-top: 6em;
@@ -81,6 +87,14 @@ const ProInfoGrid = styled.div`
     background: ${({theme}) => theme.backgrounds.primary};
     padding: 1em;
     border-radius: 4px;
+
+    section {
+      display: flex;
+      h3 {
+        font-size: 1.4rem;
+        margin: 0;
+      }
+    }
   }
 `
 
@@ -117,39 +131,51 @@ const Landing = () => (
       </ProInfoHeader>
       <ProInfoGrid>
         <div>
-          <GemIcon />
-          <span>Rep the Badge</span>
+          <section>
+            <GemIcon />
+            <h3>Rep the Badge</h3>
+          </section>
           <p>Your name will carry a special badge.</p>
         </div>
         <div>
-          <GemIcon />
-          <span>Strut your stuff</span>
+          <section>
+            <DazzleIcon />
+            <h3>Strut your Stuff</h3>
+          </section>
           <p>Give your Profile a custom colour that is visible to everybody.</p>
         </div>
         <div>
-          <GemIcon />
-          <span>Save a Word Set</span>
+          <section>
+            <BookmarkIcon />
+            <h3>Save a Word Set</h3>
+          </section>
           <p>Have a good run? Save the set of words to type again later.</p>
         </div>
         <div>
-          <GemIcon />
-          <span>Custom Trials</span>
+          <section>
+            <ScrollIcon />
+            <h3>Custom Trials</h3>
+          </section>
           <p>
             Create & publish your own Trials. Custom word set, difficulty,
             length, everything.
           </p>
         </div>
         <div>
-          <GemIcon />
-          <span>Custom Trials</span>
+          <section>
+            <FlagIcon />
+            <h3>Performance Reports</h3>
+          </section>
           <p>
             Create & publish your own Trials. Custom word set, difficulty,
             length, everything.
           </p>
         </div>
         <div>
-          <GemIcon />
-          <span>More to come!</span>
+          <section>
+            <GemIcon />
+            <h3>More to come!</h3>
+          </section>
           <p>Lot's of exciting features are in the works.</p>
         </div>
       </ProInfoGrid>
