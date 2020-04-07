@@ -39,7 +39,7 @@ const TypingArea: FC<ITypingArea> = observer(props => {
     <TypingAreaContainer>
       <TypingAreaInner
         ref={wordsRef}
-        style={{height: '75px', overflow: 'hidden'}}
+        style={{height: '80px', overflow: 'hidden'}}
         disabled={props.isGameOver}
       >
         {GameStore.fetchingWords ? (

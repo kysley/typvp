@@ -35,11 +35,7 @@ const SingleplayerMeta: FC<{color?: string}> = observer(({color}) => {
             ? 'Completed'
             : `${60 - GameStore.time}s`}
         </span>
-        <div
-          onClick={() => {
-            handleRefreshClick()
-          }}
-        >
+        <div onClick={handleRefreshClick} style={{display: 'flex'}}>
           <RefreshIcon isSpinning={spin} />
         </div>
       </MetaContainer>

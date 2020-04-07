@@ -24,6 +24,13 @@ export function genGuestIdAndName() {
   }
 }
 
+const lobbyNames = {
+  WAITING: 'Waiting',
+  STARTING: 'Starting',
+  IN_PROGRESS: 'In Progress',
+  FINISHED: 'Finished',
+}
+
 const Lobbies = observer(() => {
   const {UserStore, RaceStore} = useStore()
   const [lobbies, setLobbies] = useState([])
@@ -103,7 +110,7 @@ const Lobbies = observer(() => {
             </div>
             <div>
               <DeviceIcon />
-              <span>{lobby.state}</span>
+              <span>{lobbyNames[lobby.state]}</span>
             </div>
             <Button
               intent="none"
