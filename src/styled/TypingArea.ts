@@ -15,7 +15,7 @@ const TypingAreaContainer = styled.div`
     padding-right: 0.75rem;
     font-size: 1.25rem;
     height: 50px;
-    margin-bottom: 0.5em;
+    margin-bottom: 0;
   }
 `
 
