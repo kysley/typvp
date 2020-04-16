@@ -1,26 +1,32 @@
 import gql from 'graphql-tag'
 
 export const TRIALS = gql`
-  query trials {
-    trials {
-      name
-      id
+  query trials(
+    $where: TrialWhereInput
+    $orderBy: TrialOrderByInput
+    $skip: Int
+    $after: TrialWhereUniqueInput
+    $before: TrialWhereUniqueInput
+    $first: Int
+    $last: Int
+  ) {
+    trials(
+      where: $where
+      orderBy: $orderBy
+      skip: $skip
+      after: $after
+      before: $before
+      first: $first
+      last: $last
+    ) {
+      createdAt
+      custom
       difficulty
-      minWordLength
       maxWordLength
-    }
-  }
-`
-
-export const TRIAL = gql`
-  query trial($trialId: ID!) {
-    trial(trialId: $trialId) {
+      minWordLength
       name
-      id
+      private
       wordSet
-      difficulty
-      minWordLength
-      maxWordLength
     }
   }
 `

@@ -9,11 +9,12 @@ import TypingArea from '@/components/TypingArea'
 import SingleplayerResults from '@/components/SingleplayerResults'
 import {SingleplayerContainer} from '@/styled/Singleplayer'
 import {TypingState} from '@/types/game'
-import {ADD_RESULT} from '@/graphql/mutations'
+import {CREATE_NEW_RESULT} from '@/graphql/mutations'
+import {MutationCreateNewResultArgs} from '@/generated/graphql'
 
 const Singleplayer: FC = observer(() => {
   const {GameStore, UserStore} = useStore()
-  const [mutation, execMutation] = useMutation(ADD_RESULT)
+  const [, execMutation] = useMutation(CREATE_NEW_RESULT)
   useShortcuts(['enter'], () => {
     GameStore.reset()
   })
@@ -38,14 +39,16 @@ const Singleplayer: FC = observer(() => {
         wordIndex,
       } = GameStore
       execMutation({
-        cpm,
-        rawCpm,
-        wpm,
-        correct,
-        incorrect,
-        corrections,
-        wordIndex,
-      })
+        data: {
+          cpm,
+          rawCpm,
+          wpm,
+          correct,
+          incorrect,
+          corrections,
+          wordIndex,
+        },
+      } as MutationCreateNewResultArgs)
     }
   }, [GameStore.typingState])
 

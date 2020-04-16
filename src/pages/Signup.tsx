@@ -8,8 +8,12 @@ import {Input, Label} from '@/styled/TextInput'
 import {SignupForm, SignupFormContainer, FormErrorMsg} from '@/styled/Forms'
 import Button from '@/styled/Button'
 import {useStore} from '@/stores'
-import {SIGNUP} from '@/graphql/mutations'
+import {CREATE_ACCOUNT} from '@/graphql/mutations'
 import {containsError} from '@/pages/Login'
+import {
+  CreateAccountMutation,
+  CreateAccountMutationVariables,
+} from '@/generated/graphql'
 
 interface ISignupSchema {
   username: string
@@ -21,7 +25,9 @@ interface ISignupSchema {
 const Signup: FC = () => {
   const history = useHistory()
   const {UserStore} = useStore()
-  const [mutation, execMutation] = useMutation(SIGNUP)
+  const [mutation, execMutation] = useMutation<CreateAccountMutation>(
+    CREATE_ACCOUNT,
+  )
   const {formState, register, handleSubmit, errors} = useForm<ISignupSchema>({
     validationSchema: registerSchema,
     mode: 'onBlur',
@@ -29,24 +35,19 @@ const Signup: FC = () => {
 
   const onSubmit = async (values: ISignupSchema) => {
     await execMutation({
-      username: values.username,
-      email: values.email,
-      password: values.password,
+      data: {
+        username: values.username,
+        email: values.email,
+        password: values.password,
+      },
+    } as CreateAccountMutationVariables).then(res => {
+      if (!res.error && res.data) {
+        const {account, token} = res.data.createAccount
+        UserStore.login(token, account)
+        history.push('/')
+      }
     })
   }
-
-  useEffect(() => {
-    console.log(mutation)
-    if (mutation.data && !mutation.error) {
-      const {
-        data: {
-          signup: {account, token},
-        },
-      } = mutation
-      UserStore.login(token, account)
-      history.push('/')
-    }
-  }, [mutation])
 
   return (
     <SignupFormContainer>

@@ -2,29 +2,20 @@ import React, {useState, useEffect} from 'react'
 import {useQuery} from 'urql'
 import {observer} from 'mobx-react-lite'
 
-import LEADERBOARD from '@/graphql/queries/leaderboard'
+import {LEADERBOARD} from '@/graphql/queries'
 import {
   LeaderboardGrid,
   LeaderboardRanking,
   LeaderboardHeader,
 } from '@/styled/Leaderboard'
 import {PageHeader} from '@/styled/Theme'
+import {LeaderboardQuery} from '@/generated/graphql'
 
 const Leaderboard = observer(() => {
-  const [leaderboard, setLeaderboard] = useState([])
-  const [result] = useQuery({
+  const [result] = useQuery<LeaderboardQuery>({
     query: LEADERBOARD,
     requestPolicy: 'cache-and-network',
   })
-
-  useEffect(() => {
-    if (result.data && !result.error) {
-      const {
-        data: {leaderboard},
-      } = result
-      setLeaderboard(leaderboard)
-    }
-  }, [result])
 
   return (
     <>
@@ -38,16 +29,20 @@ const Leaderboard = observer(() => {
           <span>incorrect</span>
           <span>corrections</span>
         </LeaderboardHeader>
-        {leaderboard.map((c: any, idx) => (
-          <LeaderboardRanking key={c.id}>
-            <p>{(idx += 1)}</p>
-            <p>{c.wpm}</p>
-            <p>{c.cpm}</p>
-            <p>{c.correct}</p>
-            <p>{c.incorrect}</p>
-            <p>{c.corrections}</p>
-          </LeaderboardRanking>
-        ))}
+        {result.data && !result.error && (
+          <>
+            {result.data.leaderboard.map((c: any, idx) => (
+              <LeaderboardRanking key={c.id}>
+                <p>{(idx += 1)}</p>
+                <p>{c.wpm}</p>
+                <p>{c.cpm}</p>
+                <p>{c.correct}</p>
+                <p>{c.incorrect}</p>
+                <p>{c.corrections}</p>
+              </LeaderboardRanking>
+            ))}
+          </>
+        )}
       </LeaderboardGrid>
     </>
   )

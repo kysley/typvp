@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react'
+import React, {FC} from 'react'
 import {useHistory} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
 import {useMutation} from 'urql'
@@ -9,6 +9,7 @@ import {SignupForm, SignupFormContainer, FormErrorMsg} from '@/styled/Forms'
 import Button from '@/styled/Button'
 import {useStore} from '@/stores'
 import {LOGIN} from '@/graphql/mutations'
+import {LoginMutation, LoginMutationVariables} from '@/generated/graphql'
 
 interface ILoginSchema {
   username: string
@@ -28,7 +29,7 @@ export function containsError(errors: any, formState: any, name: string) {
 const Login: FC = () => {
   const history = useHistory()
   const {UserStore} = useStore()
-  const [mutation, execMutation] = useMutation(LOGIN)
+  const [mutation, execMutation] = useMutation<LoginMutation>(LOGIN)
   const {formState, register, handleSubmit, errors} = useForm<ILoginSchema>({
     validationSchema: loginSchema,
     mode: 'onBlur',
@@ -36,22 +37,15 @@ const Login: FC = () => {
 
   const onSubmit = async (values: ILoginSchema) => {
     await execMutation({
-      username: values.username,
-      password: values.password,
+      data: {password: values.password, username: values.username},
+    } as LoginMutationVariables).then(res => {
+      if (!res.error && res.data) {
+        const {account, token} = res.data.login
+        UserStore.login(token, account)
+        history.push('/')
+      }
     })
   }
-
-  useEffect(() => {
-    if (mutation.data && !mutation.error) {
-      const {
-        data: {
-          login: {account, token},
-        },
-      } = mutation
-      UserStore.login(token, account)
-      history.push('/')
-    }
-  }, [mutation])
 
   return (
     <SignupFormContainer>

@@ -3,7 +3,8 @@ import {observable, action, flow, computed} from 'mobx'
 
 import {TypingState} from '@/types/game'
 import {client} from '@/services/Client'
-import {GET_WORD_SET, SEEN} from '@/graphql/mutations'
+import {GET_WORDSET} from '@/graphql/queries'
+import {GetWordsetQuery} from '@/generated/graphql'
 
 let timeout: any = null
 class GameStore {
@@ -142,10 +143,15 @@ class GameStore {
     if (!this.fetchingWords) {
       console.log('not busy, generating words')
       this.fetchingWords = true
-      const {
-        data: {getWordSet},
-      } = yield client.mutation(GET_WORD_SET).toPromise()
-      this.loadWordSet(getWordSet)
+      yield client
+        .query<GetWordsetQuery>(GET_WORDSET)
+        .toPromise()
+        .then(res => {
+          if (!res.error && res.data) {
+            this.loadWordSet(res.data.getWordset)
+          }
+        })
+      // @todo show error?
       this.fetchingWords = false
     }
   })

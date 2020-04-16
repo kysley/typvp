@@ -13,7 +13,7 @@ import {
 } from '@/styled/Singleplayer'
 import Button from '@/styled/Button'
 import {SaveIcon} from '@/components/icons'
-import {SAVE_WORD_SET} from '@/graphql/mutations'
+import {CREATE_PERSONAL_WORDSET} from '@/graphql/mutations'
 
 type SingleplayerResultsProps = {
   isVisible: boolean
@@ -22,7 +22,7 @@ type SingleplayerResultsProps = {
 const SingleplayerResults: React.FC<SingleplayerResultsProps> = observer(
   ({isVisible}) => {
     const {GameStore, UserStore} = useStore()
-    const [mutation, execMutation] = useMutation(SAVE_WORD_SET)
+    const [mutation, execMutation] = useMutation(CREATE_PERSONAL_WORDSET)
 
     const saveWordSet = () => {
       execMutation({

@@ -1,31 +1,19 @@
 import {observable, action, flow} from 'mobx'
 
 import {client} from '@/services/Client'
-import {ME} from '@/graphql/queries'
+import {ME} from '@/graphql/queries/me'
+import {Account} from '@/generated/graphql'
 
-type Account = {
-  username: string
-  id: number
-  role: string
-  lastSeen?: number
-  lastPlayed?: string
-  results: any
-  createdAt: Date
-  testCount?: number
-  confirmed: boolean
-  color?: string
-  email: string
-}
-
+// @todo create an Account type from the generated output
 class UserStore {
   @observable
-  me?: Account = undefined
+  me?: Partial<Account> = undefined
 
   @observable
   fetchingUser: boolean = false
 
   @action
-  login = (token: string, account: Account): void => {
+  login = (token: string, account: Partial<Account>): void => {
     this.me = account
     localStorage.setItem('token', token)
   }

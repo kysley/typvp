@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import {useQuery, useMutation} from 'urql'
 import {observer} from 'mobx-react-lite'
 
@@ -19,7 +19,7 @@ const Trials = observer(() => {
 
   const [myTrialsResult] = useQuery({
     query: MY_TRIALS,
-    pause: !!UserStore.me,
+    pause: UserStore.me === undefined,
     requestPolicy: 'cache-and-network',
   })
 
