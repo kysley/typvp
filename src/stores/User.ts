@@ -18,7 +18,7 @@ class UserStore {
     localStorage.setItem('token', token)
   }
 
-  persist = flow(function*(
+  persist = flow(function* (
     this: UserStore,
   ): Generator<Promise<any>, void, any> {
     try {
