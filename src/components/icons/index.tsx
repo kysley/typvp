@@ -22,7 +22,7 @@ export const SVGDefault = styled.svg`
   fill: ${({theme}) => theme.colors.text};
   margin-right: 0.5em;
 
-  :only-child {
+  :last-child {
     margin-right: 0;
   }
 `
