@@ -11,6 +11,7 @@ export const CREATE_ACCOUNT = gql`
         lastSeen
         role
         username
+        id
       }
     }
   }

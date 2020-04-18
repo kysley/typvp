@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-export const ME = gql`
-  query me {
-    me {
+export const UPDATE_ACCOUNT = gql`
+  mutation updateAccount($data: ExclusiveAccountUpdateInput!) {
+    updateAccount(data: $data) {
       color
       confirmed
       email
@@ -10,7 +10,6 @@ export const ME = gql`
       lastSeen
       role
       username
-      id
     }
   }
 `
