@@ -55,6 +55,12 @@ export type AccountLoginInput = {
   password: Scalars['String'];
 };
 
+export type AccountResultsResponse = {
+   __typename?: 'accountResultsResponse';
+  count: Scalars['Int'];
+  results: Array<Test>;
+};
+
 export type AccountWhereInput = {
   color?: Maybe<NullableStringFilter>;
   confirmed?: Maybe<BooleanFilter>;
@@ -250,6 +256,7 @@ export type Query = {
    __typename?: 'Query';
   account?: Maybe<Account>;
   me?: Maybe<Account>;
+  accountResults: AccountResultsResponse;
   trialLeaders: Array<Test>;
   leaderboard: Array<Test>;
   getWordset: Scalars['String'];
@@ -260,6 +267,18 @@ export type Query = {
 
 export type QueryAccountArgs = {
   where: AccountWhereUniqueInput;
+};
+
+
+export type QueryAccountResultsArgs = {
+  where?: Maybe<TestWhereInput>;
+  orderBy?: Maybe<TestOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<TestWhereUniqueInput>;
+  before?: Maybe<TestWhereUniqueInput>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  id: Scalars['String'];
 };
 
 
@@ -487,7 +506,7 @@ export type CreateAccountMutation = (
     & Pick<AuthPayload, 'token'>
     & { account: (
       { __typename?: 'Account' }
-      & Pick<Account, 'color' | 'confirmed' | 'email' | 'lastPlayed' | 'lastSeen' | 'role' | 'username'>
+      & Pick<Account, 'color' | 'confirmed' | 'email' | 'lastPlayed' | 'lastSeen' | 'role' | 'username' | 'id'>
     ) }
   ) }
 );
@@ -524,8 +543,45 @@ export type LoginMutation = (
     & Pick<AuthPayload, 'token'>
     & { account: (
       { __typename?: 'Account' }
-      & Pick<Account, 'color' | 'confirmed' | 'email' | 'lastPlayed' | 'lastSeen' | 'role' | 'username'>
+      & Pick<Account, 'color' | 'confirmed' | 'email' | 'lastPlayed' | 'lastSeen' | 'role' | 'username' | 'id'>
     ) }
+  ) }
+);
+
+export type UpdateAccountMutationVariables = {
+  data: ExclusiveAccountUpdateInput;
+};
+
+
+export type UpdateAccountMutation = (
+  { __typename?: 'Mutation' }
+  & { updateAccount: (
+    { __typename?: 'Account' }
+    & Pick<Account, 'color' | 'confirmed' | 'email' | 'lastPlayed' | 'lastSeen' | 'role' | 'username'>
+  ) }
+);
+
+export type AccountResultsQueryVariables = {
+  where?: Maybe<TestWhereInput>;
+  orderBy?: Maybe<TestOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<TestWhereUniqueInput>;
+  before?: Maybe<TestWhereUniqueInput>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  id: Scalars['String'];
+};
+
+
+export type AccountResultsQuery = (
+  { __typename?: 'Query' }
+  & { accountResults: (
+    { __typename?: 'accountResultsResponse' }
+    & Pick<AccountResultsResponse, 'count'>
+    & { results: Array<(
+      { __typename?: 'Test' }
+      & Pick<Test, 'correct' | 'corrections' | 'cpm' | 'createdAt' | 'incorrect' | 'rawCpm' | 'type' | 'wordIndex' | 'wpm'>
+    )> }
   ) }
 );
 
@@ -563,7 +619,7 @@ export type MeQuery = (
   { __typename?: 'Query' }
   & { me?: Maybe<(
     { __typename?: 'Account' }
-    & Pick<Account, 'username'>
+    & Pick<Account, 'color' | 'confirmed' | 'email' | 'lastPlayed' | 'lastSeen' | 'role' | 'username' | 'id'>
   )> }
 );
 
